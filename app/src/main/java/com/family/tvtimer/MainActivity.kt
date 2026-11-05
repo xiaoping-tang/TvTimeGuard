@@ -1,0 +1,385 @@
+package com.family.tvtimer
+
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.TimePickerDialog
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.InputType
+import android.view.Gravity
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.Switch
+import android.widget.TextView
+import android.widget.Toast
+import org.json.JSONObject
+import java.time.LocalDate
+import kotlin.concurrent.thread
+
+class MainActivity : Activity() {
+
+    private lateinit var prefs: Prefs
+    private val handler = Handler(Looper.getMainLooper())
+    private var refresher: Runnable? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        prefs = Prefs(this)
+        if (Build.VERSION.SDK_INT >= 33 &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+        render()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        refresher?.let { handler.removeCallbacks(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refresher?.let { handler.post(it) }
+    }
+
+    private fun render() {
+        refresher?.let { handler.removeCallbacks(it) }
+        refresher = null
+        when (prefs.role) {
+            "tv" -> renderTv()
+            "phone" -> renderPhone()
+            else -> renderChooseRole()
+        }
+    }
+
+    // ---------------- 选择角色 ----------------
+
+    private fun renderChooseRole() {
+        val root = page()
+        root.addView(title("电视时间管家"))
+        root.addView(text("同一个 App 装在电视和家长手机上。请选择这台设备的用途："))
+        root.addView(button("📺 这台是电视（被管控）") {
+            prefs.role = "tv"
+            if (prefs.pairCode.isBlank()) prefs.pairCode = Prefs.newPairCode()
+            render()
+        })
+        root.addView(button("📱 这台是家长手机（遥控）") {
+            prefs.role = "phone"
+            render()
+        })
+    }
+
+    // ---------------- 电视端 ----------------
+
+    private fun renderTv() {
+        val root = page()
+        root.addView(title("电视时间管家 · 电视端"))
+
+        val status = text("")
+        status.textSize = 20f
+        root.addView(card(status))
+
+        root.addView(section("第 1 步：授权本机 ADB"))
+        root.addView(text("需先在「设置 → 系统 → 关于 → 连按 7 下 Android TV OS 版本」打开开发者选项，再在开发者选项里打开「USB 调试」。点下面按钮后电视会弹窗，勾选「始终允许」再点「允许」。"))
+        root.addView(button("授权 / 测试 ADB") {
+            toast("正在连接，请留意电视弹窗…")
+            thread {
+                val r = runCatching { TvController(this).setup() }
+                runOnUiThread {
+                    r.onSuccess { toast("✅ ADB 正常：$it") }
+                        .onFailure { toast("❌ ADB 失败：${it.message}\n请确认已打开 USB 调试") }
+                }
+            }
+        })
+
+        root.addView(section("第 2 步：启动守护"))
+        val guardBtn = button("") {
+            if (prefs.guardRunning) GuardService.stop(this) else GuardService.start(this)
+            handler.postDelayed({ render() }, 300)
+        }
+        guardBtn.text = if (prefs.guardRunning) "停止守护" else "▶ 启动守护"
+        root.addView(guardBtn)
+
+        root.addView(section("第 3 步：在家长手机上输入配对码"))
+        val codeView = text("配对码已隐藏")
+        codeView.textSize = 28f
+        codeView.typeface = Typeface.MONOSPACE
+        root.addView(codeView)
+        root.addView(button("显示 / 隐藏配对码") {
+            codeView.text = if (codeView.text.startsWith("配对码已隐藏")) prefs.pairCode else "配对码已隐藏"
+        })
+
+        root.addView(section("其他"))
+        root.addView(button("更换配对码（旧手机将失效）") {
+            confirm("确定更换配对码？手机端需要重新输入。") {
+                prefs.pairCode = Prefs.newPairCode()
+                prefs.lastCmdId = ""
+                render()
+            }
+        })
+        root.addView(button("更改设备用途") {
+            confirm("确定把这台设备改成别的用途吗？守护会停止。") {
+                GuardService.stop(this)
+                prefs.role = ""
+                render()
+            }
+        })
+
+        refresher = object : Runnable {
+            override fun run() {
+                status.text = buildString {
+                    append(if (prefs.guardRunning) "🟢 守护运行中\n" else "🔴 守护未运行\n")
+                    append(prefs.lastStatus)
+                    append("\n每日 ${prefs.dailyLimitMin} 分钟（今日奖励 +${prefs.bonusMin}）")
+                    append("\n允许时段 ${prefs.windowText()}")
+                    if (prefs.isPaused()) append("\n⏸ 管控暂停中")
+                }
+                handler.postDelayed(this, 2000)
+            }
+        }.also { handler.post(it) }
+    }
+
+    // ---------------- 家长手机端 ----------------
+
+    private fun renderPhone() {
+        val root = page()
+        root.addView(title("电视时间管家 · 家长端"))
+
+        val status = text("正在获取电视状态…")
+        status.textSize = 18f
+        root.addView(card(status))
+        root.addView(button("🔄 刷新状态") { fetchStatus(status) })
+
+        root.addView(section("快捷操作"))
+        val row1 = row()
+        row1.addView(button("+15 分钟", weight = true) { sendBonus(15) })
+        row1.addView(button("+30 分钟", weight = true) { sendBonus(30) })
+        row1.addView(button("+60 分钟", weight = true) { sendBonus(60) })
+        root.addView(row1)
+        root.addView(button("⛔ 立即关电视") {
+            confirm("现在就关掉电视？") { send(JSONObject().put("t", "off"), "已发送关机指令") }
+        })
+        val row2 = row()
+        row2.addView(button("暂停管控 1 小时", weight = true) {
+            send(JSONObject().put("t", "pause").put("until", System.currentTimeMillis() + 3600_000), "已暂停 1 小时")
+        })
+        row2.addView(button("恢复管控", weight = true) {
+            send(JSONObject().put("t", "pause").put("until", 0), "已恢复管控")
+        })
+        root.addView(row2)
+        root.addView(button("今日时间清零") {
+            confirm("把今天已看的时间和奖励都清零？") {
+                send(JSONObject().put("t", "reset").put("date", LocalDate.now().toString()), "已清零")
+            }
+        })
+
+        root.addView(section("规则设置"))
+        root.addView(text("每天最多看（分钟）"))
+        val limit = EditText(this).apply {
+            inputType = InputType.TYPE_CLASS_NUMBER
+            setText(prefs.dailyLimitMin.toString())
+        }
+        root.addView(limit)
+
+        root.addView(text("允许看电视的时段"))
+        var start = prefs.allowStartMin
+        var end = prefs.allowEndMin
+        val timeRow = row()
+        val startBtn = button("从 ${Prefs.fmtHm(start)}", weight = true) {}
+        val endBtn = button("到 ${Prefs.fmtHm(end)}", weight = true) {}
+        startBtn.setOnClickListener {
+            TimePickerDialog(this, { _, h, m -> start = h * 60 + m; startBtn.text = "从 ${Prefs.fmtHm(start)}" },
+                start / 60, start % 60, true).show()
+        }
+        endBtn.setOnClickListener {
+            TimePickerDialog(this, { _, h, m -> end = h * 60 + m; endBtn.text = "到 ${Prefs.fmtHm(end)}" },
+                end / 60, end % 60, true).show()
+        }
+        timeRow.addView(startBtn)
+        timeRow.addView(endBtn)
+        root.addView(timeRow)
+
+        val enforce = Switch(this).apply {
+            text = "超时自动关电视（关掉则只记录时间）"
+            isChecked = prefs.enforce
+            setPadding(0, dp(12), 0, dp(12))
+        }
+        root.addView(enforce)
+
+        root.addView(button("💾 保存并发送到电视") {
+            val l = limit.text.toString().toIntOrNull()
+            if (l == null || l < 0 || l > 1440) {
+                toast("每日分钟数请填 0–1440")
+                return@button
+            }
+            prefs.dailyLimitMin = l
+            prefs.allowStartMin = start
+            prefs.allowEndMin = end
+            prefs.enforce = enforce.isChecked
+            send(prefs.settingsJson(), "设置已发送，电视 30 秒内生效")
+        })
+
+        root.addView(section("配对"))
+        root.addView(text("在电视端 App 里点「显示配对码」，把配对码填在这里："))
+        val code = EditText(this).apply {
+            setText(prefs.pairCode)
+            hint = "电视上显示的配对码"
+            typeface = Typeface.MONOSPACE
+        }
+        root.addView(code)
+        root.addView(button("保存配对码") {
+            prefs.pairCode = code.text.toString()
+            toast("已保存，现在可以发送设置了")
+            fetchStatus(status)
+        })
+        root.addView(button("更改设备用途") {
+            confirm("确定把这台设备改成别的用途吗？") {
+                prefs.role = ""
+                render()
+            }
+        })
+
+        refresher = object : Runnable {
+            override fun run() {
+                fetchStatus(status)
+                handler.postDelayed(this, 30_000)
+            }
+        }.also { handler.post(it) }
+    }
+
+    private fun sendBonus(min: Int) = send(
+        JSONObject().put("t", "bonus").put("min", min).put("date", LocalDate.now().toString()),
+        "已给今天加 $min 分钟"
+    )
+
+    private fun send(body: JSONObject, okMsg: String) {
+        val code = prefs.pairCode
+        if (code.isBlank()) {
+            toast("请先在下面填写配对码")
+            return
+        }
+        thread {
+            val r = runCatching { Relay.publish(Relay.cmdTopic(code), body) }
+            runOnUiThread {
+                r.onSuccess { toast("✅ $okMsg") }.onFailure { toast("❌ 发送失败：${it.message}") }
+            }
+        }
+    }
+
+    private fun fetchStatus(view: TextView) {
+        val code = prefs.pairCode
+        if (code.isBlank()) {
+            view.text = "还没配对：请在下方输入电视上的配对码"
+            return
+        }
+        thread {
+            val r = runCatching { Relay.poll(Relay.statusTopic(code), "12h").lastOrNull() }
+            runOnUiThread {
+                view.text = r.fold(
+                    onSuccess = { m -> if (m == null) "12 小时内没有收到电视的消息。\n请确认电视端已启动守护、配对码正确。" else statusText(m) },
+                    onFailure = { "❌ 获取状态失败：${it.message}" }
+                )
+            }
+        }
+    }
+
+    private fun statusText(m: Relay.Msg): String {
+        val j = m.body
+        val ago = (System.currentTimeMillis() - j.optLong("ts", m.time)) / 60_000
+        val total = j.optInt("limit") + j.optInt("bonus")
+        val used = j.optLong("used") / 60
+        val start = Prefs.fmtHm(j.optInt("start"))
+        val end = Prefs.fmtHm(j.optInt("end"))
+        return buildString {
+            append(if (j.optBoolean("on")) "📺 电视开着\n" else "⚫ 电视待机\n")
+            append("今天已看 $used / $total 分钟（剩 ${(total - used).coerceAtLeast(0)}）\n")
+            append("允许时段 $start–$end")
+            if (!j.optBoolean("enforce")) append(" · 仅记录不关机")
+            if (System.currentTimeMillis() < j.optLong("pause")) append("\n⏸ 管控暂停中")
+            append("\n${j.optString("msg")}")
+            append("\n（$ago 分钟前上报")
+            if (ago > 35) append("，电视可能已待机或断网")
+            append("）")
+        }
+    }
+
+    // ---------------- 简单的 UI 工具 ----------------
+
+    private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
+
+    private fun page(): LinearLayout {
+        val ll = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(16), dp(16), dp(16), dp(32))
+        }
+        setContentView(ScrollView(this).apply {
+            setBackgroundColor(Color.parseColor("#F5F7F5"))
+            addView(ll)
+        })
+        return ll
+    }
+
+    private fun title(s: String) = TextView(this).apply {
+        text = s
+        textSize = 24f
+        setTypeface(typeface, Typeface.BOLD)
+        setTextColor(Color.parseColor("#1B5E20"))
+        setPadding(0, 0, 0, dp(12))
+    }
+
+    private fun section(s: String) = TextView(this).apply {
+        text = s
+        textSize = 18f
+        setTypeface(typeface, Typeface.BOLD)
+        setTextColor(Color.parseColor("#2E7D32"))
+        setPadding(0, dp(20), 0, dp(6))
+    }
+
+    private fun text(s: String) = TextView(this).apply {
+        text = s
+        textSize = 15f
+        setTextColor(Color.parseColor("#333333"))
+        setPadding(0, dp(4), 0, dp(4))
+    }
+
+    private fun card(v: View) = LinearLayout(this).apply {
+        setPadding(dp(16), dp(16), dp(16), dp(16))
+        background = GradientDrawable().apply {
+            setColor(Color.WHITE)
+            cornerRadius = dp(12).toFloat()
+            setStroke(dp(1), Color.parseColor("#C8E6C9"))
+        }
+        addView(v)
+    }
+
+    private fun row() = LinearLayout(this).apply {
+        orientation = LinearLayout.HORIZONTAL
+        gravity = Gravity.CENTER_VERTICAL
+    }
+
+    private fun button(s: String, weight: Boolean = false, onClick: () -> Unit) = Button(this).apply {
+        text = s
+        isAllCaps = false
+        setOnClickListener { onClick() }
+        if (weight) layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+    }
+
+    private fun confirm(msg: String, ok: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setMessage(msg)
+            .setPositiveButton("确定") { _, _ -> ok() }
+            .setNegativeButton("取消", null)
+            .show()
+    }
+
+    private fun toast(s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+}
