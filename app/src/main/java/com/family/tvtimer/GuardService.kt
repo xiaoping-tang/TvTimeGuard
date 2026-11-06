@@ -102,6 +102,8 @@ class GuardService : Service() {
 
         if (!on) {
             lastTick = 0L
+            // 倒计时中被关屏，下次开屏重新开始（短）倒计时，保证家长总有机会输 PIN
+            prefs.lockDeadline = 0L
             update("电视待机中")
             maybePublish(on = false)
             return
@@ -121,24 +123,69 @@ class GuardService : Service() {
             else -> null
         }
 
+        if (reason == null || forceOff || prefs.isPaused() || !prefs.enforce || !prefs.paired) {
+            prefs.lockDeadline = 0L // LockActivity 看到 0 会自己关闭
+        }
         when {
             reason == null -> update("正在看 · 剩 ${prefs.remainingSec / 60} 分钟")
-            !forceOff && prefs.isPaused() -> update("管控暂停中 · $reason")
-            !forceOff && !prefs.enforce -> update("仅记录 · $reason")
+            forceOff -> {
+                turnOff(reason)
+                return
+            }
+            prefs.isPaused() -> update("管控暂停中 · $reason")
+            !prefs.enforce -> update("仅记录 · $reason")
+            !prefs.paired -> update("还没配对手机，只计时不关机 · $reason")
             else -> {
-                try {
-                    tv.turnOff()
-                    lastTick = 0L
-                    update("已关闭电视：$reason")
-                } catch (t: Throwable) {
-                    update("⚠ 想关电视但 ADB 失败（请在电视上重新授权）：$reason")
-                }
-                forcePublish = true
-                maybePublish(on = false)
+                countdownThenOff(reason)
                 return
             }
         }
         maybePublish(on = true)
+    }
+
+    /** 先全屏提示「时间到了」并倒计时，期间家长可输 PIN 解锁；倒计时结束才关机 */
+    private fun countdownThenOff(reason: String) {
+        val now = System.currentTimeMillis()
+        if (prefs.lockDeadline == 0L) {
+            // 10 分钟内刚倒计时过（小孩关了又开），只给短倒计时
+            val sec = if (now - prefs.lastLockAt < 10 * 60_000) SHORT_LOCK_SEC else LOCK_SEC
+            prefs.lastLockAt = now
+            prefs.lockReason = reason
+            prefs.lockDeadline = now + sec * 1000
+            forcePublish = true
+        }
+        val left = (prefs.lockDeadline - now + 999) / 1000
+        if (left <= 0) {
+            prefs.lockDeadline = 0L
+            turnOff(reason)
+            return
+        }
+        if (!LockActivity.visible) showLock()
+        update("⏳ $reason，$left 秒后关机")
+        maybePublish(on = true)
+        // 倒计时期间加快检查，按时关机，小孩按主页键退出提示也会被马上拉回来
+        executor?.schedule({ safeTick() }, minOf(left, 3L), TimeUnit.SECONDS)
+    }
+
+    private fun showLock() {
+        try {
+            // 后台服务不能直接弹界面，借本机 ADB 启动
+            tv.shell("am start -n $packageName/.LockActivity")
+        } catch (t: Throwable) {
+            Log.w(TAG, "show lock failed", t)
+        }
+    }
+
+    private fun turnOff(reason: String) {
+        try {
+            tv.turnOff()
+            lastTick = 0L
+            update("已关闭电视：$reason")
+        } catch (t: Throwable) {
+            update("⚠ 想关电视但 ADB 失败（请在电视上重新授权）：$reason")
+        }
+        forcePublish = true
+        maybePublish(on = false)
     }
 
     /** 处理手机发来的指令，返回是否要求立即关机 */
@@ -157,7 +204,10 @@ class GuardService : Service() {
         for (m in msgs) {
             val j = m.body
             when (j.optString("t")) {
-                "cfg" -> prefs.applySettings(j)
+                "cfg" -> {
+                    prefs.applySettings(j)
+                    prefs.paired = true
+                }
                 "bonus" -> if (j.optString("date") == today) prefs.bonusMin = prefs.bonusMin + j.optInt("min")
                 "reset" -> if (j.optString("date") == today) prefs.resetToday()
                 "pause" -> prefs.pauseUntil = j.optLong("until")
@@ -228,6 +278,8 @@ class GuardService : Service() {
         private const val CHANNEL = "guard"
         private const val NOTIF_ID = 1
         private const val CHECK_SEC = 30L
+        private const val LOCK_SEC = 60L
+        private const val SHORT_LOCK_SEC = 20L
         const val ACTION_STOP = "com.family.tvtimer.STOP"
 
         fun start(ctx: Context) {

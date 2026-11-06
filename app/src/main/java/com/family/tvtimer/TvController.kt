@@ -25,7 +25,11 @@ class TvController(private val context: Context) {
 
     /** 让电视进入待机 */
     fun turnOff() {
-        withAdb { it.shell("input keyevent KEYCODE_SLEEP") }
+        shell("input keyevent KEYCODE_SLEEP")
+    }
+
+    fun shell(cmd: String) {
+        withAdb { it.shell(cmd) }
     }
 
     /** 测试 ADB 并顺便把本 App 加入省电白名单，避免被系统杀掉 */

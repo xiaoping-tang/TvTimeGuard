@@ -48,6 +48,30 @@ class Prefs(context: Context) {
         get() = sp.getBoolean("guard_running", false)
         set(v) = sp.edit().putBoolean("guard_running", v).apply()
 
+    /** 电视端：4 位家长 PIN，空字符串表示还没设置 */
+    var pin: String
+        get() = sp.getString("pin", "") ?: ""
+        set(v) = sp.edit().putString("pin", v).apply()
+
+    /** 电视端：是否已收到手机发来的设置。配对前只计时、不关机，保证家长能完成安装 */
+    var paired: Boolean
+        get() = sp.getBoolean("paired", false)
+        set(v) = sp.edit().putBoolean("paired", v).apply()
+
+    /** 电视端：「时间到了」倒计时的截止时间（毫秒），0 表示没在倒计时 */
+    var lockDeadline: Long
+        get() = sp.getLong("lock_deadline", 0L)
+        set(v) = sp.edit().putLong("lock_deadline", v).apply()
+
+    var lockReason: String
+        get() = sp.getString("lock_reason", "") ?: ""
+        set(v) = sp.edit().putString("lock_reason", v).apply()
+
+    /** 电视端：上一次开始倒计时的时间，用来防止反复开关机蹭时间 */
+    var lastLockAt: Long
+        get() = sp.getLong("last_lock_at", 0L)
+        set(v) = sp.edit().putLong("last_lock_at", v).apply()
+
     /** 电视端：已处理到的最后一条指令 id */
     var lastCmdId: String
         get() = sp.getString("last_cmd_id", "") ?: ""

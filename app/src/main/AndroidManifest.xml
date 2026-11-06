@@ -32,6 +32,15 @@
             </intent-filter>
         </activity>
 
+        <!-- exported：守护服务通过本机 ADB（shell 身份）启动它 -->
+        <activity
+            android:name=".LockActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.family.tvtimer.lock"
+            android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen" />
+
         <service
             android:name=".GuardService"
             android:exported="false"

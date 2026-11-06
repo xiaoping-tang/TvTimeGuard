@@ -80,7 +80,53 @@ class MainActivity : Activity() {
 
     // ---------------- 电视端 ----------------
 
+    /** 电视端第一次使用：先设置 4 位家长 PIN */
+    private fun renderSetPin() {
+        val root = page()
+        root.addView(title("电视时间管家 · 设置家长密码"))
+        root.addView(text("请先设置 4 位家长密码。以后停止守护、查看配对码，以及「时间到了」时临时解锁，都要用这个密码。请不要让小孩看到。"))
+        var first = ""
+        val hint = text("请输入新密码")
+        hint.textSize = 18f
+        root.addView(hint)
+        root.addView(Ui.pinPad(this, "_ _ _ _") { pin ->
+            if (first.isEmpty()) {
+                first = pin
+                hint.text = "请再输入一次确认"
+                true
+            } else if (pin == first) {
+                prefs.pin = pin
+                toast("✅ 家长密码已设置")
+                render()
+                true
+            } else {
+                first = ""
+                hint.text = "两次不一样，请重新输入新密码"
+                false
+            }
+        })
+    }
+
+    /** 输对家长 PIN 才执行 action */
+    private fun withPin(action: () -> Unit) {
+        lateinit var dialog: AlertDialog
+        val pad = Ui.pinPad(this, "请输入家长密码") { pin ->
+            val ok = pin == prefs.pin
+            if (ok) {
+                dialog.dismiss()
+                action()
+            }
+            ok
+        }
+        dialog = AlertDialog.Builder(this).setView(pad).setNegativeButton("取消", null).create()
+        dialog.show()
+    }
+
     private fun renderTv() {
+        if (prefs.pin.isBlank()) {
+            renderSetPin()
+            return
+        }
         val root = page()
         root.addView(title("电视时间管家 · 电视端"))
 
@@ -89,7 +135,7 @@ class MainActivity : Activity() {
         root.addView(card(status))
 
         root.addView(section("第 1 步：授权本机 ADB"))
-        root.addView(text("需先在「设置 → 系统 → 关于 → 连按 7 下 Android TV OS 版本」打开开发者选项，再在开发者选项里打开「USB 调试」。点下面按钮后电视会弹窗，勾选「始终允许」再点「允许」。"))
+        root.addView(text("需先在「设置 → 系统 → 关于」里，对「Android TV OS 版本号（Build）」连按 7 下打开开发者选项，再到「设置 → 系统 → 开发者选项」里打开「USB 调试」。点下面按钮后电视会弹窗，勾选「始终允许」再点「允许」。"))
         root.addView(button("授权 / 测试 ADB") {
             toast("正在连接，请留意电视弹窗…")
             thread {
@@ -102,11 +148,17 @@ class MainActivity : Activity() {
         })
 
         root.addView(section("第 2 步：启动守护"))
+        root.addView(text("在手机配对之前，守护只计时、不会关电视。"))
         val guardBtn = button("") {
-            if (prefs.guardRunning) GuardService.stop(this) else GuardService.start(this)
-            handler.postDelayed({ render() }, 300)
+            if (prefs.guardRunning) withPin {
+                GuardService.stop(this)
+                handler.postDelayed({ render() }, 300)
+            } else {
+                GuardService.start(this)
+                handler.postDelayed({ render() }, 300)
+            }
         }
-        guardBtn.text = if (prefs.guardRunning) "停止守护" else "▶ 启动守护"
+        guardBtn.text = if (prefs.guardRunning) "停止守护（需密码）" else "▶ 启动守护"
         root.addView(guardBtn)
 
         root.addView(section("第 3 步：在家长手机上输入配对码"))
@@ -114,22 +166,31 @@ class MainActivity : Activity() {
         codeView.textSize = 28f
         codeView.typeface = Typeface.MONOSPACE
         root.addView(codeView)
-        root.addView(button("显示 / 隐藏配对码") {
-            codeView.text = if (codeView.text.startsWith("配对码已隐藏")) prefs.pairCode else "配对码已隐藏"
+        root.addView(button("显示 / 隐藏配对码（需密码）") {
+            if (codeView.text.startsWith("配对码已隐藏")) withPin { codeView.text = prefs.pairCode }
+            else codeView.text = "配对码已隐藏"
         })
 
         root.addView(section("其他"))
-        root.addView(button("更换配对码（旧手机将失效）") {
-            confirm("确定更换配对码？手机端需要重新输入。") {
+        root.addView(button("更换配对码（需密码，旧手机将失效）") {
+            withPin {
                 prefs.pairCode = Prefs.newPairCode()
                 prefs.lastCmdId = ""
+                prefs.paired = false
                 render()
             }
         })
-        root.addView(button("更改设备用途") {
-            confirm("确定把这台设备改成别的用途吗？守护会停止。") {
+        root.addView(button("修改家长密码（需旧密码）") {
+            withPin {
+                prefs.pin = ""
+                render()
+            }
+        })
+        root.addView(button("更改设备用途（需密码）") {
+            withPin {
                 GuardService.stop(this)
                 prefs.role = ""
+                prefs.paired = false
                 render()
             }
         })
@@ -137,7 +198,8 @@ class MainActivity : Activity() {
         refresher = object : Runnable {
             override fun run() {
                 status.text = buildString {
-                    append(if (prefs.guardRunning) "🟢 守护运行中\n" else "🔴 守护未运行\n")
+                    append(if (prefs.guardRunning) "🟢 守护运行中" else "🔴 守护未运行")
+                    append(if (prefs.paired) " · 已配对手机\n" else " · 未配对手机（只计时不关机）\n")
                     append(prefs.lastStatus)
                     append("\n每日 ${prefs.dailyLimitMin} 分钟（今日奖励 +${prefs.bonusMin}）")
                     append("\n允许时段 ${prefs.windowText()}")
@@ -238,8 +300,9 @@ class MainActivity : Activity() {
         root.addView(code)
         root.addView(button("保存配对码") {
             prefs.pairCode = code.text.toString()
-            toast("已保存，现在可以发送设置了")
-            fetchStatus(status)
+            // 电视收到第一份设置后才开始真正管控
+            send(prefs.settingsJson(), "已配对，设置已发送到电视")
+            handler.postDelayed({ fetchStatus(status) }, 3000)
         })
         root.addView(button("更改设备用途") {
             confirm("确定把这台设备改成别的用途吗？") {
@@ -366,12 +429,8 @@ class MainActivity : Activity() {
         gravity = Gravity.CENTER_VERTICAL
     }
 
-    private fun button(s: String, weight: Boolean = false, onClick: () -> Unit) = Button(this).apply {
-        text = s
-        isAllCaps = false
-        setOnClickListener { onClick() }
-        if (weight) layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-    }
+    private fun button(s: String, weight: Boolean = false, onClick: () -> Unit) =
+        Ui.button(this, s, weight, onClick)
 
     private fun confirm(msg: String, ok: () -> Unit) {
         AlertDialog.Builder(this)
