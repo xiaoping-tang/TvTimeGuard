@@ -39,7 +39,10 @@ class QuizActivity : Activity() {
     private lateinit var submitBtn: Button
     private lateinit var nextBtn: Button
     private lateinit var exitBtn: Button
-    private lateinit var firstKey: Button
+    private lateinit var numPad: View
+    private lateinit var letterPad: View
+    private lateinit var numFirst: Button
+    private lateinit var letterFirst: Button
     private val keys = mutableListOf<Button>()
 
     private var current: Question? = null
@@ -51,6 +54,7 @@ class QuizActivity : Activity() {
         super.onCreate(savedInstanceState)
         prefs = Prefs(this)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        runCatching { English.loadAssets(this) } // 读不到英文题库就只出数学题
         val dp = { v: Int -> Ui.dp(this, v) }
 
         // 电视横屏：左边题目（可滚动），右边数字键盘
@@ -102,29 +106,48 @@ class QuizActivity : Activity() {
             }
             setPadding(dp(12), dp(8), dp(12), dp(8))
         }
-        val keyRows = listOf(
+        // 两套键盘：数学题用数字键盘，英文填空用字母键盘，按题目类型切换
+        fun buildPad(rows: List<List<String>>, width: Int, size: Float, pad: Int, first: String): Pair<LinearLayout, Button> {
+            val box = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER_HORIZONTAL
+            }
+            var firstBtn: Button? = null
+            for (rowKeys in rows) {
+                val row = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL
+                    layoutParams = LinearLayout.LayoutParams(dp(width), LinearLayout.LayoutParams.WRAP_CONTENT)
+                }
+                for (k in rowKeys) {
+                    val b = Ui.button(this, k, weight = true) { press(k) }.apply {
+                        textSize = size
+                        setPadding(dp(pad), dp(8), dp(pad), dp(8))
+                        (layoutParams as LinearLayout.LayoutParams).setMargins(dp(2), dp(3), dp(2), dp(3))
+                    }
+                    if (k == first) firstBtn = b
+                    keys.add(b)
+                    row.addView(b)
+                }
+                box.addView(row)
+            }
+            return box to firstBtn!!
+        }
+        val (np, nFirst) = buildPad(listOf(
             listOf("7", "8", "9"),
             listOf("4", "5", "6"),
             listOf("1", "2", "3"),
             listOf("0", ".", "/"),
             listOf("⌫", "Clear"),
-        )
-        for (rowKeys in keyRows) {
-            val row = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                layoutParams = LinearLayout.LayoutParams(dp(300), LinearLayout.LayoutParams.WRAP_CONTENT)
-            }
-            for (k in rowKeys) {
-                val b = Ui.button(this, k, weight = true) { press(k) }.apply {
-                    textSize = 20f
-                    setPadding(dp(8), dp(8), dp(8), dp(8))
-                }
-                if (k == "1") firstKey = b
-                keys.add(b)
-                row.addView(b)
-            }
-            padCard.addView(row)
-        }
+        ), 300, 20f, 8, "1")
+        val (lp, lFirst) = buildPad(listOf(
+            "qwertyuiop".map { it.toString() },
+            "asdfghjkl".map { it.toString() },
+            "zxcvbnm'".map { it.toString() },
+            listOf("⌫", "Clear"),
+        ), 400, 17f, 0, "a")
+        numPad = np; numFirst = nFirst; letterPad = lp; letterFirst = lFirst
+        padCard.addView(numPad)
+        padCard.addView(letterPad)
         submitBtn = Ui.button(this, "✔ Submit") { submit() }.apply { textSize = 18f }
         padCard.addView(submitBtn)
         nextBtn = Ui.button(this, "Next question ▶") { nextQuestion() }.apply {
@@ -148,9 +171,9 @@ class QuizActivity : Activity() {
     private fun refreshHeader() {
         val reward = prefs.quizRewardMin()
         headerView.text = when {
-            reward <= 0 -> "📝 Maths practice"
-            timeUp() -> "⏰ TV time is up! Solve 1 problem correctly to watch $reward more minutes."
-            else -> "📝 Solve 1 problem correctly to get $reward more minutes of TV."
+            reward <= 0 -> "📝 Practice time"
+            timeUp() -> "⏰ TV time is up! Answer 1 question correctly to watch $reward more minutes."
+            else -> "📝 Answer 1 question correctly to get $reward more minutes of TV."
         }
         scoreView.text = buildString {
             append("Quiz bonus today: ${prefs.quizBonusMin} / ${prefs.quizCapMin} min")
@@ -166,17 +189,21 @@ class QuizActivity : Activity() {
         current = q
         answered = false
         input.clear()
-        topicView.text = "Primary 5 · ${q.topic}"
+        topicView.text = if (q.isEnglish) "Primary 5 English · ${q.topic} · Fill in the blank with ONE word"
+        else "Primary 5 Maths · ${q.topic}"
         questionView.text = q.text
-        feedbackView.text = "Type numbers only, no units. Use / for fractions, e.g. 3/4."
+        feedbackView.text = if (q.isEnglish) "Type one word, then press Submit."
+        else "Type numbers only, no units. Use / for fractions, e.g. 3/4."
         feedbackView.setTextColor(Color.parseColor("#B0BEC5"))
         refreshInput()
         refreshHeader()
         keys.forEach { it.isEnabled = true }
+        numPad.visibility = if (q.isEnglish) View.GONE else View.VISIBLE
+        letterPad.visibility = if (q.isEnglish) View.VISIBLE else View.GONE
         submitBtn.visibility = View.VISIBLE
         submitBtn.isEnabled = true
         nextBtn.visibility = View.GONE
-        firstKey.requestFocus()
+        (if (q.isEnglish) letterFirst else numFirst).requestFocus()
     }
 
     private fun press(k: String) {
@@ -184,7 +211,7 @@ class QuizActivity : Activity() {
         when (k) {
             "⌫" -> if (input.isNotEmpty()) input.deleteCharAt(input.length - 1)
             "Clear" -> input.clear()
-            else -> if (input.length < 12) input.append(k)
+            else -> if (input.length < 16) input.append(k)
         }
         feedbackView.text = ""
         refreshInput()
@@ -197,17 +224,20 @@ class QuizActivity : Activity() {
     private fun submit() {
         val q = current ?: return
         if (answered) return
-        val ans = Frac.parse(input.toString())
-        if (ans == null) {
+        if (input.isEmpty()) {
             feedbackView.setTextColor(Color.parseColor("#FFAB91"))
-            feedbackView.text = if (input.isEmpty()) "Please type your answer first."
-            else "That doesn't look like a number. Check it again (use / for fractions, e.g. 3/4)."
+            feedbackView.text = "Please type your answer first."
+            return
+        }
+        if (!q.isEnglish && Frac.parse(input.toString()) == null) {
+            feedbackView.setTextColor(Color.parseColor("#FFAB91"))
+            feedbackView.text = "That doesn't look like a number. Check it again (use / for fractions, e.g. 3/4)."
             return
         }
         answered = true
         keys.forEach { it.isEnabled = false }
         submitBtn.isEnabled = false
-        if (ans == q.answer) {
+        if (q.isCorrect(input.toString())) {
             val add = prefs.addQuizBonus()
             feedbackView.setTextColor(Color.parseColor("#A5D6A7"))
             feedbackView.text = if (add > 0) "✅ Correct! Well done! Enjoy $add minutes of TV."
@@ -215,11 +245,13 @@ class QuizActivity : Activity() {
             refreshHeader()
             GuardService.poke()
             // 一次只给 10 分钟：答对就关掉做题界面，去看电视
+            // 关掉做题界面，系统会回到原来的 App（例如 YouTube）接着播
             handler.postDelayed({ finish() }, 3000)
         } else {
             wrong++
             feedbackView.setTextColor(Color.parseColor("#FFAB91"))
-            feedbackView.text = "❌ Not quite. The correct answer is ${q.answerText}.\n\nWorking:\n${q.explain}"
+            feedbackView.text = "❌ Not quite. The correct answer is ${q.answerText}.\n\n" +
+                (if (q.isEnglish) "Why: " else "Working:\n") + q.explain
             refreshHeader()
             submitBtn.visibility = View.GONE
             nextBtn.visibility = View.VISIBLE
@@ -240,9 +272,12 @@ class QuizActivity : Activity() {
         giveUp()
     }
 
-    /** 遥控器或键盘上如果有数字键，也可以直接按 */
+    /** 遥控器或外接键盘上如果有数字键/字母键，也可以直接按 */
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         val k = when (keyCode) {
+            in KeyEvent.KEYCODE_A..KeyEvent.KEYCODE_Z ->
+                if (current?.isEnglish == true) ('a' + (keyCode - KeyEvent.KEYCODE_A)).toString() else null
+            KeyEvent.KEYCODE_APOSTROPHE -> if (current?.isEnglish == true) "'" else null
             in KeyEvent.KEYCODE_0..KeyEvent.KEYCODE_9 -> (keyCode - KeyEvent.KEYCODE_0).toString()
             in KeyEvent.KEYCODE_NUMPAD_0..KeyEvent.KEYCODE_NUMPAD_9 -> (keyCode - KeyEvent.KEYCODE_NUMPAD_0).toString()
             KeyEvent.KEYCODE_PERIOD, KeyEvent.KEYCODE_NUMPAD_DOT -> "."
@@ -261,6 +296,7 @@ class QuizActivity : Activity() {
         super.onResume()
         visible = true
         launchGraceUntil = 0L
+        lastResumeAt = System.currentTimeMillis()
         refreshHeader()
     }
 
@@ -287,6 +323,10 @@ class QuizActivity : Activity() {
         /** 小孩主动放弃了做题；电视待机或时间又够了时清掉 */
         @Volatile
         var declined = false
+
+        /** 做题界面最近一次真正出现在屏幕上的时间，守护服务用它判断「打开了却没出现」 */
+        @Volatile
+        var lastResumeAt = 0L
 
         fun isActive() = visible || System.currentTimeMillis() < launchGraceUntil
     }

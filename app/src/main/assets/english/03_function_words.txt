@@ -1,0 +1,220 @@
+# 新加坡 P5 英文填空：介词（P）、连词（C）、代词/关系词（R）、数量词（N）、反义疑问句（Q）
+# P / C / R / N 题在电视上会显示答案的首字母和字母数，避免一题多解
+# 格式：题型|句子（___ 是空格）|答案（多个用 / 分隔）|解释
+P|Siti is afraid ___ the dark.|of|We say "afraid of".
+P|Ali is very good ___ drawing.|at|We say "good at" something.
+P|The pupils are interested ___ science.|in|We say "interested in".
+P|Kumar was proud ___ his younger sister's results.|of|We say "proud of".
+P|My mother is fond ___ gardening.|of|We say "fond of".
+P|The baby is allergic ___ peanuts.|to|We say "allergic to".
+P|Emily is kind ___ animals.|to|We say "kind to" someone or something.
+P|The teacher was angry ___ the noisy boys.|with|We say "angry with" a person.
+P|Ben apologised ___ his mistake.|for|We say "apologise for" something.
+P|Please listen ___ the teacher.|to|We say "listen to".
+P|The library is open ___ Monday to Saturday.|from|We say "from ... to ...".
+P|We will meet ___ 3 p.m. at the MRT station.|at|We use "at" for a time on the clock.
+P|My birthday is ___ June.|in|We use "in" for months.
+P|The concert is ___ Saturday.|on|We use "on" for days.
+P|The shops are closed ___ Christmas Day.|on|We use "on" for a particular day.
+P|I usually read a book ___ night.|at|We say "at night".
+P|We go swimming ___ the morning.|in|We say "in the morning".
+P|Singapore became independent ___ 1965.|in|We use "in" for years.
+P|The cat is hiding ___ the table.|under|"under" means below something.
+P|The picture is hanging ___ the wall.|on|Something touching a wall is "on" it.
+P|The fish are swimming ___ the tank.|in|Inside something: "in".
+P|Hui Min sat ___ Emily and Nurul.|between|In the middle of two people: "between".
+P|The teacher divided the sweets ___ all the pupils in the class.|among|Sharing with more than two people: "among".
+P|The plane flew ___ the clouds.|above|Higher than something: "above".
+P|The boys walked ___ the bridge to the other side of the river.|across|From one side to the other: "across".
+P|The train went ___ a long tunnel.|through|From one end to the other end of something enclosed: "through".
+P|Wei Jie jumped ___ the pool with a big splash.|into|Moving to the inside of something: "into".
+P|The cat jumped ___ the table.|onto|Moving to the top of something: "onto".
+P|The children ran ___ the tree in a circle.|around|In a circle: "around".
+P|Please put the milk back ___ the fridge.|into/in|Moving to the inside: "into".
+P|The ball rolled ___ the hill.|down|Moving from a higher place to a lower place: "down".
+P|We walked ___ the river and enjoyed the view.|along|Following the length of something: "along".
+P|The dog ran ___ the cat.|after|To chase something: run "after" it.
+P|I have been waiting ___ two hours.|for|"for" is used with a period of time.
+P|Farid has lived here ___ 2018.|since|"since" is used with a point in time.
+P|Please finish your homework ___ Friday.|by|"by" means "not later than".
+P|The shop stays open ___ 10 p.m.|until|"until" means up to a point in time.
+P|The boy was punished ___ telling lies.|for|We say "punished for".
+P|Mother is worried ___ Grandma's health.|about|We say "worried about".
+P|The pupils are excited ___ the school trip.|about|We say "excited about".
+P|This book belongs ___ my brother.|to|We say "belong to".
+P|The cake was divided ___ eight pieces.|into|We say "divide into".
+P|The room was filled ___ balloons.|with|We say "filled with".
+P|The bottle is full ___ water.|of|We say "full of".
+P|He is different ___ his twin brother.|from|We say "different from".
+P|The answer depends ___ the question.|on|We say "depend on".
+P|We congratulated Siti ___ winning the race.|on|We say "congratulate someone on" something.
+P|The boy was accused ___ stealing the money.|of|We say "accused of".
+P|Ryan prevented his brother ___ falling into the drain.|from|We say "prevent someone from".
+P|I agree ___ you.|with|We agree "with" a person.
+P|The children laughed ___ the clown's jokes.|at|We say "laugh at".
+P|She is married ___ a doctor.|to|We say "married to".
+P|He was absent ___ school because he was sick.|from|We say "absent from".
+P|The girl is responsible ___ feeding the fish.|for|We say "responsible for".
+P|Ali is similar ___ his father in many ways.|to|We say "similar to".
+P|My aunt arrived ___ Singapore last night.|in|We arrive "in" a city or country.
+P|We arrived ___ the airport early.|at|We arrive "at" a place such as a building or station.
+P|We travelled to Malaysia ___ car.|by|We use "by" for transport: by car.
+P|Nurul went to school ___ foot.|on|We say "on foot".
+P|The book was written ___ a famous author.|by|In the passive voice, the doer comes after "by".
+P|The bag is made ___ leather.|of|We say "made of" a material.
+P|The cake was made ___ my mother.|by|In the passive voice, the doer comes after "by".
+P|The thief was hiding ___ the door.|behind|At the back of something: "behind".
+P|The school is ___ the post office. You can see it across the road.|opposite|Facing it on the other side: "opposite".
+P|Mother sat ___ to me on the bus.|next|We say "next to".
+P|The cat sat ___ front of the fire.|in|We say "in front of".
+P|We sheltered from the rain ___ a big umbrella.|under|Below something: "under".
+P|The children played happily ___ recess.|during|Throughout a period of time: "during".
+P|Wash your hands ___ you eat.|before|At an earlier time: "before".
+P|We went home ___ the show ended.|after|At a later time: "after".
+P|Mei Ling shared her umbrella ___ her friend.|with|We share "with" someone.
+P|The teacher pointed ___ the map on the board.|at/to|We point "at" something.
+P|The man is suffering ___ a bad cold.|from|We say "suffer from".
+P|Please take care ___ your little sister.|of|We say "take care of".
+P|The pupils are busy ___ their projects.|with|We say "busy with".
+P|The house is famous ___ its beautiful garden.|for|We say "famous for".
+P|Grandpa is tired ___ walking.|of|"tired of" means you no longer want to do something.
+P|The boy is capable ___ doing it himself.|of|We say "capable of".
+P|Don't be rude ___ your elders.|to|We say "rude to" someone.
+P|The fire spread quickly ___ the forest.|through|From one part to another inside: "through".
+P|The boy climbed ___ the tree to get his kite.|up|Moving to a higher place: "up".
+P|The car drove ___ the tunnel and came out on the other side.|through|From one end to the other: "through".
+P|There is a fence ___ the garden.|around|On all sides: "around".
+P|The village is ___ the foot of the hill.|at|We say "at the foot of".
+P|Ali is waiting ___ the bus stop.|at|"at" is used for a point or place.
+P|We stayed ___ home because of the rain.|at|We say "at home".
+P|The puppy is ___ the box. Only its head is sticking out.|in|Inside a container: "in".
+P|My father is ___ work now.|at|We say "at work".
+P|The train to Johor leaves ___ platform 2.|from|Leaving a place: "from".
+C|Ali was tired, ___ he continued walking.|but|"but" shows a contrast.
+C|I stayed at home ___ it was raining.|because|"because" gives a reason.
+C|Do you want tea ___ coffee?|or|"or" gives a choice.
+C|___ it was raining, the boys continued playing football.|although/though|"Although" shows a contrast in the same sentence.
+C|Siti did not go to school ___ she was sick.|because/as/since|"because" gives a reason.
+C|You will not pass the test ___ you study hard.|unless|"unless" means "if ... not".
+C|Wait here ___ I come back.|until/till|"until" means up to the time when.
+C|Kumar did his homework ___ he went to bed.|before|"before" means at an earlier time.
+C|The pupils went out to play ___ the bell rang.|after/when|"after" means at a later time.
+C|___ I was walking home, it began to rain.|while/when/as|"While" shows two things happening at the same time.
+C|She is ___ clever that she finished the test in ten minutes.|so|We say "so + adjective + that".
+C|It was ___ a hot day that we stayed indoors.|such|We say "such a + adjective + noun + that".
+C|Ben studied hard ___ that he could pass the test.|so|"so that" shows a purpose.
+C|___ Ali nor Ben knew the answer.|neither|We say "neither ... nor ...".
+C|You can have ___ the red one or the blue one.|either|We say "either ... or ...".
+C|She can ___ sing but also dance.|not|We say "not only ... but also ...".
+C|___ you hurry, you will miss the bus.|unless|"Unless" means "if ... not": if you do not hurry, you will miss the bus.
+C|The boy was hungry. ___, he did not eat his lunch.|however|"However" shows a contrast between two sentences.
+C|It was raining heavily. ___, the match was cancelled.|therefore|"Therefore" shows a result.
+C|Emily likes swimming. ___, she likes cycling.|besides|"Besides" adds more information.
+C|Ryan was late ___ he missed the bus.|because|"because" gives a reason.
+C|Please call me ___ you reach home.|when/once|"when" means at the time that.
+C|I will lend you my book ___ you return it by Friday.|if|"if" gives a condition.
+C|The pupils were quiet ___ the teacher was talking.|while/when/as|"while" means during the time that.
+C|___ he was very tired, he finished his homework.|although/though|"Although" shows a contrast.
+C|Hui Min practised the piano every day ___ she could win the competition.|so|"so that" shows a purpose.
+C|I like durians, ___ my brother hates them.|but/while|"but" shows a contrast.
+C|He ran ___ fast as he could.|as|We say "as ... as".
+C|The test was ___ difficult as I expected.|as|We say "as ... as".
+C|She speaks English ___ well as her teacher.|as|We say "as well as".
+C|___ you finish your homework, you cannot watch television.|until/unless|"Until you finish" means up to the time you finish.
+C|Kumar not only cleaned his room ___ also washed the dishes.|but|We say "not only ... but also ...".
+C|The road was wet ___ it had rained.|because/as/since|"because" gives a reason.
+C|Nurul felt sick, ___ she went to see the doctor.|so|"so" shows a result.
+C|___ of the bad weather, the trip was postponed.|because|"Because of" + noun gives a reason.
+C|___ the heavy rain, the match went on.|despite|"Despite" + noun shows a contrast.
+C|Ali ran quickly ___ that he would not be late.|so|"so that" shows a purpose.
+C|We will go to the beach ___ it rains.|unless|"unless" means "if it does not rain".
+R|The girl ___ won the race is my cousin.|who/that|"who" is used for people.
+R|This is the bag ___ I bought yesterday.|which/that|"which" is used for things.
+R|The boy ___ bicycle was stolen reported it to the police.|whose|"whose" shows that something belongs to someone.
+R|This is the house ___ my grandfather was born.|where|"where" is used for places.
+R|I still remember the day ___ we first met.|when/that|"when" is used for time.
+R|The man to ___ I spoke was very helpful.|whom|After a preposition ("to") we use "whom" for people.
+R|Ali hurt ___ while playing football.|himself|Ali hurt his own body: himself.
+R|The girls made the cake by ___.|themselves|The girls did it on their own: themselves.
+R|I can do it ___. I don't need any help.|myself|"I" did it on my own: myself.
+R|The cat licked ___ clean.|itself|The cat (it) cleaned its own body: itself.
+R|We enjoyed ___ at the party.|ourselves|We had fun: enjoyed ourselves.
+R|Siti, did you make this card by ___?|yourself|"you" (one person): yourself.
+R|This book is not mine. It is ___.|hers/his/yours|The possessive pronoun shows whose it is.
+R|The dog wagged ___ tail happily.|its|"its" shows that the tail belongs to the dog (no apostrophe).
+R|Ben and I finished ___ project early.|our|"Ben and I" = we, so the project is "our" project.
+R|Those books belong to the twins. They are ___.|theirs|Belonging to them: theirs.
+R|That pencil is ___. I wrote my name on it.|mine|Belonging to me: mine.
+R|The teacher gave Emily and ___ a prize.|me|After a verb we use the object pronoun "me".
+R|Kumar and ___ went to the zoo.|I|The subject pronoun "I" is used before the verb.
+R|___ of the twins is taller? They look the same to me.|which|"Which" asks us to choose between things or people.
+R|___ is knocking on the door?|who|"Who" asks about a person.
+R|___ book is this? It has no name on it.|whose|"Whose" asks who something belongs to.
+R|Both of the boys did ___ homework.|their|Belonging to them: their.
+R|Everyone must bring ___ own water bottle.|their/his/her|"Everyone ... their own" is commonly used.
+R|The pupils helped one ___ with the project.|another|"one another" means each other.
+R|The two sisters looked at each ___ and smiled.|other|"each other" is used for two people.
+R|I have two pens. One is red and the ___ is blue.|other|With two things we say "one ... the other".
+R|___ of us knew the answer, so we asked the teacher.|none|"None of us" means not one of us.
+R|There is ___ in the box. It is empty.|nothing|An empty box has nothing in it.
+R|I looked ___ for my keys but could not find them.|everywhere|In every place: everywhere.
+N|There isn't ___ milk left in the bottle.|much|"much" is used with uncountable nouns like milk.
+N|How ___ apples did you buy?|many|"many" is used with countable nouns like apples.
+N|How ___ sugar do you want in your tea?|much|"much" is used with uncountable nouns like sugar.
+N|Only a ___ pupils came to school because of the storm.|few|"a few" is used with countable nouns.
+N|There is only a ___ rice left in the pot.|little|"a little" is used with uncountable nouns.
+N|Would you like ___ more cake?|some|We use "some" in offers.
+N|Do you have ___ questions?|any|We use "any" in questions.
+N|I don't have ___ money left.|any|We use "any" in negative sentences.
+N|___ pupil in the class received a certificate.|every/each|"Every" + singular noun means all of them, one by one.
+N|There were ___ many people at the concert that we could not find a seat.|so|We say "so many ... that".
+N|We have ___ time, so we must hurry.|little|"little" (without "a") means not much.
+N|___ of the two answers is correct. Both are wrong.|neither|"Neither" means not one of the two.
+N|___ of my parents are teachers. My mother and my father both teach.|both|"Both" means the two of them.
+N|There are ___ of fish in the sea.|lots/plenty|"lots of" means a large number.
+N|He spent ___ his money on toys and has nothing left.|all|"all" means everything.
+N|___ of the cake was eaten. Only a small piece was left.|most|"Most" means nearly all.
+N|Can I have a ___ of water, please?|glass|We say "a glass of water".
+N|Mother bought a ___ of bread.|loaf|We say "a loaf of bread".
+N|Please buy a ___ of milk from the shop.|carton/bottle|We say "a carton of milk".
+N|He gave me a ___ of advice.|piece/word|"advice" is uncountable, so we say "a piece of advice".
+N|We saw a ___ of birds flying south.|flock|A group of birds is a "flock".
+N|A ___ of bees flew out of the hive.|swarm|A group of bees is a "swarm".
+N|The farmer has a large ___ of cattle.|herd|A group of cattle is a "herd".
+N|A ___ of wolves hunted in the forest.|pack|A group of wolves is a "pack".
+N|There is a ___ of fish swimming near the reef.|school/shoal|A group of fish is a "school".
+N|The teacher gave us a ___ of paper each.|sheet/piece|We say "a sheet of paper".
+N|Mother bought a ___ of grapes.|bunch|We say "a bunch of grapes".
+N|There was a ___ of keys on the table.|bunch|We say "a bunch of keys".
+N|A ___ of people gathered outside the stadium.|crowd|A large group of people is a "crowd".
+N|A ___ of soldiers marched past.|troop/group|A group of soldiers is a "troop".
+Q|You are coming to the party, ___ you?|aren't/arent|Positive sentence → negative tag: aren't you?
+Q|She can swim, ___ she?|can't/cant|Positive sentence → negative tag: can't she?
+Q|Ali doesn't like durians, ___ he?|does|Negative sentence → positive tag: does he?
+Q|They went to the zoo yesterday, ___ they?|didn't/didnt|Past tense, positive → didn't they?
+Q|You have finished your homework, ___ you?|haven't/havent|Positive with "have" → haven't you?
+Q|It isn't raining now, ___ it?|is|Negative sentence → positive tag: is it?
+Q|Siti will help us, ___ she?|won't/wont|Positive with "will" → won't she?
+Q|Ben was late again, ___ he?|wasn't/wasnt|Positive with "was" → wasn't he?
+Q|The children weren't at home, ___ they?|were|Negative sentence → positive tag: were they?
+Q|Let's go to the park, ___ we?|shall|After "Let's", the tag is "shall we?".
+Q|You can't come tomorrow, ___ you?|can|Negative sentence → positive tag: can you?
+Q|She likes reading, ___ she?|doesn't/doesnt|Simple present, positive → doesn't she?
+Q|I am your best friend, ___ I?|aren't/arent|After "I am", the tag is "aren't I?".
+Q|Nobody called me, ___ they?|did|"Nobody" is negative, so the tag is positive: did they?
+Q|Everyone has arrived, ___ they?|haven't/havent|"Everyone has" → the tag is "haven't they?".
+Q|Kumar never tells lies, ___ he?|does|"never" is negative, so the tag is positive: does he?
+Q|You should study hard, ___ you?|shouldn't/shouldnt|Positive with "should" → shouldn't you?
+Q|There is a cat under the table, ___ there?|isn't/isnt|"There is" → isn't there?
+Q|The pupils have gone home, ___ they?|haven't/havent|Positive with "have" → haven't they?
+Q|He could not open the door, ___ he?|could|Negative sentence → positive tag: could he?
+Q|Mei Ling plays the violin, ___ she?|doesn't/doesnt|Simple present, positive → doesn't she?
+Q|The bus hasn't arrived yet, ___ it?|has|Negative sentence → positive tag: has it?
+Q|Your parents are teachers, ___ they?|aren't/arent|Positive with "are" → aren't they?
+Q|We must wear our uniforms, ___ we?|mustn't/mustnt|Positive with "must" → mustn't we?
+Q|Close the door, ___ you?|will/would/could|After a command, we often use "will you?".
+Q|Hui Min rarely eats fast food, ___ she?|does|"rarely" is negative in meaning, so the tag is positive: does she?
+Q|That is your bag, ___ it?|isn't/isnt|"That is" → isn't it?
+Q|Those are your shoes, ___ they?|aren't/arent|"Those are" → aren't they?
+Q|You didn't see the movie, ___ you?|did|Negative sentence → positive tag: did you?
+Q|Farid had breakfast this morning, ___ he?|didn't/didnt|"had" is the main verb here (past), so the tag is "didn't he?".

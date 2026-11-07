@@ -86,16 +86,102 @@ data class Frac private constructor(val num: Long, val den: Long) : Comparable<F
 }
 
 /**
- * 一道题。answer 用来判对错（数值相等就算对，3/4 和 0.75 都行），
- * answerText 是显示给小孩看的标准答案，explain 是答错后显示的解题步骤。
+ * 一道题。answerText 是显示给小孩看的标准答案，explain 是答错后显示的解题步骤/解释。
+ *  - 数学题：answer 是精确数值，数值相等就算对（3/4 和 0.75 都行）
+ *  - 英文填空：words 是所有可接受的单词（不分大小写）
  */
 data class Question(
     val topic: String,
     val text: String,
-    val answer: Frac,
     val answerText: String,
     val explain: String,
-)
+    val answer: Frac? = null,
+    val words: List<String> = emptyList(),
+) {
+    val isEnglish get() = answer == null
+
+    fun isCorrect(input: String): Boolean =
+        if (answer != null) Frac.parse(input) == answer
+        else normalize(input).let { s -> s.isNotEmpty() && words.any { normalize(it) == s } }
+
+    companion object {
+        fun normalize(s: String) = s.trim().lowercase().replace('’', '\'').replace('‘', '\'')
+    }
+}
+
+/**
+ * 新加坡 P5 英文填空题：题库是 assets/english 目录下的 txt 文件，一行一题：
+ *   题型|句子（___ 是空格）|答案（多个用 / 分隔）|解释
+ * 介词、连词、代词、数量词、短语动词、词汇题（P C R N X V）会显示首字母和字母数，避免一题多解。
+ */
+object English {
+    private val topics = mapOf(
+        "T" to "Verb forms", "S" to "Subject-verb agreement", "W" to "Word forms", "U" to "Plurals",
+        "A" to "Comparatives", "P" to "Prepositions", "C" to "Connectors", "R" to "Pronouns",
+        "N" to "Quantifiers & group words", "Q" to "Question tags", "X" to "Phrasal verbs", "V" to "Vocabulary",
+    )
+    private const val HINT_TOPICS = "PCRNXV"
+
+    data class Item(val code: String, val sentence: String, val answers: List<String>, val explain: String)
+
+    @Volatile
+    var items: List<Item> = emptyList()
+        private set
+
+    private var deck = ArrayDeque<Item>()
+
+    /** 解析题库文本；格式不对的行会抛异常（单元测试会检查整个题库） */
+    fun parse(lines: List<String>): List<Item> = lines.map { it.trim() }
+        .filter { it.isNotEmpty() && !it.startsWith("#") }
+        .map { line ->
+            val p = line.split('|')
+            require(p.size == 4) { "需要 4 段：$line" }
+            val (code, sentence, ans, explain) = p
+            require(code in topics) { "未知题型 $code：$line" }
+            require(Regex("___").findAll(sentence).count() == 1) { "要有且只有一个 ___：$line" }
+            val answers = ans.split('/').map { it.trim() }.filter { it.isNotEmpty() }
+            require(answers.isNotEmpty()) { "没有答案：$line" }
+            Item(code, sentence, answers, explain)
+        }
+
+    fun load(lines: List<String>) {
+        items = parse(lines)
+        deck = ArrayDeque()
+    }
+
+    /** 从 APK 的 assets/english/ 读取全部题库（只读一次） */
+    fun loadAssets(ctx: android.content.Context) {
+        if (items.isNotEmpty()) return
+        val am = ctx.assets
+        val files = am.list("english").orEmpty().filter { it.endsWith(".txt") }.sorted()
+        load(files.flatMap { f -> am.open("english/$f").bufferedReader().readLines() })
+    }
+
+    /** 把空格画出来：需要提示的题显示首字母和字母数，例如 o _ _ */
+    fun blank(item: Item): String {
+        val a = item.answers.first()
+        return if (item.code in HINT_TOPICS) "${a.first()}" + " _".repeat(a.length - 1) else "________"
+    }
+
+    fun toQuestion(item: Item): Question {
+        val hint = if (item.code in HINT_TOPICS)
+            "\n\n(The first letter is given. The word has ${item.answers.first().length} letters.)" else ""
+        return Question(
+            topic = topics.getValue(item.code),
+            text = item.sentence.replace("___", blank(item)) + hint,
+            answerText = "\"${item.answers.first()}\"",
+            explain = item.explain,
+            words = item.answers,
+        )
+    }
+
+    /** 洗牌后依次出题，整个题库做完一轮才会重复 */
+    fun next(r: Random): Question? {
+        if (items.isEmpty()) return null
+        if (deck.isEmpty()) deck = ArrayDeque(items.shuffled(r))
+        return toQuestion(deck.removeFirst())
+    }
+}
 
 /**
  * 新加坡小学五年级（Primary 5）英文数学应用题：参数随机，答案保证精确、整洁，
@@ -151,8 +237,18 @@ object Quiz {
 
     private var lastIndex = -1
 
-    /** 下一道题（不和上一题同一类型） */
+    /** 英文题和数学题的出题比例：6 道里 5 道英文、1 道数学 */
+    const val ENGLISH_SHARE = 5
+    const val MATH_SHARE = 1
+
+    /** 下一道题：英文填空和数学应用题按 5:1 混合（英文题库没加载时只出数学） */
     fun next(): Question {
+        if (r.nextInt(ENGLISH_SHARE + MATH_SHARE) < ENGLISH_SHARE) English.next(r)?.let { return it }
+        return nextMath()
+    }
+
+    /** 下一道数学题（不和上一题同一类型） */
+    fun nextMath(): Question {
         var i: Int
         do { i = r.nextInt(generators.size) } while (i == lastIndex)
         lastIndex = i
@@ -160,7 +256,7 @@ object Quiz {
     }
 
     private fun q(topic: String, text: String, ans: Frac, ansText: String, vararg steps: String) =
-        Question(topic, text, ans, ansText, steps.joinToString("\n"))
+        Question(topic, text, ansText, steps.joinToString("\n"), answer = ans)
 
     // ---------------- Fractions ----------------
 

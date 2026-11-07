@@ -19,6 +19,12 @@ object Relay {
     fun cmdTopic(code: String) = "tvtimer-$code-cmd"
     fun statusTopic(code: String) = "tvtimer-$code-st"
 
+    /** ntfy.sh 免费额度用完（HTTP 429）：每个网络（公网 IP）每天最多 250 条消息 */
+    class QuotaExceeded : RuntimeException(
+        "今天这个网络的免费消息额度用完了（ntfy.sh 每个网络每天 250 条）。" +
+            "手机可以关掉 Wi-Fi、改用流量再试"
+    )
+
     fun publish(topic: String, body: JSONObject) {
         val conn = URL("$SERVER/$topic").openConnection() as HttpURLConnection
         try {
@@ -28,6 +34,7 @@ object Relay {
             conn.doOutput = true
             conn.outputStream.use { it.write(body.toString().toByteArray()) }
             val code = conn.responseCode
+            if (code == 429) throw QuotaExceeded()
             if (code !in 200..299) throw RuntimeException("中转服务器返回 $code")
         } finally {
             conn.disconnect()

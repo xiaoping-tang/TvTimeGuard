@@ -1,0 +1,175 @@
+# 新加坡 P5 英文填空：词形变换（W）、复数（U）、比较级和最高级（A）
+# 格式：题型|句子（___ 是空格）|答案（多个用 / 分隔）|解释
+W|The ballerina danced ___ (beautiful) on the stage.|beautifully|We need an adverb to describe how she danced: beautiful → beautifully.
+W|Please walk ___ (quiet) along the corridor.|quietly|We need an adverb to describe how to walk: quiet → quietly.
+W|The pupils listened ___ (careful) to the instructions.|carefully|An adverb describes how they listened: careful → carefully.
+W|Ali answered the question ___ (correct).|correctly|An adverb describes how he answered: correct → correctly.
+W|The old man walked ___ (slow) across the road.|slowly|An adverb describes how he walked: slow → slowly.
+W|The boy shouted ___ (angry) at his brother.|angrily|An adverb: angry → angrily (change y to i).
+W|The children played ___ (happy) in the garden.|happily|An adverb: happy → happily (change y to i).
+W|She solved the puzzle ___ (easy).|easily|An adverb: easy → easily (change y to i).
+W|The firemen acted ___ (brave) to save the trapped family.|bravely|An adverb: brave → bravely.
+W|The baby slept ___ (peaceful) in her mother's arms.|peacefully|An adverb: peaceful → peacefully.
+W|The driver was fined for driving ___ (careless).|carelessly|An adverb: careless → carelessly.
+W|Siti spoke ___ (polite) to the visitors.|politely|An adverb: polite → politely.
+W|The team worked ___ (hard) to win the competition.|hard|"hard" is both an adjective and an adverb. "hardly" means "almost not".
+W|Kumar is a very ___ (care) boy. He seldom makes mistakes.|careful|We need an adjective to describe the boy: care → careful.
+W|It is ___ (danger) to play near the canal.|dangerous|We need an adjective: danger → dangerous.
+W|The clown was so ___ (fun) that everyone laughed.|funny|We need an adjective: fun → funny.
+W|The weather today is hot and ___ (sun).|sunny|We need an adjective: sun → sunny (double the n).
+W|It was a ___ (rain) day, so we stayed at home.|rainy|We need an adjective: rain → rainy.
+W|The museum was full of ___ (interest) things.|interesting|Things that make us interested are "interesting".
+W|The pupils were very ___ (interest) in the science show.|interested|People who feel interest are "interested".
+W|The long journey was very ___ (tire).|tiring|Something that makes us tired is "tiring".
+W|After the long journey, we were very ___ (tire).|tired|People who feel tired are "tired".
+W|The ending of the movie was very ___ (excite).|exciting|Something that makes us excited is "exciting".
+W|The children were ___ (excite) about the school holidays.|excited|People who feel excitement are "excited".
+W|Ben was ___ (bore) because there was nothing to do.|bored|People who feel boredom are "bored".
+W|The lesson was so ___ (bore) that I almost fell asleep.|boring|Something that makes us bored is "boring".
+W|The magician's tricks were ___ (amaze).|amazing|Something that amazes us is "amazing".
+W|We were ___ (surprise) to see snow in the desert.|surprised|People who feel surprise are "surprised".
+W|Mei Ling showed great ___ (kind) to the lost child.|kindness|We need a noun: kind → kindness.
+W|The ___ (happy) of the children made their parents smile.|happiness|We need a noun: happy → happiness.
+W|The ___ (dark) of the cave frightened the boys.|darkness|We need a noun: dark → darkness.
+W|We were amazed by the ___ (beautiful) of the sunset.|beauty|We need a noun: beautiful → beauty.
+W|Honesty is the best policy. Ali is admired for his ___ (honest).|honesty|We need a noun: honest → honesty.
+W|The ___ (strong) of the wind knocked down the tree.|strength|We need a noun: strong → strength.
+W|The ___ (long) of the swimming pool is fifty metres.|length|We need a noun: long → length.
+W|The ___ (wide) of the road is ten metres.|width|We need a noun: wide → width.
+W|The ___ (deep) of the river is about three metres.|depth|We need a noun: deep → depth.
+W|The ___ (high) of the building is two hundred metres.|height|We need a noun: high → height.
+W|The ___ (weigh) of the parcel is five kilograms.|weight|We need a noun: weigh → weight.
+W|Farid felt a sense of ___ (proud) when he received the trophy.|pride|We need a noun: proud → pride.
+W|The pupils showed great ___ (patient) while waiting for the bus.|patience|We need a noun: patient → patience.
+W|The ___ (die) of his pet dog made him very sad.|death|We need a noun: die → death.
+W|We need your ___ (permit) to go on the trip.|permission|We need a noun: permit → permission.
+W|The ___ (explain) given by the teacher was very clear.|explanation|We need a noun: explain → explanation.
+W|The ___ (decide) to cancel the match was made because of the rain.|decision|We need a noun: decide → decision.
+W|She received an ___ (invite) to her friend's birthday party.|invitation|We need a noun: invite → invitation.
+W|The ___ (discover) of the hidden treasure was reported in the news.|discovery|We need a noun: discover → discovery.
+W|The ___ (perform) by the school band was excellent.|performance|We need a noun: perform → performance.
+W|There was a big ___ (improve) in Ryan's handwriting.|improvement|We need a noun: improve → improvement.
+W|The ___ (enjoy) of reading can last a lifetime.|enjoyment|We need a noun: enjoy → enjoyment.
+W|My grandfather spent his ___ (child) on a farm.|childhood|We need a noun: child → childhood.
+W|Emily and Nurul have been close friends since childhood. Their ___ (friend) is very strong.|friendship|We need a noun: friend → friendship.
+W|The ___ (fly) from Singapore to Tokyo takes about seven hours.|flight|We need a noun: fly → flight.
+W|The ___ (choose) of food at the buffet was wide.|choice|We need a noun: choose → choice.
+W|The baby's ___ (breathe) was slow and steady.|breath/breathing|We need a noun: breathe → breath.
+W|The ___ (know) you gain from reading is very useful.|knowledge|We need a noun: know → knowledge.
+W|The ___ (free) to choose our own books made us happy.|freedom|We need a noun: free → freedom.
+W|The ___ (wise) of the old man impressed everyone.|wisdom|We need a noun: wise → wisdom.
+W|Ali's ___ (absent) from school worried his teacher.|absence|We need a noun: absent → absence.
+W|The ___ (important) of exercise cannot be ignored.|importance|We need a noun: important → importance.
+W|The ___ (silent) in the hall was broken by a loud sneeze.|silence|We need a noun: silent → silence.
+W|The rescue team showed great ___ (brave).|bravery|We need a noun: brave → bravery.
+W|Hui Min wants to be a ___ (science) when she grows up.|scientist|A person who works in science is a "scientist".
+W|The ___ (art) painted a beautiful picture of the sea.|artist|A person who makes art is an "artist".
+W|The ___ (piano) played a lovely tune at the concert.|pianist|A person who plays the piano is a "pianist".
+W|The ___ (visit) to the museum took many photographs.|visitors/visitor|People who visit are "visitors".
+W|The ___ (rob) was caught by the police.|robber|A person who robs is a "robber" (double the b).
+W|The ___ (swim) won the gold medal.|swimmer|A person who swims is a "swimmer" (double the m).
+W|The ___ (farm) grows rice and vegetables.|farmer|A person who works on a farm is a "farmer".
+W|The ___ (direct) of the film thanked the actors.|director|A person who directs is a "director".
+W|The ___ (inspect) checked our bus tickets.|inspector|A person who inspects is an "inspector".
+W|The ___ (assist) helped the manager with the files.|assistant|A person who assists is an "assistant".
+W|The ___ (compete) in the race lined up at the start.|competitors|People who compete are "competitors".
+W|The ___ (account) checked the company's money.|accountant|A person who works with accounts is an "accountant".
+W|Please do not ___ (danger) your life by crossing the road carelessly.|endanger|We need a verb: danger → endanger.
+W|The heat will ___ (soft) the butter.|soften|We need a verb: soft → soften.
+W|The tailor will ___ (short) my trousers.|shorten|We need a verb: short → shorten.
+W|The workers plan to ___ (wide) the road.|widen|We need a verb: wide → widen.
+W|Exercise helps to ___ (strong) your muscles.|strengthen|We need a verb: strong → strengthen.
+W|Please ___ (sure) that all the windows are closed.|ensure|We need a verb: sure → ensure.
+W|The doctor will ___ (able) the patient to walk again.|enable|We need a verb: able → enable.
+W|We must ___ (courage) our friends to do their best.|encourage|We need a verb: courage → encourage.
+W|Please ___ (simple) the sentence for the younger pupils.|simplify|We need a verb: simple → simplify.
+W|The teacher asked us to ___ (summary) the story.|summarise/summarize|We need a verb: summary → summarise.
+W|The pupils were ___ (patient) and kept asking when the bus would come.|impatient|They kept asking, so they were not patient: impatient.
+W|It is ___ (polite) to talk with your mouth full.|impolite/rude|Talking with your mouth full is not polite: impolite.
+W|The story is so strange that it is ___ (believe).|unbelievable|Something we cannot believe is "unbelievable".
+W|The old chair was ___ (comfort), so nobody sat on it.|uncomfortable|Nobody sat on it, so it was not comfortable: uncomfortable.
+W|It is ___ (possible) to finish all this work in one hour. We need more time.|impossible|We need more time, so it is not possible: impossible.
+W|The boy was ___ (honest) and lied to his mother.|dishonest|He lied, so he was not honest: dishonest.
+W|Ryan was ___ (happy) because he lost his favourite toy.|unhappy|Losing a toy makes him not happy: unhappy.
+W|The answer is ___ (correct). Please try again.|incorrect|"Please try again" shows it is not correct: incorrect.
+W|The ___ (friend) shopkeeper never smiled or greeted anyone.|unfriendly|He never smiled or greeted anyone, so he was not friendly: unfriendly.
+U|There are many ___ (mouse) in the old barn.|mice|The plural of "mouse" is "mice".
+U|The dentist checked all my ___ (tooth).|teeth|The plural of "tooth" is "teeth".
+U|My ___ (foot) are sore after the long walk.|feet|The plural of "foot" is "feet".
+U|Three ___ (child) are playing in the sandpit.|children|The plural of "child" is "children".
+U|There are two ___ (woman) waiting outside.|women|The plural of "woman" is "women".
+U|The farmer has ten ___ (sheep).|sheep|The plural of "sheep" is also "sheep".
+U|We saw a flock of ___ (goose) by the lake.|geese|The plural of "goose" is "geese".
+U|The ___ (leaf) turned yellow and fell to the ground.|leaves|The plural of "leaf" is "leaves".
+U|Mother bought two ___ (loaf) of bread.|loaves|The plural of "loaf" is "loaves".
+U|The ___ (knife) in the kitchen are very sharp.|knives|The plural of "knife" is "knives".
+U|The ___ (wolf) howled at the moon.|wolves|The plural of "wolf" is "wolves".
+U|Cut the apple into two ___ (half).|halves|The plural of "half" is "halves".
+U|The cat has nine ___ (life), or so people say.|lives|The plural of "life" is "lives".
+U|The ___ (thief) ran away with the jewels.|thieves|The plural of "thief" is "thieves".
+U|There are many ___ (shelf) in the library.|shelves|The plural of "shelf" is "shelves".
+U|The ___ (baby) are sleeping in the nursery.|babies|The plural of "baby": change y to i and add -es: babies.
+U|There are many ___ (city) in China.|cities|The plural of "city": change y to i and add -es: cities.
+U|The ___ (boy) are playing football.|boys|"boy" ends in a vowel + y, so just add -s: boys.
+U|The children played with their ___ (toy).|toys|"toy" ends in a vowel + y, so just add -s: toys.
+U|There are many ___ (box) in the storeroom.|boxes|Words ending in -x add -es: boxes.
+U|The ___ (bus) arrived one after another.|buses|Words ending in -s add -es: buses.
+U|Mother washed all the ___ (dish) after dinner.|dishes|Words ending in -sh add -es: dishes.
+U|The ___ (church) in the town are very old.|churches|Words ending in -ch add -es: churches.
+U|We bought some ___ (tomato) for the salad.|tomatoes|"tomato" → tomatoes.
+U|The ___ (potato) are in the basket.|potatoes|"potato" → potatoes.
+U|Some ___ (hero) never give up.|heroes|"hero" → heroes.
+U|We saw two ___ (deer) in the forest.|deer|The plural of "deer" is also "deer".
+U|There are many ___ (fish) in the pond.|fish/fishes|The plural of "fish" is usually "fish".
+U|The ___ (ox) pulled the cart slowly.|oxen|The plural of "ox" is "oxen".
+U|The ___ (person) in the queue were waiting patiently.|people/persons|The plural of "person" is usually "people".
+U|The class collected many ___ (photo) of the trip.|photos|"photo" → photos.
+U|The ___ (piano) in the music room are out of tune.|pianos|"piano" → pianos.
+U|There are many ___ (country) in Asia.|countries|Change y to i and add -es: countries.
+U|Grandma told us many ___ (story) about her childhood.|stories|Change y to i and add -es: stories.
+U|The ___ (key) to the cupboard are missing.|keys|"key" ends in a vowel + y, so just add -s: keys.
+U|The pupils sharpened their ___ (pencil).|pencils|Most nouns just add -s: pencils.
+U|There are seven ___ (day) in a week.|days|"day" ends in a vowel + y, so just add -s: days.
+U|We need two ___ (glass) for the drinks.|glasses|Words ending in -ss add -es: glasses.
+U|The ___ (watch) in the shop window are expensive.|watches|Words ending in -ch add -es: watches.
+U|The ___ (calf) followed the cows into the barn.|calves|The plural of "calf" is "calves".
+A|Ali is ___ (tall) than his brother.|taller|Comparing two people: tall → taller.
+A|This is the ___ (tall) building in Singapore.|tallest|Comparing more than two things: tall → tallest.
+A|An elephant is ___ (heavy) than a horse.|heavier|Comparing two things: heavy → heavier (change y to i).
+A|The blue whale is the ___ (heavy) animal in the world.|heaviest|The most of all: heavy → heaviest.
+A|Today is ___ (hot) than yesterday.|hotter|Comparing two days: hot → hotter (double the t).
+A|It was the ___ (hot) day of the year.|hottest|The most of all: hot → hottest (double the t).
+A|My bag is ___ (big) than yours.|bigger|Comparing two bags: big → bigger (double the g).
+A|This is the ___ (good) cake I have ever eaten.|best|The superlative of "good" is "best".
+A|Ben's handwriting is ___ (good) than mine.|better|The comparative of "good" is "better".
+A|The weather today is ___ (bad) than yesterday.|worse|The comparative of "bad" is "worse".
+A|That was the ___ (bad) storm we have ever had.|worst|The superlative of "bad" is "worst".
+A|Siti has ___ (many) books than Devi.|more|The comparative of "many" is "more".
+A|Who has the ___ (many) stickers in the class?|most|The superlative of "many" is "most".
+A|I have ___ (little) money than my sister.|less|The comparative of "little" (amount) is "less".
+A|He ate the ___ (little) amount of food of all.|least|The superlative of "little" is "least".
+A|The library is ___ (far) from my house than the school.|farther/further|The comparative of "far" is "farther" or "further".
+A|This puzzle is ___ (easy) than the last one.|easier|Comparing two puzzles: easy → easier (change y to i).
+A|Mathematics is the ___ (difficult) subject for me. (Write the missing word before "difficult".)|most|Long adjectives use "most" for the superlative: the most difficult.
+A|This book is ___ (interesting) than that one. (Write the missing word before "interesting".)|more|Long adjectives use "more" for the comparative: more interesting.
+A|A cheetah is the ___ (fast) land animal.|fastest|The most of all: fast → fastest.
+A|A car is ___ (fast) than a bicycle.|faster|Comparing two things: fast → faster.
+A|Mount Everest is the ___ (high) mountain in the world.|highest|The most of all: high → highest.
+A|My sister is two years ___ (old) than me.|older|Comparing two people: old → older.
+A|Grandpa is the ___ (old) person in our family.|oldest/eldest|The most of all: old → oldest.
+A|The second rope is ___ (long) than the first.|longer|Comparing two ropes: long → longer.
+A|Of all the girls, Hui Min is the ___ (happy).|happiest|The most of all: happy → happiest.
+A|This room is ___ (clean) than it was yesterday.|cleaner|Comparing two times: clean → cleaner.
+A|Ryan is the ___ (thin) boy in his class.|thinnest|The most of all: thin → thinnest (double the n).
+A|The river is ___ (wide) here than near the bridge.|wider|Comparing two places: wide → wider.
+A|The sea is ___ (calm) today than it was yesterday.|calmer|Comparing two days: calm → calmer.
+A|Of the three sisters, Emily is the ___ (young).|youngest|The most of all: young → youngest.
+A|This is the ___ (funny) joke I have ever heard.|funniest|The most of all: funny → funniest.
+A|The test was ___ (hard) than I expected.|harder|Comparing: hard → harder.
+A|My father's car is ___ (new) than my uncle's.|newer|Comparing two cars: new → newer.
+A|This is the ___ (large) pizza in the shop.|largest|The most of all: large → largest.
+A|Of all my friends, Farid lives the ___ (near) to the school.|nearest|The most of all: near → nearest.
+A|A mouse is ___ (small) than a rat.|smaller|Comparing two animals: small → smaller.
+A|Kumar is the ___ (strong) boy in the team.|strongest|The most of all: strong → strongest.
+A|The baby is ___ (quiet) now than she was this morning.|quieter|Comparing two times: quiet → quieter.
+A|As the sun set, the sky became ___ (dark) and the stars came out.|darker|The sky changed compared with before: dark → darker.

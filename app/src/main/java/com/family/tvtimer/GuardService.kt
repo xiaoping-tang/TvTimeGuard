@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ServiceInfo
+import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 import android.util.Log
@@ -35,6 +36,10 @@ class GuardService : Service() {
     private var lastPublish = 0L
     private var lastPublishedKey = ""
     private var forcePublish = true
+    private var publishBackoffUntil = 0L
+    private var quizLaunchAt = 0L
+    private var quizLaunchFails = 0
+    private var lockLaunchAt = 0L
 
     private val screenOnReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -110,6 +115,8 @@ class GuardService : Service() {
             // 倒计时中被关屏，下次开屏重新开始（短）倒计时，保证家长总有机会输 PIN
             prefs.lockDeadline = 0L
             QuizActivity.declined = false // 下次开机时间还是用完的话，重新出题
+            quizLaunchFails = 0
+            quizLaunchAt = 0L
             update("电视待机中")
             maybePublish(on = false)
             return
@@ -129,6 +136,7 @@ class GuardService : Service() {
         }
         lastTick = now
 
+        if (QuizActivity.visible) quizLaunchFails = 0
         if (quizzing && !forceOff) {
             prefs.lockDeadline = 0L // 做题界面优先，「时间到了」先不弹
             update(if (prefs.remainingSec <= 0) "📝 时间用完，正在做题赢 10 分钟" else "📝 正在做题加时 · 剩 ${prefs.remainingSec / 60} 分钟")
@@ -165,8 +173,8 @@ class GuardService : Service() {
             prefs.isPaused() -> update("管控暂停中 · $reason")
             !prefs.enforce -> update("仅记录 · $reason")
             !prefs.paired -> update("还没配对手机，只计时不关机 · $reason")
-            // 时间用完：不弹关机倒计时，直接去做题（小孩主动放弃做题才走倒计时关机）
-            timeUp && quizCanHelp && !QuizActivity.declined -> {
+            // 时间用完：不弹关机倒计时，直接去做题（小孩主动放弃做题、或做题界面打不开时才走倒计时关机）
+            timeUp && quizCanHelp && !QuizActivity.declined && quizUsable(now) -> {
                 prefs.lockDeadline = 0L
                 showQuiz()
                 update("📝 时间用完，打开做题界面")
@@ -190,7 +198,6 @@ class GuardService : Service() {
             prefs.lastLockAt = now
             prefs.lockReason = reason
             prefs.lockDeadline = now + sec * 1000
-            forcePublish = true
         }
         val left = (prefs.lockDeadline - now + 999) / 1000
         if (left <= 0) {
@@ -198,8 +205,13 @@ class GuardService : Service() {
             turnOff(reason)
             return
         }
-        if (!LockActivity.visible) showLock()
-        update("⏳ $reason，$left 秒后关机")
+        val blocked = uiBlocked()
+        // 倒计时界面被关掉（按主页键）就拉回来；最多 5 秒拉一次。App 被暂停时界面打不开，就不去试，免得系统一直弹框
+        if (!LockActivity.visible && !blocked && now - lockLaunchAt > 5_000) {
+            lockLaunchAt = now
+            showLock()
+        }
+        update("⏳ $reason，$left 秒后关机" + if (blocked) " · ⚠ $BLOCKED_MSG" else "")
         maybePublish(on = true)
         // 倒计时期间加快检查，按时关机，小孩按主页键退出提示也会被马上拉回来
         executor?.schedule({ safeTick() }, minOf(left, 3L), TimeUnit.SECONDS)
@@ -214,12 +226,39 @@ class GuardService : Service() {
         }
     }
 
+    /**
+     * 本 App 被系统「暂停使用」了（Google TV 儿童资料、家长控制、屏幕使用时间限制等会这样做）。
+     * 这时做题和倒计时界面都打不开，每次尝试系统都会弹「应用无法使用 …… 由 Google TV 所管理」。
+     * 守护服务本身还在运行，关电视用的是本机 ADB，不受影响。
+     */
+    private fun uiBlocked(): Boolean = Build.VERSION.SDK_INT >= 29 &&
+        runCatching { packageManager.isPackageSuspended() }.getOrDefault(false)
+
+    /**
+     * 做题界面能不能用：App 被暂停就不能用；另外连续 2 次打开后它都没出现（被系统拦了），
+     * 也当作不能用，改走倒计时关机，不再一遍遍尝试。
+     */
+    private fun quizUsable(now: Long): Boolean {
+        if (uiBlocked()) return false
+        if (quizLaunchAt > 0 && now - quizLaunchAt > 15_000) {
+            if (QuizActivity.lastResumeAt < quizLaunchAt) quizLaunchFails++ else quizLaunchFails = 0
+            quizLaunchAt = 0L
+        }
+        return quizLaunchFails < 2
+    }
+
     private fun showQuiz() {
+        if (uiBlocked()) {
+            update("⚠ $BLOCKED_MSG")
+            return
+        }
+        // 不需要另外暂停视频：做题界面盖上来时，YouTube 等播放器退到后台会自己暂停；
+        // 答对后做题界面关掉，系统回到原来的 App，播放器会自己接着播（已在电视上实测）
         try {
+            quizLaunchAt = System.currentTimeMillis()
             QuizActivity.launchGraceUntil = System.currentTimeMillis() + 15_000
             // 和「时间到了」一样，后台服务借本机 ADB 打开界面
             tv.shell("am start -n $packageName/.QuizActivity")
-            forcePublish = true
         } catch (t: Throwable) {
             QuizActivity.launchGraceUntil = 0L
             Log.w(TAG, "show quiz failed", t)
@@ -272,13 +311,24 @@ class GuardService : Service() {
         return off
     }
 
+    /**
+     * 上报状态给手机。ntfy.sh 免费额度是每个网络每天 250 条（手机在家发的指令也算），所以要省着用：
+     *  - 只有「状态类别」变了才算变化：状态文字里的数字（剩几分钟、几秒后关机）不算
+     *  - 没变化时定期上报：开着 10 分钟一次，待机 1 小时一次
+     *  - 两次上报至少隔 1 分钟（收到手机指令后的回报除外，让家长马上看到结果）
+     *  - 额度用完（429）后 30 分钟内不再尝试
+     */
     private fun maybePublish(on: Boolean) {
         val code = prefs.pairCode
         if (code.isBlank()) return
         val now = System.currentTimeMillis()
-        val key = "$on|${prefs.lastStatus.substringBefore('\n')}|${prefs.dailyLimitMin}|${prefs.bonusMin}"
-        val interval = if (on) 5 * 60_000 else 30 * 60_000
+        if (now < publishBackoffUntil) return
+        val state = prefs.lastStatus.substringBefore('\n').replace(Regex("\\d+"), "#")
+        val key = "$on|$state|${prefs.dailyLimitMin}|${prefs.bonusMin}|${prefs.pauseUntil}|${prefs.enforce}|" +
+            "${prefs.allowStartMin}-${prefs.allowEndMin}|${prefs.quizCapMin}"
+        val interval = if (on) 10 * 60_000 else 60 * 60_000
         if (!forcePublish && key == lastPublishedKey && now - lastPublish < interval) return
+        if (!forcePublish && now - lastPublish < 60_000) return // 下一次检查（30 秒后）再发
         try {
             Relay.publish(
                 Relay.statusTopic(code),
@@ -297,6 +347,7 @@ class GuardService : Service() {
             forcePublish = false
         } catch (t: Throwable) {
             Log.w(TAG, "publish failed", t)
+            publishBackoffUntil = now + if (t is Relay.QuotaExceeded) 30 * 60_000 else 60_000
         }
     }
 
@@ -334,14 +385,14 @@ class GuardService : Service() {
         private const val LOCK_SEC = 60L
         private const val SHORT_LOCK_SEC = 20L
         const val ACTION_STOP = "com.family.tvtimer.STOP"
+        private const val BLOCKED_MSG = "电视时间管家被 Google TV 暂停了（儿童资料/家长控制），做题和倒计时界面打不开"
 
         @Volatile
         private var instance: GuardService? = null
 
-        /** 让守护马上检查一次（答对加时、退出做题界面时调用） */
+        /** 让守护马上检查一次（答对加时、退出做题界面时调用）。是否上报由 maybePublish 自己判断 */
         fun poke() {
             val s = instance ?: return
-            s.forcePublish = true
             s.executor?.execute { s.safeTick() }
         }
 

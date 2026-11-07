@@ -1,0 +1,175 @@
+# 新加坡 P5 英文填空：动词时态（T）、主谓一致（S）
+# 格式：题型|句子（___ 是空格）|答案（多个用 / 分隔）|解释
+T|Yesterday, Ali ___ (go) to the library after school.|went|"Yesterday" tells us it happened in the past: go → went.
+T|My mother ___ (bake) a chocolate cake last Sunday.|baked|"Last Sunday" is in the past: bake → baked.
+T|The children ___ (swim) in the pool when it started to rain.|were|An action in progress in the past: "were swimming". The missing word is "were".
+T|Look! The baby ___ (sleep) peacefully in the cot.|is|"Look!" shows it is happening now: "is sleeping". The missing word is "is".
+T|Mei Ling has ___ (write) three letters to her pen pal this month.|written|"has" + past participle: write → written.
+T|The sun ___ (rise) in the east every morning.|rises|A fact that is always true uses the simple present: the sun rises.
+T|We ___ (visit) our grandparents tomorrow.|will|"Tomorrow" is in the future: "will visit". The missing word is "will".
+T|Ben ___ (break) his arm when he fell off his bicycle last year.|broke|Past tense: break → broke.
+T|By the time we reached the cinema, the movie had already ___ (begin).|begun|"had" + past participle: begin → begun.
+T|Siti ___ (teach) her younger brother how to ride a bicycle last weekend.|taught|Past tense: teach → taught.
+T|The teacher ___ (catch) the boy cheating during the test yesterday.|caught|Past tense: catch → caught.
+T|Every Saturday, Kumar ___ (play) football with his friends.|plays|"Every Saturday" shows a habit. Kumar (he) → plays.
+T|I have ___ (know) Emily since we were in Primary One.|known|"have" + past participle: know → known.
+T|The thief ___ (run) away when he saw the police officer.|ran|Past tense: run → ran.
+T|She ___ (choose) the red dress for the party last night.|chose|Past tense: choose → chose.
+T|The vase was ___ (break) by the cat.|broken|Passive voice: was + past participle: break → broken.
+T|The letters were ___ (send) to the wrong address.|sent|Passive voice: were + past participle: send → sent.
+T|Hui Min was ___ (bite) by a mosquito while she was in the garden.|bitten|Passive voice: was + past participle: bite → bitten.
+T|The old bridge was ___ (build) more than a hundred years ago.|built|Passive voice: was + past participle: build → built.
+T|While Farid ___ (do) his homework, the lights went out.|was|An action in progress in the past: "was doing". The missing word is "was".
+T|Ryan ___ (feel) very tired after the long walk yesterday.|felt|Past tense: feel → felt.
+T|The bell has just ___ (ring), so we must go back to class.|rung|"has" + past participle: ring → rung.
+T|Nurul ___ (lose) her purse at the market last Friday.|lost|Past tense: lose → lost.
+T|Devi ___ (hide) the present under her bed before her sister came home.|hid|Past tense: hide → hid.
+T|The boys ___ (dig) a deep hole in the sand yesterday.|dug|Past tense: dig → dug.
+T|My father ___ (drive) us to the zoo last holiday.|drove|Past tense: drive → drove.
+T|Grandma ___ (sew) a new button on my shirt this morning.|sewed|Past tense: sew → sewed.
+T|The pupils have ___ (draw) beautiful pictures for the art competition.|drawn|"have" + past participle: draw → drawn.
+T|Wei Jie ___ (fly) a kite at the beach last Sunday.|flew|Past tense: fly → flew.
+T|The bird has ___ (fly) away.|flown|"has" + past participle: fly → flown.
+T|I ___ (forget) to bring my water bottle yesterday.|forgot|Past tense: forget → forgot.
+T|Have you ever ___ (eat) durian?|eaten|"Have" + past participle: eat → eaten.
+T|The children ___ (sing) a song for their teacher on Teachers' Day last year.|sang|Past tense: sing → sang.
+T|The choir has ___ (sing) at many concerts.|sung|"has" + past participle: sing → sung.
+T|Ali ___ (throw) the ball to his friend a moment ago.|threw|Past tense: throw → threw.
+T|The ball was ___ (throw) over the fence.|thrown|Passive voice: was + past participle: throw → thrown.
+T|Emily ___ (wear) her new shoes to the party last night.|wore|Past tense: wear → wore.
+T|She has ___ (wear) the same watch for ten years.|worn|"has" + past participle: wear → worn.
+T|The pond ___ (freeze) during the cold winter last year.|froze|Past tense: freeze → froze.
+T|The fish in the supermarket was ___ (freeze).|frozen|Passive / adjective: past participle: freeze → frozen.
+T|Kumar ___ (lead) his team to victory in yesterday's match.|led|Past tense: lead → led.
+T|The tired girl ___ (lie) down on the sofa and fell asleep.|lay|Past tense of "lie" (to rest) is "lay".
+T|Ben ___ (lay) the plates on the table before dinner.|laid|Past tense of "lay" (to put down) is "laid".
+T|The man ___ (shake) hands with the principal at the start of the ceremony.|shook|Past tense: shake → shook.
+T|The money was ___ (steal) from the cash box.|stolen|Passive voice: was + past participle: steal → stolen.
+T|Someone ___ (steal) my bicycle last night.|stole|Past tense: steal → stole.
+T|My uncle ___ (buy) a new car last month.|bought|Past tense: buy → bought.
+T|We ___ (bring) our umbrellas because it looked like rain.|brought|Past tense: bring → brought.
+T|Siti ___ (think) the test was easy.|thought|Past tense: think → thought.
+T|The baby ___ (cry) loudly when his toy fell yesterday.|cried|Past tense: cry → cried (change y to i).
+T|Mei Ling ___ (study) hard for her examinations last year.|studied|Past tense: study → studied (change y to i).
+T|The rabbit ___ (hop) across the field a moment ago.|hopped|Past tense: hop → hopped (double the p).
+T|The car ___ (stop) at the traffic light.|stopped|Past tense: stop → stopped (double the p).
+T|Farid ___ (plan) a surprise party for his mother last week.|planned|Past tense: plan → planned (double the n).
+T|The children are ___ (run) around the playground now.|running|"are" + -ing form: run → running (double the n).
+T|Look! The girls are ___ (dance) on the stage.|dancing|"are" + -ing form: dance → dancing (drop the e).
+T|My brother is ___ (write) a story at the moment.|writing|"is" + -ing form: write → writing (drop the e).
+T|The man is ___ (lie) on the grass under the tree.|lying|"is" + -ing form: lie → lying.
+T|The baby is ___ (cry) because she is hungry.|crying|"is" + -ing form: cry → crying.
+T|Ryan is ___ (swim) in the pool now.|swimming|"is" + -ing form: swim → swimming (double the m).
+T|Hui Min enjoys ___ (read) storybooks in her free time.|reading|After "enjoy" we use the -ing form: reading.
+T|Ben is good at ___ (draw) cartoons.|drawing|After a preposition ("at") we use the -ing form: drawing.
+T|Thank you for ___ (help) me with my homework.|helping|After a preposition ("for") we use the -ing form: helping.
+T|Devi is looking forward to ___ (see) her cousins during the holidays.|seeing|"look forward to" is followed by the -ing form: seeing.
+T|Would you mind ___ (close) the window, please?|closing|After "mind" we use the -ing form: closing.
+T|The teacher made the boys ___ (sweep) the floor.|sweep|"made someone" + base form of the verb: sweep.
+T|My mother let me ___ (watch) television after dinner.|watch|"let someone" + base form of the verb: watch.
+T|Kumar hopes to ___ (become) a doctor when he grows up.|become|After "to" we use the base form of the verb: to become.
+T|If it ___ (rain) tomorrow, we will not go to the park.|rains|In "If ..., will ..." sentences, the "if" part uses the simple present: it rains.
+T|If I ___ (be) you, I would tell the truth.|were|For imaginary situations we say "If I were you".
+T|She ___ (not like) vegetables, but she eats them anyway. (Write one word, e.g. a short form.)|doesn't/doesnt|She → "does not like" = "doesn't like".
+T|They ___ (live) in Tampines since 2020.|have|"since 2020" → present perfect: "have lived". The missing word is "have".
+T|Emily ___ (finish) her homework already, so she can play now.|has|"already" → present perfect: "has finished". The missing word is "has".
+T|The shop ___ (open) at 9 a.m. every day.|opens|A regular habit uses the simple present: the shop opens.
+T|Neither Ali nor his friends ___ (be) at the party yesterday.|were|With "neither ... nor ...", the verb agrees with the nearer subject ("friends"), past: were.
+T|When I arrived, the bus had already ___ (leave).|left|"had" + past participle: leave → left.
+T|The girl ___ (fall) and hurt her knee during recess yesterday.|fell|Past tense: fall → fell.
+T|The leaves have ___ (fall) from the trees.|fallen|"have" + past participle: fall → fallen.
+T|Wei Jie ___ (win) first prize in the drawing competition last year.|won|Past tense: win → won.
+T|The cat ___ (sit) on the mat and licked its paws.|sat|Past tense: sit → sat.
+T|We ___ (meet) our new teacher on the first day of school.|met|Past tense: meet → met.
+T|The boy ___ (tear) the paper into small pieces.|tore|Past tense: tear → tore.
+T|My shirt was ___ (tear) when it caught on a nail.|torn|Passive voice: was + past participle: tear → torn.
+T|The baby has ___ (grow) so much this year.|grown|"has" + past participle: grow → grown.
+T|The farmer ___ (grow) vegetables in his garden last year.|grew|Past tense: grow → grew.
+T|The man ___ (blow) out the candles on his birthday cake.|blew|Past tense: blow → blew.
+T|The strong wind has ___ (blow) down the old tree.|blown|"has" + past participle: blow → blown.
+T|Mother ___ (keep) the cake in the fridge last night.|kept|Past tense: keep → kept.
+T|Nurul ___ (spend) all her pocket money on books last week.|spent|Past tense: spend → spent.
+T|The children ___ (hold) hands as they crossed the road.|held|Past tense: hold → held.
+T|The pupils ___ (stand) up when the principal entered the hall.|stood|Past tense: stand → stood.
+T|I ___ (hear) a strange noise outside my window last night.|heard|Past tense: hear → heard.
+T|The puppy ___ (bite) the postman yesterday.|bit|Past tense: bite → bit.
+T|Ryan ___ (shut) the door quietly behind him.|shut|Past tense of "shut" is also "shut".
+T|Siti ___ (cut) the cake into eight pieces at the party.|cut|Past tense of "cut" is also "cut".
+T|My sister ___ (read) three books during the holidays last year.|read|Past tense of "read" is spelt the same: read.
+T|The sun was ___ (shine) brightly when we reached the beach.|shining|"was" + -ing form: shine → shining (drop the e).
+T|While we were ___ (have) dinner, the doorbell rang.|having|"were" + -ing form: have → having (drop the e).
+T|The ice cream ___ (melt) quickly because it was very hot.|melted|Past tense: melt → melted.
+T|The audience ___ (clap) loudly after the performance.|clapped|Past tense: clap → clapped (double the p).
+T|The pupils ___ (carry) the chairs to the hall yesterday.|carried|Past tense: carry → carried (change y to i).
+T|Grandpa ___ (tell) us an interesting story last night.|told|Past tense: tell → told.
+T|The pupils were ___ (tell) to line up quietly.|told|Passive voice: were + past participle: tell → told.
+T|The winners will be ___ (give) their prizes next Monday.|given|Passive voice: will be + past participle: give → given.
+T|The new library will be ___ (open) next month.|opened|Passive voice: will be + past participle: open → opened.
+T|The cake has been ___ (eat) by the children.|eaten|Passive voice: has been + past participle: eat → eaten.
+T|English is ___ (speak) in many countries.|spoken|Passive voice: is + past participle: speak → spoken.
+T|The windows are ___ (clean) every Friday.|cleaned|Passive voice: are + past participle: clean → cleaned.
+T|The thief was ___ (catch) by the police.|caught|Passive voice: was + past participle: catch → caught.
+T|The song was ___ (choose) for the school concert.|chosen|Passive voice: was + past participle: choose → chosen.
+T|The prize was ___ (win) by a girl from our class.|won|Passive voice: was + past participle: win → won.
+T|My homework was ___ (forget) at home.|forgotten|Passive voice: was + past participle: forget → forgotten.
+T|The parcel was ___ (deliver) this morning.|delivered|Passive voice: was + past participle: deliver → delivered.
+T|The boy ___ (dive) into the pool and swam to the other side.|dived/dove|Past tense: dive → dived (also "dove").
+T|The ship ___ (sink) after it hit the rocks.|sank|Past tense: sink → sank.
+T|The ship has ___ (sink) to the bottom of the sea.|sunk|"has" + past participle: sink → sunk.
+T|The girl ___ (drink) a glass of milk before bed last night.|drank|Past tense: drink → drank.
+T|Have you ___ (drink) enough water today?|drunk|"Have" + past participle: drink → drunk.
+T|Ali ___ (ride) his bicycle to the park yesterday.|rode|Past tense: ride → rode.
+T|Have you ever ___ (ride) a horse?|ridden|"Have" + past participle: ride → ridden.
+T|The bird ___ (build) its nest in the tree last spring.|built|Past tense: build → built.
+T|The boys ___ (fight) over the last piece of cake.|fought|Past tense: fight → fought.
+T|The baby ___ (wake) up in the middle of the night.|woke|Past tense: wake → woke.
+T|The noise has ___ (wake) the baby.|woken|"has" + past participle: wake → woken.
+S|Each of the pupils ___ (have) a new textbook.|has|"Each" is singular, so we use "has".
+S|Everyone in the class ___ (be) excited about the trip.|is|"Everyone" is singular, so we use "is".
+S|The box of crayons ___ (be) on the table.|is|The subject is "box" (singular), not "crayons": is.
+S|The children in the playground ___ (be) very noisy.|are|The subject is "children" (plural): are.
+S|Neither the teacher nor the pupils ___ (know) the answer.|know|With "neither ... nor ...", the verb agrees with the nearer subject "pupils" (plural): know.
+S|Either my brothers or my sister ___ (cook) dinner every night.|cooks|With "either ... or ...", the verb agrees with the nearer subject "sister" (singular): cooks.
+S|The news ___ (be) very surprising.|is|"News" is uncountable and takes a singular verb: is.
+S|Mathematics ___ (be) my favourite subject.|is|"Mathematics" is a single subject, so it takes a singular verb: is.
+S|A pair of scissors ___ (be) in the drawer.|is|The subject is "a pair" (singular): is.
+S|My scissors ___ (be) very sharp.|are|"Scissors" on its own takes a plural verb: are.
+S|The teacher, together with her pupils, ___ (be) going to the museum.|is|The subject is "The teacher" (singular). "together with her pupils" does not change it: is.
+S|Ali, as well as his brothers, ___ (enjoy) playing football.|enjoys|The subject is "Ali" (singular): enjoys.
+S|There ___ (be) many people at the beach yesterday.|were|"many people" is plural and it was in the past: were.
+S|There ___ (be) a cat sleeping under the car now.|is|"a cat" is singular and it is happening now: is.
+S|One of my friends ___ (live) in Jurong.|lives|"One of ..." is singular: lives.
+S|Some of the cake ___ (be) left on the plate.|is|"Some of the cake" refers to an uncountable amount: is.
+S|Some of the apples ___ (be) rotten.|are|"Some of the apples" refers to many apples: are.
+S|The flock of birds ___ (fly) south every winter.|flies|The subject is "flock" (singular): flies.
+S|My family ___ (go) to the beach every Sunday.|goes|"My family" is treated as one group here: goes.
+S|Bread and butter ___ (be) my favourite breakfast.|is|"Bread and butter" is one dish, so it takes a singular verb: is.
+S|Ten dollars ___ (be) too much to pay for this pen.|is|An amount of money is treated as one sum: is.
+S|Nobody ___ (want) to go out in the rain.|wants|"Nobody" is singular: wants.
+S|Both of the boys ___ (like) swimming.|like|"Both" is plural: like.
+S|The furniture in the room ___ (look) new.|looks|"Furniture" is uncountable and takes a singular verb: looks.
+S|The information you gave me ___ (be) very useful.|was|"Information" is uncountable and takes a singular verb. Past: was.
+S|Each boy and each girl ___ (be) given a sweet.|was|With "each ... and each ...", the verb is singular: was.
+S|The number of pupils in the school ___ (be) increasing.|is|"The number of ..." is singular: is.
+S|A number of pupils ___ (be) absent today.|are|"A number of ..." means "many" and is plural: are.
+S|The police ___ (be) looking for the thief.|are|"Police" always takes a plural verb: are.
+S|Everybody ___ (love) ice cream.|loves|"Everybody" is singular: loves.
+S|My glasses ___ (be) on the table.|are|"Glasses" (spectacles) takes a plural verb: are.
+S|The cattle ___ (be) grazing in the field.|are|"Cattle" is always plural: are.
+S|Physics ___ (be) taught in secondary school.|is|"Physics" is a single subject: is.
+S|Neither of the answers ___ (be) correct.|is|"Neither of ..." is singular: is.
+S|None of the milk ___ (be) left.|is|"None of the milk" is an uncountable amount: is.
+S|Not one of the pupils ___ (be) late today.|was|"Not one" is singular. Past: was.
+S|The boy with the two dogs ___ (live) next door.|lives|The subject is "The boy" (singular): lives.
+S|The dogs that belong to my neighbour ___ (bark) every night.|bark|The subject is "The dogs" (plural): bark.
+S|Every one of the cookies ___ (taste) delicious.|tastes|"Every one" is singular: tastes.
+S|Many a pupil ___ (have) made this mistake.|has|"Many a ..." takes a singular verb: has.
+S|The crowd ___ (cheer) loudly when the team scored.|cheered|The crowd cheered (past tense).
+S|Rice and chicken ___ (be) my favourite dish.|is|"Rice and chicken" is one dish: is.
+S|The class ___ (be) going on a learning journey tomorrow.|is|"The class" as one group: is.
+S|Your trousers ___ (be) dirty.|are|"Trousers" takes a plural verb: are.
+S|My luggage ___ (be) too heavy to carry.|is|"Luggage" is uncountable: is.
+S|There ___ (be) some milk in the fridge.|is|"some milk" is uncountable: is.
+S|There ___ (be) a few eggs in the basket.|are|"a few eggs" is plural: are.
+S|Her advice ___ (be) always helpful.|is|"Advice" is uncountable: is.
+S|The equipment for the camp ___ (be) ready.|is|"Equipment" is uncountable: is.

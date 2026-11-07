@@ -387,8 +387,10 @@ class MainActivity : Activity() {
             if (System.currentTimeMillis() < j.optLong("pause")) append("\n⏸ 管控暂停中")
             append("\n${j.optString("msg")}")
             append("\n（$ago 分钟前上报")
-            if (ago > 35) append("，电视可能已待机或断网")
+            if (ago > 70) append("，电视可能已待机或断网")
             append("）")
+            if (ago > 70 && j.optBoolean("on"))
+                append("\n电视开着却很久没上报：可能是家里网络今天的免费消息额度（ntfy.sh 每天 250 条）用完了，第二天会恢复")
         }
     }
 

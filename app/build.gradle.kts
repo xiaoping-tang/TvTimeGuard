@@ -11,8 +11,8 @@ android {
         applicationId = "com.family.tvtimer"
         minSdk = 26
         targetSdk = 35
-        versionCode = 4
-        versionName = "1.3"
+        versionCode = 8
+        versionName = "1.4.3"
     }
 
     // 签名文件放在仓库里（私有仓库），任何电脑编译出来的签名都一样，可以直接覆盖安装。

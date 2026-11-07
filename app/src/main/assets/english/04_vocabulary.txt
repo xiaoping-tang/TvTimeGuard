@@ -1,0 +1,200 @@
+# 新加坡 P5 英文填空：短语动词（X）、词汇（V）
+# X / V 题在电视上会显示答案的首字母和字母数；V 题括号里是词义提示
+# 格式：题型|句子（___ 是空格）|答案（多个用 / 分隔）|解释
+X|Please ___ off the lights when you leave the room.|turn/switch|"turn off" means to stop a machine or light.
+X|The plane will take ___ in ten minutes.|off|"take off" means to leave the ground and fly.
+X|Ali gave ___ smoking last year.|up|"give up" means to stop doing something.
+X|Can you look ___ my cat while I am away?|after|"look after" means to take care of.
+X|I am looking ___ my lost keys.|for|"look for" means to try to find.
+X|Please look ___ the word in the dictionary.|up|"look up" means to search for information.
+X|The firemen put ___ the fire quickly.|out|"put out" means to stop a fire from burning.
+X|The meeting was put ___ until next week because the principal was sick.|off|"put off" means to delay to a later time.
+X|Siti takes ___ her mother. They both have curly hair.|after|"take after" means to look or behave like an older family member.
+X|We ran ___ of milk, so Mother went to the shop.|out|"run out of" means to have none left.
+X|The car broke ___ on the highway.|down|"break down" means to stop working.
+X|Thieves broke ___ the house last night.|into|"break into" means to enter a place by force.
+X|Please fill ___ this form with your name and address.|in|"fill in" means to write information in a form.
+X|The children set ___ for the zoo early in the morning.|off/out|"set off" means to start a journey.
+X|Ben came ___ an old photograph while cleaning his room.|across|"come across" means to find by chance.
+X|We must carry ___ with our work even though it is hard.|on|"carry on" means to continue.
+X|The fire alarm went ___ during the lesson.|off|"go off" means a bell or alarm starts ringing.
+X|Please hold ___ while I get a pen.|on|"hold on" means to wait for a short time.
+X|The teacher handed ___ the test papers to the pupils.|out|"hand out" means to give to each person.
+X|Please hand ___ your homework by Friday.|in|"hand in" means to give your work to the teacher.
+X|Grandpa usually gets ___ at six o'clock.|up|"get up" means to rise from bed.
+X|The boys get ___ well with each other.|on/along|"get on well" means to have a friendly relationship.
+X|The patient is getting ___ from his illness slowly.|over|"get over" means to recover from.
+X|The rain finally let ___ in the afternoon.|up|"let up" means to become weaker or stop.
+X|Don't let me ___. I am counting on you.|down|"let someone down" means to disappoint them.
+X|The police are looking ___ the case.|into|"look into" means to investigate.
+X|Kumar is looking ___ to the school holidays.|forward|"look forward to" means to feel happy about something that will happen.
+X|The pupils made ___ a story about a dragon.|up|"make up" means to invent.
+X|I can't make ___ what he wrote. His handwriting is very messy.|out|"make out" means to see or understand with difficulty.
+X|Please pick ___ the rubbish on the floor.|up|"pick up" means to lift from the ground.
+X|The concert was called ___ because of the storm.|off|"call off" means to cancel.
+X|Mother told me to tidy ___ my room.|up|"tidy up" means to make neat.
+X|We need to cut ___ on sugar to stay healthy.|down|"cut down on" means to eat or use less.
+X|The class turned ___ in large numbers for the sports day.|up/out|"turn up" means to arrive or appear.
+X|The bus slowed ___ as it came to the bus stop.|down|"slow down" means to go more slowly.
+X|Hui Min woke ___ late and missed the bus.|up|"wake up" means to stop sleeping.
+X|The boys ran ___ from the angry dog.|away|"run away" means to escape by running.
+X|Please write ___ the homework in your diary.|down|"write down" means to record on paper.
+X|My sister grew ___ in Malaysia.|up|"grow up" means to become an adult.
+X|The teacher asked us to go ___ our answers before handing in the paper.|over/through|"go over" means to check carefully.
+X|Emily tried ___ the dress before buying it.|on|"try on" means to put on clothes to see if they fit.
+X|The baby is asleep. Please don't wake her ___.|up|"wake up" means to stop someone from sleeping.
+X|The bomb blew ___ with a loud bang.|up|"blow up" means to explode.
+X|We should stand ___ for our friends when they are bullied.|up|"stand up for" means to support or defend.
+X|Wei Jie found ___ that the test was postponed.|out|"find out" means to discover information.
+X|The thief got ___ with the stolen money.|away|"get away" means to escape.
+X|Prices of food have gone ___ this year.|up|"go up" means to increase.
+X|The pupils lined ___ outside the classroom.|up|"line up" means to stand in a line.
+X|Please put ___ your toys after playing.|away|"put away" means to put things back where they belong.
+X|Ryan put ___ his jacket because it was cold.|on|"put on" means to wear.
+X|Please take ___ your shoes before entering the house.|off|"take off" means to remove clothing.
+X|The magician made the rabbit disappear and then brought it ___.|back|"bring back" means to return something.
+X|Farid turned ___ the invitation because he was busy.|down|"turn down" means to refuse.
+X|We must clean ___ the classroom before we go home.|up|"clean up" means to make clean and neat.
+X|The old building was pulled ___ to make way for a new mall.|down|"pull down" means to destroy a building.
+X|The pupils dressed ___ as animals for the play.|up|"dress up" means to wear special clothes or a costume.
+V|The ___ (very large) elephant walked slowly across the field.|enormous/huge/gigantic|"enormous" means very large.
+V|The ___ (very small) ant carried a crumb many times its size.|tiny|"tiny" means very small.
+V|Siti was ___ (very afraid) when she heard the thunder.|terrified|"terrified" means very frightened.
+V|The pupils were ___ (very happy) when they won the competition.|delighted/overjoyed|"delighted" means very pleased.
+V|The old man was too ___ (weak and thin) to walk without help.|frail|"frail" means weak, usually because of old age.
+V|The road was ___ (wet and easy to slip on) after the rain.|slippery|"slippery" means difficult to hold or stand on.
+V|Ali was ___ (not able to sit still or rest) on the night before the trip.|restless|"restless" means unable to keep still.
+V|The thief ___ (moved quietly) into the house through the back door.|crept/sneaked/snuck|"crept" (creep) means moved slowly and quietly.
+V|The hungry boy ___ (ate very quickly) his lunch.|gobbled/devoured|"gobbled" means ate quickly and greedily.
+V|The baby ___ (cried softly) in her cot.|whimpered|"whimpered" means made soft crying sounds.
+V|The girl ___ (spoke very softly) a secret to her friend.|whispered|"whispered" means spoke very quietly.
+V|The children ___ (shouted loudly with joy) when they saw the clown.|cheered|"cheered" means shouted with joy.
+V|The pupils ___ (laughed quietly) at the funny joke.|giggled/chuckled|"giggled" means laughed in a silly, quiet way.
+V|The lion ___ (made a loud deep sound) loudly.|roared|A lion "roars".
+V|The dog ___ (made a low angry sound) at the stranger.|growled|"growled" means made a low, angry sound.
+V|The snake ___ (made a long s sound) at the frightened rabbit.|hissed|A snake "hisses".
+V|The bees ___ (made a low continuous sound) around the flowers.|buzzed|Bees "buzz".
+V|The wolf ___ (made a long loud cry) at the moon.|howled|A wolf "howls".
+V|The horse ___ (made its sound) when it saw the farmer.|neighed|A horse "neighs".
+V|The ___ (person who sees an event) told the police what happened.|witness|A "witness" is someone who sees an event happen.
+V|The ___ (person who travels to a place) took photos of the old temple.|tourist|A "tourist" visits places for pleasure.
+V|The ___ (person who is staying in a hospital for treatment) was given medicine.|patient|A "patient" is a person receiving medical care.
+V|The ___ (person who buys things from a shop) paid at the counter.|customer|A "customer" buys things from a shop.
+V|The ___ (person who flies a plane) landed the plane safely.|pilot|A "pilot" flies a plane.
+V|The ___ (person who designs buildings) drew the plans for the new library.|architect|An "architect" designs buildings.
+V|The ___ (person who looks after people's teeth) checked my teeth.|dentist|A "dentist" takes care of teeth.
+V|The ___ (person who writes books) signed copies of her new novel.|author/writer|An "author" writes books.
+V|The ___ (person who repairs cars) fixed our car.|mechanic|A "mechanic" repairs machines and cars.
+V|The ___ (person who serves food in a restaurant) brought us the menu.|waiter/waitress|A "waiter" serves food in a restaurant.
+V|The ___ (person who looks after a library) helped me find a book.|librarian|A "librarian" works in a library.
+V|The ___ (person who sells flowers) made a beautiful bouquet.|florist|A "florist" sells flowers.
+V|The ___ (person who makes bread and cakes) woke up early to bake.|baker|A "baker" makes bread and cakes.
+V|The ___ (person who looks after animals' health) treated our sick dog.|vet/veterinarian|A "vet" is an animal doctor.
+V|We went to the ___ (place where you can see many animals) during the holidays.|zoo|A "zoo" is a place where animals are kept for people to see.
+V|Mother borrowed some books from the ___ (place where you borrow books).|library|A "library" is where you borrow books.
+V|We bought fresh fish at the ___ (place where people buy and sell food).|market|A "market" is where people buy and sell things.
+V|The sick man was taken to the ___ (place where sick people are treated).|hospital|A "hospital" is where sick people are treated.
+V|The tourists stayed at a ___ (building where travellers pay to sleep).|hotel|A "hotel" is where travellers stay.
+V|The ___ (place where planes take off and land) was crowded during the holidays.|airport|An "airport" is where planes take off and land.
+V|The ancient pots are kept in a ___ (building where old and valuable things are shown).|museum|A "museum" shows old and valuable things.
+V|The ___ (story that is passed down from long ago) tells of a brave princess.|legend|A "legend" is an old story from the past.
+V|The boy told a ___ (something that is not true) to avoid being punished.|lie|A "lie" is something that is not true.
+V|We had a ___ (meal eaten outdoors) in the park.|picnic|A "picnic" is a meal eaten outdoors.
+V|The ___ (strong wind and heavy rain) knocked down many trees.|storm|A "storm" has strong winds and heavy rain.
+V|There was a ___ (too much water covering the land) after the heavy rain.|flood|A "flood" happens when water covers land that is usually dry.
+V|The farmers had no water for their crops during the ___ (long period without rain).|drought|A "drought" is a long period without rain.
+V|The pupils were ___ (not allowed in) to the staff room.|forbidden|"forbidden" means not allowed.
+V|Ali was ___ (sure) that he had locked the door.|certain/confident|"certain" means sure.
+V|The water in the pool was so ___ (clear enough to see through) that we could see the bottom.|transparent/clear|"transparent" means you can see through it.
+V|Kumar is very ___ (always telling the truth). He never tells lies.|honest/truthful|"honest" means always telling the truth.
+V|Nurul is very ___ (willing to give and share). She often shares her food.|generous|"generous" means willing to give.
+V|The ___ (not brave) boy ran away when he saw the spider.|cowardly|"cowardly" means not brave.
+V|Emily is a ___ (shy and quiet) girl who seldom speaks in class.|timid/reserved|"timid" means shy and easily frightened.
+V|The ___ (always wanting more for oneself) boy refused to share his sweets.|greedy/selfish|"greedy" means wanting more than you need.
+V|Ryan is ___ (always ready to work hard). He finishes his work on time.|hardworking/diligent|"hardworking" means putting in a lot of effort.
+V|The old man was ___ (having very little money) and could not afford food.|poor|"poor" means having very little money.
+V|The ___ (having a lot of money) businessman donated money to the school.|wealthy/rich|"wealthy" means having a lot of money.
+V|The boy was ___ (not tidy) and his room was full of rubbish.|untidy/messy|"untidy" means not neat.
+V|The ___ (very old) temple was built hundreds of years ago.|ancient|"ancient" means very old.
+V|Hui Min bought a ___ (not costing much) pen at the bookshop.|cheap|"cheap" means low in price.
+V|The diamond ring was very ___ (costing a lot).|expensive|"expensive" means costing a lot of money.
+V|The soup was too ___ (having a lot of salt) to drink.|salty|"salty" means having too much salt.
+V|The lemon tasted very ___ (having a sharp taste like vinegar).|sour|"sour" is the taste of lemons and vinegar.
+V|The medicine tasted ___ (having a sharp unpleasant taste).|bitter|"bitter" is a sharp, unpleasant taste.
+V|The room was ___ (having no sound at all) after the pupils left.|silent/quiet|"silent" means with no sound.
+V|The pupils were ___ (making a lot of noise) during recess.|noisy|"noisy" means making a lot of noise.
+V|The ___ (very cold) wind made us shiver.|freezing/icy|"freezing" means very cold.
+V|It was a ___ (very hot) afternoon, so we stayed indoors.|scorching/sweltering|"scorching" means very hot.
+V|The pupils were ___ (very tired) after the cross-country race.|exhausted|"exhausted" means very tired.
+V|The ___ (not common) bird was seen only once a year.|rare|"rare" means not often found.
+V|The puppy was ___ (not able to be found) for two days.|missing/lost|"missing" means not able to be found.
+V|The ___ (not safe) old bridge was closed to the public.|unsafe/dangerous|"unsafe" means not safe.
+V|Siti ___ (said sorry) for being late.|apologised/apologized|"apologise" means to say sorry.
+V|The teacher ___ (said good things about) Ali for his good work.|praised|"praise" means to say good things about someone.
+V|The boy was ___ (punished by being made to stay back) after school for being rude.|detained|"detained" means made to stay back.
+V|The firemen ___ (saved from danger) the cat from the burning house.|rescued/saved|"rescue" means to save from danger.
+V|The police ___ (caught and took away) the thief.|arrested|"arrest" means to catch and take to the police station.
+V|Kumar ___ (gave money to help others) $10 to the charity.|donated|"donate" means to give money or things to help others.
+V|The magician made the coin ___ (go out of sight).|disappear/vanish|"disappear" means to go out of sight.
+V|The ice cream began to ___ (turn into liquid) in the hot sun.|melt|"melt" means to turn from solid into liquid.
+V|The pupils ___ (got ready) for the examination by studying hard.|prepared|"prepare" means to get ready.
+V|Please ___ (answer) to my letter as soon as possible.|reply/respond|"reply" means to answer.
+V|The teacher ___ (made clear) how to solve the problem.|explained|"explain" means to make something clear.
+V|We ___ (put up decorations in) the classroom for Children's Day.|decorated|"decorate" means to make a place look nicer.
+V|Mei Ling ___ (got first place) the singing competition.|won|"win" means to come first.
+V|The thief tried to ___ (run away) from the police.|escape|"escape" means to get away.
+V|Farid ___ (did not remember) to bring his homework.|forgot|"forget" means to not remember.
+V|The boys ___ (argued angrily) over the toy.|quarrelled/quarreled/fought|"quarrel" means to argue angrily.
+V|Please ___ (say again) the question. I didn't hear it.|repeat|"repeat" means to say again.
+V|The doctor ___ (looked carefully at) the patient's throat.|examined/checked|"examine" means to look at carefully.
+V|The pupils ___ (took part) in the school concert.|participated|"participate" means to take part.
+V|The ___ (person who wins) of the race received a gold medal.|winner/champion|The "winner" is the one who comes first.
+V|The pupils listened ___ (paying close attention) to the story.|attentively/carefully|"attentively" means paying close attention.
+V|The ___ (person in charge of a ship) gave orders to the sailors.|captain|The "captain" is in charge of a ship.
+V|The ___ (large group of people watching a show) clapped loudly.|audience|The "audience" watches a performance.
+V|The ___ (person who comes to your home as a guest) brought us a gift.|visitor/guest|A "visitor" comes to see you.
+V|My ___ (child of my uncle or aunt) is coming to stay with us.|cousin|Your "cousin" is your uncle's or aunt's child.
+V|We stayed with our ___ (person who lives next to us) while our parents were away.|neighbour/neighbor|A "neighbour" lives next to you.
+V|The ___ (yearly celebration of the day you were born) party was fun.|birthday|A "birthday" celebrates the day you were born.
+V|Ali has a ___ (strong wish) to become a pilot.|desire/dream|A "desire" is a strong wish.
+V|The ___ (path for walking in a forest) was muddy after the rain.|trail/track|A "trail" is a path through the countryside.
+V|There was a long ___ (line of people waiting) outside the cinema.|queue|A "queue" is a line of people waiting.
+V|The ___ (money you pay to travel on a bus or train) has gone up.|fare|A "fare" is the price of a journey.
+V|The pupils raised money for ___ (an organisation that helps people in need).|charity|A "charity" helps people in need.
+V|The ___ (small house for a dog) is in the garden.|kennel|A "kennel" is a small house for a dog.
+V|The bees live in a ___ (home for bees).|hive|A "hive" is a home for bees.
+V|The bird built a ___ (home made of twigs) in the tree.|nest|A "nest" is a bird's home.
+V|The rabbit hid in its ___ (hole in the ground where rabbits live).|burrow/hole|A "burrow" is a hole where rabbits live.
+V|The horse is in the ___ (building where horses are kept).|stable|A "stable" is where horses are kept.
+V|The pigs are rolling in the mud in their ___ (place where pigs are kept).|sty/pen|A "sty" is where pigs are kept.
+V|The lion lives in a ___ (home of a wild animal) in the hills.|den/lair|A "den" is a wild animal's home.
+V|A baby cat is called a ___.|kitten|A young cat is a "kitten".
+V|A baby dog is called a ___.|puppy|A young dog is a "puppy".
+V|A baby cow is called a ___.|calf|A young cow is a "calf".
+V|A baby sheep is called a ___.|lamb|A young sheep is a "lamb".
+V|A baby horse is called a ___.|foal|A young horse is a "foal".
+V|A baby duck is called a ___.|duckling|A young duck is a "duckling".
+V|A baby frog is called a ___.|tadpole|A young frog is a "tadpole".
+V|A baby kangaroo is called a ___.|joey|A young kangaroo is a "joey".
+V|A baby goat is called a ___.|kid|A young goat is a "kid".
+V|A baby lion is called a ___.|cub|A young lion is a "cub".
+V|The opposite of "ancient" is ___ (recent and new).|modern|"modern" is the opposite of "ancient".
+V|The opposite of "victory" is ___ (losing).|defeat|"defeat" is the opposite of "victory".
+V|The opposite of "generous" is ___ (unwilling to share).|selfish/mean|"selfish" is the opposite of "generous".
+V|The opposite of "brave" is ___ (easily frightened).|cowardly/timid/afraid|"cowardly" is the opposite of "brave".
+V|The opposite of "arrive" is ___ (go away).|depart/leave|"depart" is the opposite of "arrive".
+V|The opposite of "accept" is ___ (say no to).|refuse/reject/decline|"refuse" is the opposite of "accept".
+V|The opposite of "permanent" is ___ (lasting only a short time).|temporary|"temporary" is the opposite of "permanent".
+V|The opposite of "expand" is ___ (become smaller).|shrink/contract|"shrink" is the opposite of "expand".
+V|The opposite of "include" is ___ (leave out).|exclude|"exclude" is the opposite of "include".
+V|The opposite of "increase" is ___ (become less).|decrease/reduce|"decrease" is the opposite of "increase".
+V|The opposite of "maximum" is ___ (the smallest amount).|minimum|"minimum" is the opposite of "maximum".
+V|The opposite of "success" is ___ (not succeeding).|failure|"failure" is the opposite of "success".
+V|The opposite of "interior" is ___ (the outside part).|exterior|"exterior" is the opposite of "interior".
+V|The opposite of "noisy" is ___ (making little sound).|quiet/silent|"quiet" is the opposite of "noisy".
+V|The opposite of "sharp" is ___ (not sharp).|blunt/dull|"blunt" is the opposite of "sharp".
+V|The opposite of "shallow" is ___ (going far down).|deep|"deep" is the opposite of "shallow".
+V|The opposite of "rough" is ___ (even and flat).|smooth|"smooth" is the opposite of "rough".
+V|The opposite of "polite" is ___ (not polite).|rude/impolite|"rude" is the opposite of "polite".
+V|The opposite of "loose" is ___ (fitting closely).|tight|"tight" is the opposite of "loose".
+V|The opposite of "guilty" is ___ (not having done wrong).|innocent|"innocent" is the opposite of "guilty".
