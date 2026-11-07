@@ -201,7 +201,7 @@ class MainActivity : Activity() {
                     append(if (prefs.guardRunning) "🟢 守护运行中" else "🔴 守护未运行")
                     append(if (prefs.paired) " · 已配对手机\n" else " · 未配对手机（只计时不关机）\n")
                     append(prefs.lastStatus)
-                    append("\n每日 ${prefs.dailyLimitMin} 分钟（今日奖励 +${prefs.bonusMin}）")
+                    append("\n每日 ${prefs.dailyLimitMin} 分钟（今日奖励 +${prefs.bonusMin}，其中做题 +${prefs.quizBonusMin}）")
                     append("\n允许时段 ${prefs.windowText()}")
                     if (prefs.isPaused()) append("\n⏸ 管控暂停中")
                 }
@@ -227,6 +227,9 @@ class MainActivity : Activity() {
         row1.addView(button("+30 分钟", weight = true) { sendBonus(30) })
         row1.addView(button("+60 分钟", weight = true) { sendBonus(60) })
         root.addView(row1)
+        root.addView(button("📝 做题加时（电视出题，答对 +${Prefs.QUIZ_REWARD_MIN} 分钟）") {
+            send(JSONObject().put("t", "quiz"), "已发送，电视 30 秒内出题")
+        })
         root.addView(button("⛔ 立即关电视") {
             confirm("现在就关掉电视？") { send(JSONObject().put("t", "off"), "已发送关机指令") }
         })
@@ -251,6 +254,13 @@ class MainActivity : Activity() {
             setText(prefs.dailyLimitMin.toString())
         }
         root.addView(limit)
+
+        root.addView(text("做题加时每天最多加（分钟）"))
+        val quizCap = EditText(this).apply {
+            inputType = InputType.TYPE_CLASS_NUMBER
+            setText(prefs.quizCapMin.toString())
+        }
+        root.addView(quizCap)
 
         root.addView(text("允许看电视的时段"))
         var start = prefs.allowStartMin
@@ -283,6 +293,12 @@ class MainActivity : Activity() {
                 toast("每日分钟数请填 0–1440")
                 return@button
             }
+            val qc = quizCap.text.toString().toIntOrNull()
+            if (qc == null || qc < 0 || qc > 600) {
+                toast("做题加时上限请填 0–600")
+                return@button
+            }
+            prefs.quizCapMin = qc
             prefs.dailyLimitMin = l
             prefs.allowStartMin = start
             prefs.allowEndMin = end
@@ -365,6 +381,7 @@ class MainActivity : Activity() {
         return buildString {
             append(if (j.optBoolean("on")) "📺 电视开着\n" else "⚫ 电视待机\n")
             append("今天已看 $used / $total 分钟（剩 ${(total - used).coerceAtLeast(0)}）\n")
+            if (j.optInt("quiz") > 0) append("其中做题赚了 ${j.optInt("quiz")} 分钟\n")
             append("允许时段 $start–$end")
             if (!j.optBoolean("enforce")) append(" · 仅记录不关机")
             if (System.currentTimeMillis() < j.optLong("pause")) append("\n⏸ 管控暂停中")

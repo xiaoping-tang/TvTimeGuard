@@ -11,8 +11,19 @@ android {
         applicationId = "com.family.tvtimer"
         minSdk = 26
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 4
+        versionName = "1.3"
+    }
+
+    // 签名文件放在仓库里（私有仓库），任何电脑编译出来的签名都一样，可以直接覆盖安装。
+    // 这是 Android 标准 debug 证书格式，密码固定为 android。
+    signingConfigs {
+        getByName("debug") {
+            storeFile = rootProject.file("keystore/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {
@@ -33,6 +44,7 @@ android {
 
 dependencies {
     implementation("dev.mobile:dadb:1.2.10")
+    testImplementation("junit:junit:4.13.2")
 }
 
 kotlin {

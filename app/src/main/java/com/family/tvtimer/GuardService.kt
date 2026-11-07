@@ -45,11 +45,15 @@ class GuardService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    /** 手机发来「做题加时」的时间，等电视亮屏时打开做题界面；0 表示没有 */
+    private var quizRequestAt = 0L
+
     override fun onCreate() {
         super.onCreate()
         prefs = Prefs(this)
         tv = TvController(this)
         createChannel()
+        instance = this
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -83,6 +87,7 @@ class GuardService : Service() {
             unregisterReceiver(screenOnReceiver)
         }
         executor = null
+        if (instance === this) instance = null
         super.onDestroy()
     }
 
@@ -104,30 +109,55 @@ class GuardService : Service() {
             lastTick = 0L
             // 倒计时中被关屏，下次开屏重新开始（短）倒计时，保证家长总有机会输 PIN
             prefs.lockDeadline = 0L
+            QuizActivity.declined = false // 下次开机时间还是用完的话，重新出题
             update("电视待机中")
             maybePublish(on = false)
             return
         }
 
-        // 累计两次检查之间的时间（最多算 2 个周期，防止休眠后一次加太多）
-        if (lastTick > 0) {
+        // 手机要求做题：亮屏时打开做题界面（请求 10 分钟内有效）
+        if (quizRequestAt > 0) {
+            if (now - quizRequestAt < 10 * 60_000 && !forceOff) showQuiz()
+            quizRequestAt = 0L
+        }
+        val quizzing = QuizActivity.isActive()
+
+        // 累计两次检查之间的时间（最多算 2 个周期，防止休眠后一次加太多）。做题时不算看电视
+        if (lastTick > 0 && !quizzing) {
             val delta = ((now - lastTick) / 1000).coerceIn(0, CHECK_SEC * 2)
             prefs.usedSec = prefs.usedSec + delta
         }
         lastTick = now
 
+        if (quizzing && !forceOff) {
+            prefs.lockDeadline = 0L // 做题界面优先，「时间到了」先不弹
+            update(if (prefs.remainingSec <= 0) "📝 时间用完，正在做题赢 10 分钟" else "📝 正在做题加时 · 剩 ${prefs.remainingSec / 60} 分钟")
+            maybePublish(on = true)
+            return
+        }
+
+        // 只有「今天的时间用完了」（且在允许时段内）才能靠做题加时；做题加时到上限后照旧倒计时关机
+        val timeUp = prefs.isInAllowedWindow() && prefs.remainingSec <= 0
+        val quizCanHelp = prefs.quizRewardMin() > 0
         val reason = when {
             forceOff -> "家长远程关机"
             !prefs.isInAllowedWindow() -> "不在允许时段（${prefs.windowText()}）"
-            prefs.remainingSec <= 0 -> "今天的时间用完了"
+            timeUp && !quizCanHelp -> "今天的时间用完了（做题加时也到上限了）"
+            timeUp -> "今天的时间用完了"
             else -> null
         }
 
+        if (reason == null) QuizActivity.declined = false
         if (reason == null || forceOff || prefs.isPaused() || !prefs.enforce || !prefs.paired) {
             prefs.lockDeadline = 0L // LockActivity 看到 0 会自己关闭
         }
         when {
-            reason == null -> update("正在看 · 剩 ${prefs.remainingSec / 60} 分钟")
+            reason == null -> {
+                update("正在看 · 剩 ${prefs.remainingSec / 60} 分钟")
+                // 时间快用完时，到点就检查，不用等下一个 30 秒周期
+                val left = prefs.remainingSec
+                if (left < CHECK_SEC) executor?.schedule({ safeTick() }, left + 1, TimeUnit.SECONDS)
+            }
             forceOff -> {
                 turnOff(reason)
                 return
@@ -135,6 +165,14 @@ class GuardService : Service() {
             prefs.isPaused() -> update("管控暂停中 · $reason")
             !prefs.enforce -> update("仅记录 · $reason")
             !prefs.paired -> update("还没配对手机，只计时不关机 · $reason")
+            // 时间用完：不弹关机倒计时，直接去做题（小孩主动放弃做题才走倒计时关机）
+            timeUp && quizCanHelp && !QuizActivity.declined -> {
+                prefs.lockDeadline = 0L
+                showQuiz()
+                update("📝 时间用完，打开做题界面")
+                maybePublish(on = true)
+                return
+            }
             else -> {
                 countdownThenOff(reason)
                 return
@@ -176,6 +214,18 @@ class GuardService : Service() {
         }
     }
 
+    private fun showQuiz() {
+        try {
+            QuizActivity.launchGraceUntil = System.currentTimeMillis() + 15_000
+            // 和「时间到了」一样，后台服务借本机 ADB 打开界面
+            tv.shell("am start -n $packageName/.QuizActivity")
+            forcePublish = true
+        } catch (t: Throwable) {
+            QuizActivity.launchGraceUntil = 0L
+            Log.w(TAG, "show quiz failed", t)
+        }
+    }
+
     private fun turnOff(reason: String) {
         try {
             tv.turnOff()
@@ -213,6 +263,8 @@ class GuardService : Service() {
                 "pause" -> prefs.pauseUntil = j.optLong("until")
                 // 过期的关机指令不执行，免得电视第二天一开机就被关
                 "off" -> if (now - m.time < 3 * 60_000) off = true
+                // 做题加时：电视待机时先记着，10 分钟内亮屏就出题
+                "quiz" -> if (now - m.time < 10 * 60_000) quizRequestAt = m.time
             }
             prefs.lastCmdId = m.id
         }
@@ -235,6 +287,7 @@ class GuardService : Service() {
                     .put("on", on)
                     .put("used", prefs.usedSec)
                     .put("bonus", prefs.bonusMin)
+                    .put("quiz", prefs.quizBonusMin)
                     .put("pause", prefs.pauseUntil)
                     .put("msg", prefs.lastStatus.substringBefore('\n'))
                     .put("ts", now)
@@ -281,6 +334,16 @@ class GuardService : Service() {
         private const val LOCK_SEC = 60L
         private const val SHORT_LOCK_SEC = 20L
         const val ACTION_STOP = "com.family.tvtimer.STOP"
+
+        @Volatile
+        private var instance: GuardService? = null
+
+        /** 让守护马上检查一次（答对加时、退出做题界面时调用） */
+        fun poke() {
+            val s = instance ?: return
+            s.forcePublish = true
+            s.executor?.execute { s.safeTick() }
+        }
 
         fun start(ctx: Context) {
             ctx.startForegroundService(Intent(ctx, GuardService::class.java))

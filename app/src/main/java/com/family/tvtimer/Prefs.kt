@@ -88,6 +88,16 @@ class Prefs(context: Context) {
         get() { rollDay(); return sp.getInt("bonus_min", 0) }
         set(v) = sp.edit().putInt("bonus_min", v).apply()
 
+    /** 今天做题赚到的分钟数（已经算在 bonusMin 里，单独记下来用来判断上限） */
+    var quizBonusMin: Int
+        get() { rollDay(); return sp.getInt("quiz_bonus_min", 0) }
+        set(v) = sp.edit().putInt("quiz_bonus_min", v).apply()
+
+    /** 每天最多能靠做题加多少分钟 */
+    var quizCapMin: Int
+        get() = sp.getInt("quiz_cap_min", 60)
+        set(v) = sp.edit().putInt("quiz_cap_min", v).apply()
+
     var lastStatus: String
         get() = sp.getString("last_status", "守护未启动") ?: ""
         set(v) = sp.edit().putString("last_status", v).apply()
@@ -99,6 +109,7 @@ class Prefs(context: Context) {
                 .putString("usage_date", today)
                 .putLong("used_sec", 0L)
                 .putInt("bonus_min", 0)
+                .putInt("quiz_bonus_min", 0)
                 .apply()
         }
     }
@@ -119,7 +130,23 @@ class Prefs(context: Context) {
     fun isPaused(): Boolean = System.currentTimeMillis() < pauseUntil
 
     fun resetToday() {
-        sp.edit().putLong("used_sec", 0L).putInt("bonus_min", 0).apply()
+        sp.edit().putLong("used_sec", 0L).putInt("bonus_min", 0).putInt("quiz_bonus_min", 0).apply()
+    }
+
+    /** 做对一道题能加的分钟数（不超过今天剩下的做题上限） */
+    fun quizRewardMin(): Int = minOf(QUIZ_REWARD_MIN, (quizCapMin - quizBonusMin).coerceAtLeast(0))
+
+    /** 做题答对：加时并记账，返回实际加了多少分钟 */
+    @Synchronized
+    fun addQuizBonus(): Int {
+        val add = quizRewardMin()
+        if (add > 0) {
+            // 时间用完后多算的几秒（倒计时等）不追究，保证答对后从现在起能看满 10 分钟
+            if (usedSec > totalAllowedSec) usedSec = totalAllowedSec
+            quizBonusMin = quizBonusMin + add
+            bonusMin = bonusMin + add
+        }
+        return add
     }
 
     fun windowText() = "${fmtHm(allowStartMin)}–${fmtHm(allowEndMin)}"
@@ -131,15 +158,20 @@ class Prefs(context: Context) {
         .put("start", allowStartMin)
         .put("end", allowEndMin)
         .put("enforce", enforce)
+        .put("quizCap", quizCapMin)
 
     fun applySettings(j: JSONObject) {
         dailyLimitMin = j.optInt("limit", dailyLimitMin)
         allowStartMin = j.optInt("start", allowStartMin)
         allowEndMin = j.optInt("end", allowEndMin)
         enforce = j.optBoolean("enforce", enforce)
+        quizCapMin = j.optInt("quizCap", quizCapMin)
     }
 
     companion object {
+        /** 做对一道题加几分钟 */
+        const val QUIZ_REWARD_MIN = 10
+
         fun fmtHm(min: Int) = "%02d:%02d".format(min / 60, min % 60)
 
         fun newPairCode(): String {
