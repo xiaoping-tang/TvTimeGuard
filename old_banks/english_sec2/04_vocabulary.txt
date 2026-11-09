@@ -1,0 +1,79 @@
+# Singapore Secondary 2 (Express) English fill-in: quantifiers (N), question tags (Q), phrasal verbs (X), vocabulary (V)
+# Format: code|sentence (___ is the blank)|answers (separated by /)|explanation
+N|___ of the two shirts fits me; both are too small.|Neither/neither|"Neither" means "not one and not the other" of two.
+N|There is very ___ milk left, so we need to buy some.|little|"Little" is used with uncountable nouns like milk.
+N|___ of the students passed the test; not a single one failed.|All/all|"All" means every one of them.
+N|Lonely and shy, Daniel has very ___ friends at his new school.|few|"Few" is used with countable nouns like friends.
+N|___ student must bring a calculator for the exam.|Every/every/Each/each|"Every" is followed by a singular noun.
+N|Tall trees grow on ___ side of the road.|either/each|"Either side" means both sides here.
+N|A ___ number of people attended the National Day Parade.|large/great|We say "a large number of" with countable nouns.
+N|I am sorry, but I haven't got ___ money left.|any|We use "any" in negative sentences.
+N|Would you like ___ more tea?|some|We use "some" in offers.
+N|Not ___ of the information on that website was useful.|much|"Much" is used with uncountable nouns like information.
+N|She spent ___ the money she had saved; nothing was left.|all|"All the money" means every bit of it.
+N|___ few students arrived late, but most were on time.|A/a|"A few" means "a small number of".
+Q|I'm right about this, ___ I?|aren't/arent|The tag for "I am" is "aren't I".
+Q|Nobody called while I was out, ___ they?|did|"Nobody" is negative, so the tag is positive: did they.
+Q|Let's go for a swim after lunch, ___ we?|shall|The tag for "Let's" is "shall we".
+Q|Everyone enjoyed the concert, ___ they?|didn't/didnt|"Everyone" uses "they" in the tag; positive sentence, negative tag.
+Q|She has hardly eaten anything today, ___ she?|has|"Hardly" makes the sentence negative, so the tag is positive.
+Q|You'd better leave now, ___ you?|hadn't/hadnt|"You'd better" means "you had better", so the tag is "hadn't you".
+Q|He used to live in Japan, ___ he?|didn't/didnt|The tag for "used to" is "didn't".
+Q|There is little hope of finding the lost cat, ___ there?|is|"Little" makes the sentence negative, so the tag is positive.
+Q|Neither of them came to the party, ___ they?|did|"Neither" is negative, so the tag is positive.
+Q|Nothing can stop us now, ___ it?|can|"Nothing" is negative and uses "it" in the tag.
+Q|You have never been to Paris, ___ you?|have|"Never" makes the sentence negative, so the tag is positive.
+Q|I'm not late for the meeting, ___ I?|am|For "I am not", the tag is "am I".
+Q|She'd rather stay at home tonight, ___ she?|wouldn't/wouldnt|"She'd rather" means "she would rather", so the tag is "wouldn't she".
+Q|He'd already finished his work by then, ___ he?|hadn't/hadnt|"He'd finished" means "he had finished", so the tag is "hadn't he".
+Q|Somebody left the gate open, ___ they?|didn't/didnt|"Somebody" uses "they" in the tag; past positive, negative tag.
+Q|The children seldom complain, ___ they?|do|"Seldom" makes the sentence negative, so the tag is positive.
+Q|That's your bag on the chair, ___ it?|isn't/isnt|"That's" means "that is"; the tag uses "it".
+Q|Few people knew the truth, ___ they?|did|"Few" makes the sentence negative, so the tag is positive.
+X|The outdoor concert has been called ___ because of the storm.|off|"Call off" means "cancel".
+X|I can't put ___ with his rudeness any longer.|up|"Put up with" means "tolerate".
+X|The fire alarm went ___ in the middle of the night.|off|"Go off" means "start ringing".
+X|Mei Ling takes ___ her mother; they look very alike.|after|"Take after" means "look or behave like an older relative".
+X|We have run ___ of sugar, so I can't bake the cake.|out|"Run out of" means "have none left".
+X|If you don't know the meaning, look it ___ in a dictionary.|up|"Look up" means "search for information".
+X|The plane took ___ on time despite the bad weather.|off|"Take off" means "leave the ground".
+X|Don't give ___; you are almost at the finish line!|up|"Give up" means "stop trying".
+X|The firefighters put ___ the blaze within an hour.|out|"Put out" means "stop a fire burning".
+X|The thief thought he had got ___ with stealing the jewels.|away|"Get away with" means "not be punished for".
+X|While cleaning the attic, he came ___ an old photo of his grandparents.|across|"Come across" means "find by chance".
+X|The orphaned children were ___ up by their grandparents.|brought|"Bring up" means "raise a child".
+X|Can you ___ out what that faded sign says?|make|"Make out" means "manage to see or read".
+X|The police are looking ___ the cause of the fire.|into|"Look into" means "investigate".
+X|She turned ___ the job offer because the salary was too low.|down|"Turn down" means "refuse".
+X|The birthday girl ___ out all the candles in one breath.|blew|"Blow out" means "put out a flame by blowing".
+X|I will pick you ___ from the station at seven.|up|"Pick up" means "collect someone".
+V|The museum displays ___ (very old) pottery from China.|ancient|"Ancient" means very old, from long ago.
+V|She was ___ (unwilling) to lend him any more money.|reluctant|"Reluctant" means not willing to do something.
+V|The instructions were ___ (unclear; having two possible meanings), so we were confused.|ambiguous|"Ambiguous" means it can be understood in more than one way.
+V|Wearing a helmet is ___ (required by the rules) for all cyclists in the race.|compulsory/mandatory/obligatory|"Compulsory" means it must be done.
+V|The teacher gave a ___ (short and clear) explanation of the rule.|concise/brief|"Concise" means using few words but clear.
+V|Water is ___ (absolutely necessary) for all living things.|essential/vital/crucial|"Essential" means absolutely necessary.
+V|The hikers were ___ (extremely tired) after the long climb.|exhausted|"Exhausted" means extremely tired.
+V|A good referee must be ___ (fair; not supporting either side).|impartial/unbiased/fair|"Impartial" means not taking sides.
+V|The doctor ___ (identified the illness of) the patient quickly.|diagnosed|"Diagnose" means to find out what illness someone has.
+V|My uncle has an ___ (extremely large) collection of stamps.|enormous/huge/vast|"Enormous" means extremely large.
+V|The ___ (never stopping) noise from the road kept us awake.|constant/continuous/incessant|"Constant" means happening all the time.
+V|After lying to his friend, Tom felt ___ (deeply sorry for doing wrong).|remorseful/sorry/regretful|"Remorseful" means feeling sorry for something wrong you did.
+V|The weather in the mountains is ___ (cannot be known in advance).|unpredictable|"Unpredictable" means you cannot tell what will happen.
+V|The organisers ___ (moved to a later time) the match because of the storm.|postponed/delayed|"Postpone" means to move an event to a later time.
+V|These medical records are strictly ___ (private and secret).|confidential/secret|"Confidential" means meant to be kept secret.
+V|The company needs to ___ (make smaller) its costs this year.|reduce/cut/lower|"Reduce" means to make smaller or less.
+V|His handwriting was so messy that it was ___ (impossible to read).|illegible/unreadable|"Illegible" means impossible to read.
+V|The firefighter showed great ___ (bravery) during the rescue.|courage/bravery/valour|"Courage" means the ability to face danger.
+V|We were ___ (extremely surprised) to see snow in Singapore!|astonished/amazed/astounded|"Astonished" means extremely surprised.
+V|The twins wore ___ (exactly the same) outfits to the party.|identical/matching|"Identical" means exactly the same.
+V|The tiny fishing village is ___ (far away from other places).|isolated/remote|"Isolated" means far away from other places.
+V|The singer is ___ (famous and admired) across Asia for her powerful voice.|renowned/famous/celebrated|"Renowned" means famous and admired.
+V|The prisoner tried to ___ (get free; run away) but was caught at the gate.|escape/flee|"Escape" means to get away from a place.
+V|Recycling helps to ___ (keep from harm) the environment.|protect/preserve/conserve|"Protect" means to keep safe from harm.
+V|The lecture was so ___ (long and boring) that many students fell asleep.|tedious/boring/dull|"Tedious" means long, slow and boring.
+V|The engineers had ___ (expected and prepared for) the problem.|anticipated/predicted/foreseen|"Anticipate" means to expect something and prepare for it.
+V|The region has an ___ (more than enough) supply of fresh water.|abundant/ample/plentiful|"Abundant" means more than enough.
+V|The two friends had a ___ (strong and angry) argument about the match.|heated/fierce|"Heated" describes an argument full of strong feeling.
+V|The volunteers were ___ (thankful) for the generous donations.|grateful/thankful|"Grateful" means thankful.
+V|The new evidence ___ (showed to be false) the suspect's story.|disproved/contradicted|"Disprove" means to show that something is false.

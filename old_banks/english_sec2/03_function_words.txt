@@ -1,0 +1,84 @@
+# Singapore Secondary 2 (Express) English fill-in: prepositions (P), connectors (C), pronouns and relative words (R)
+# The app shows the first letter and letter count of the first answer as a hint
+# Format: code|sentence (___ is the blank)|answers (separated by /)|explanation
+P|Despite the rain, Grandma insisted ___ walking home alone.|on|We say "insist on" + -ing.
+P|She finally succeeded ___ persuading her parents to buy a dog.|in|We say "succeed in" + -ing.
+P|The student was accused ___ copying his friend's homework.|of|We say "accuse someone of" something.
+P|Penang is famous ___ its delicious street food.|for|We say "famous for".
+P|Nadia is capable ___ handling the project on her own.|of|We say "capable of".
+P|Whether we go to the beach depends ___ the weather.|on|We say "depend on".
+P|He strongly objected ___ being called a coward.|to|We say "object to" + -ing.
+P|Students are prohibited ___ using their phones during lessons.|from|We say "prohibit someone from" + -ing.
+P|I would like to congratulate you ___ your excellent results.|on|We say "congratulate someone on" something.
+P|The car skidded and collided ___ a lorry.|with|We say "collide with".
+P|The treasurer is responsible ___ the club's money.|for|We say "responsible for".
+P|Wei Ming was so absorbed ___ his novel that he missed his stop.|in|We say "absorbed in" something.
+P|My opinion differs ___ yours on this matter.|from|We say "differ from".
+P|The residents complained ___ the noise from the construction site.|about|We say "complain about" something.
+P|Contrary ___ popular belief, bats are not blind.|to|We say "contrary to".
+P|The coach was disappointed ___ the team's careless mistakes.|with/in/by|We say "disappointed with" something or someone.
+P|Many teenagers are addicted ___ online games.|to|We say "addicted to".
+P|She was jealous ___ her sister's success.|of|We say "jealous of".
+P|The crowd stayed until the end in spite ___ the heat.|of|We say "in spite of".
+P|The soldiers were armed ___ rifles.|with|We say "armed with".
+P|The careless mistake resulted ___ a serious accident.|in|"Result in" means "cause".
+P|The illness resulted ___ poor hygiene in the kitchen.|from|"Result from" means "be caused by".
+P|Some people are very sensitive ___ criticism.|to|We say "sensitive to".
+P|The book consists ___ twelve short chapters.|of|We say "consist of".
+P|The man was charged ___ robbery.|with|We say "charge someone with" a crime.
+P|Passengers are asked to refrain ___ eating on the train.|from|We say "refrain from" + -ing.
+P|Only Secondary Two students are eligible ___ the leadership camp.|for|We say "eligible for".
+P|Hundreds of people protested ___ the new law.|against|We say "protest against" something.
+P|I have no objection ___ your plan.|to|We say "objection to".
+P|Ali was ashamed ___ his rude behaviour.|of|We say "ashamed of".
+P|The robber was sentenced ___ five years in prison.|to|We say "sentence someone to" a punishment.
+P|The carpenter takes great pride ___ his work.|in|We say "take pride in".
+P|The noisy neighbours deprived us ___ sleep.|of|We say "deprive someone of" something.
+P|She has been preoccupied ___ her exams all week.|with|We say "preoccupied with".
+P|There has been a sharp increase ___ the price of eggs.|in|We say "an increase in" something.
+P|My grandmother has a strong preference ___ green tea.|for|We say "preference for".
+P|Do not take advantage ___ her kindness.|of|We say "take advantage of".
+P|The lifeguard prevented the child ___ falling into the pool.|from|We say "prevent someone from" + -ing.
+C|___ he was exhausted, he continued working until midnight.|Although/although/Though/though|"Although" introduces a contrast.
+C|___ the heavy rain, the match went on as planned.|Despite/despite|"Despite" is followed by a noun, not a clause.
+C|You may go to the party ___ you finish your homework first.|provided/providing/if|"Provided" means "only if".
+C|You will not pass the exam ___ you study harder.|unless|"Unless" means "if not".
+C|Tom loves outdoor sports, ___ his brother prefers reading at home.|whereas/while/but|"Whereas" shows a contrast between two people or things.
+C|The task was very difficult; ___, we completed it on time.|nevertheless/nonetheless/however|"Nevertheless" means "in spite of that".
+C|Speak softly ___ you wake the sleeping baby.|lest|"Lest" means "so that ... not" (formal).
+C|He saved every cent ___ that he could buy a new bicycle.|so|"So that" shows purpose.
+C|___ of the bad weather, the flight was delayed.|Because/because|"Because of" is followed by a noun.
+C|In ___ of his injury, he finished the marathon.|spite|"In spite of" means "despite".
+C|She was ___ tired that she fell asleep on the bus.|so|"So + adjective + that" shows a result.
+C|It was ___ a boring film that half the audience left early.|such|"Such + a + adjective + noun + that" shows a result.
+C|___ you like it or not, you must attend the meeting.|Whether/whether|"Whether ... or not" means it does not matter which.
+C|___ sooner had I sat down than the phone rang.|No/no|"No sooner ... than" shows one thing happened right after another.
+C|___ had I closed my eyes when the alarm went off.|Hardly/hardly/Scarcely/scarcely|"Hardly ... when" shows one thing happened right after another.
+C|Not only is Sarah clever, ___ she is also very kind.|but|"Not only ... but also" adds a second point.
+C|___ the teacher had left, the pupils began to chat.|Once/once/When/when/After/after|"Once" means "as soon as".
+C|The roads were flooded; ___, the race was postponed.|therefore/consequently/hence/thus|"Therefore" shows a result.
+C|Vikram is talented; ___, he is extremely hardworking.|moreover/furthermore/besides|"Moreover" adds another point.
+C|Even ___ she is young, she is very wise.|though|"Even though" introduces a contrast.
+C|I will lend you my book as long ___ you return it by Friday.|as|"As long as" means "on condition that".
+C|Kevin ran as fast as he could; ___, he still missed the bus.|however/nevertheless|"However" shows a contrast with the earlier idea.
+C|___ I was walking home, it began to pour.|While/while/As/as/When/when|"While" shows two things happening at the same time.
+C|You may borrow my laptop on condition ___ you return it tomorrow.|that|"On condition that" means "only if".
+C|___ to the heavy rain, the outdoor concert was cancelled.|Due/due/Owing/owing|"Due to" means "because of".
+C|Lisa failed the driving test ___ her careful preparation.|despite|"Despite" shows a surprising contrast.
+R|The woman ___ car was stolen reported it to the police.|whose|"Whose" shows possession.
+R|The officer to ___ I spoke at the counter was very patient.|whom|After a preposition we use "whom" for people.
+R|This is the kampong house in ___ my grandfather grew up.|which|After a preposition we use "which" for things and places.
+R|The school started a scheme ___ students can borrow laptops for free.|whereby|"Whereby" means "by which".
+R|You may choose ___ book you like from the shelf.|whichever/whatever|"Whichever" means "any one that".
+R|___ wins the race will receive a trophy.|Whoever/whoever|"Whoever" means "any person who".
+R|Nobody knows the reason ___ he left so suddenly.|why|We use "why" after "the reason".
+R|2020 was the year ___ we moved to Punggol.|when|We use "when" after a word for time.
+R|The two boys blamed ___ other for the broken vase.|each|"Each other" shows two people doing something to one another.
+R|My cousin taught ___ to play the guitar by watching videos.|herself/himself|A reflexive pronoun is used when the doer and receiver are the same.
+R|The students, many of ___ were tired, still finished the hike.|whom|After "many of" we use "whom" for people.
+R|He lent me his old dictionary, ___ cover was torn.|whose|"Whose" can show possession for things too.
+R|Everything ___ the witness said turned out to be true.|that|After "everything" we usually use "that".
+R|In a crisis, it is hard to know ___ to trust.|whom/who|"Whom" is the object of "trust".
+R|This is the cafe ___ we first met.|where|We use "where" after a place.
+R|This is the girl ___ I believe won the art prize.|who|"Who" is the subject of "won"; "I believe" is extra.
+R|The twins are always helping one ___.|another|"One another" means "each other".

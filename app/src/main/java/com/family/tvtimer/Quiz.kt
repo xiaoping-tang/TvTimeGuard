@@ -85,10 +85,17 @@ data class Frac private constructor(val num: Long, val den: Long) : Comparable<F
     }
 }
 
+enum class Subject(val label: String) { ENGLISH("English"), MATH("Maths"), CHINESE("华文"), SCIENCE("Science") }
+
+/** 作答方式：数字键盘、字母键盘、四选一 */
+enum class Kind { NUMBER, WORD, CHOICE }
+
 /**
  * 一道题。answerText 是显示给小孩看的标准答案，explain 是答错后显示的解题步骤/解释。
- *  - 数学题：answer 是精确数值，数值相等就算对（3/4 和 0.75 都行）
- *  - 英文填空：words 是所有可接受的单词（不分大小写）
+ *  - 填数字：answer 是精确数值，数值相等就算对（3/4 和 0.75 都行）
+ *  - 填单词：words 是所有可接受的单词（不分大小写）
+ *  - 四选一：options 是打乱顺序后的四个选项，words 里是正确选项
+ * source 是题目出处（哪所学校哪年的考卷），自编的题为空。
  */
 data class Question(
     val topic: String,
@@ -97,8 +104,26 @@ data class Question(
     val explain: String,
     val answer: Frac? = null,
     val words: List<String> = emptyList(),
+    val options: List<String> = emptyList(),
+    val level: String = "Primary 5",
+    val subject: Subject = when {
+        answer != null -> Subject.MATH
+        options.isNotEmpty() -> Subject.CHINESE
+        else -> Subject.ENGLISH
+    },
+    val source: String = "",
 ) {
-    val isEnglish get() = answer == null
+    val kind: Kind
+        get() = when {
+            answer != null -> Kind.NUMBER
+            options.isNotEmpty() -> Kind.CHOICE
+            else -> Kind.WORD
+        }
+    val isEnglish get() = kind == Kind.WORD
+    val isChoice get() = kind == Kind.CHOICE
+
+    /** 华文题的界面提示和讲解用中文，其他科目用英文 */
+    val isChineseUi get() = subject == Subject.CHINESE
 
     fun isCorrect(input: String): Boolean =
         if (answer != null) Frac.parse(input) == answer
@@ -109,18 +134,25 @@ data class Question(
     }
 }
 
+/** 从 APK 的 assets/<dir>/ 读出全部 txt 题库文件的所有行（文件按名字排序） */
+internal fun readAssetDir(ctx: android.content.Context, dir: String): List<String> {
+    val am = ctx.assets
+    return am.list(dir).orEmpty().filter { it.endsWith(".txt") }.sorted()
+        .flatMap { f -> am.open("$dir/$f").bufferedReader().readLines() }
+}
+
 /**
- * 新加坡 P5 英文填空题：题库是 assets/english 目录下的 txt 文件，一行一题：
+ * 英文填空题库（P5 在 assets/english，Sec 2 在 assets/english_sec2），一行一题：
  *   题型|句子（___ 是空格）|答案（多个用 / 分隔）|解释
  * 介词、连词、代词、数量词、短语动词、词汇题（P C R N X V）会显示首字母和字母数，避免一题多解。
  */
-object English {
+class FillBank(val level: String, val dir: String) {
     private val topics = mapOf(
         "T" to "Verb forms", "S" to "Subject-verb agreement", "W" to "Word forms", "U" to "Plurals",
         "A" to "Comparatives", "P" to "Prepositions", "C" to "Connectors", "R" to "Pronouns",
         "N" to "Quantifiers & group words", "Q" to "Question tags", "X" to "Phrasal verbs", "V" to "Vocabulary",
     )
-    private const val HINT_TOPICS = "PCRNXV"
+    private val HINT_TOPICS = "PCRNXV"
 
     data class Item(val code: String, val sentence: String, val answers: List<String>, val explain: String)
 
@@ -149,12 +181,9 @@ object English {
         deck = ArrayDeque()
     }
 
-    /** 从 APK 的 assets/english/ 读取全部题库（只读一次） */
+    /** 从 APK 的 assets 读取题库（只读一次） */
     fun loadAssets(ctx: android.content.Context) {
-        if (items.isNotEmpty()) return
-        val am = ctx.assets
-        val files = am.list("english").orEmpty().filter { it.endsWith(".txt") }.sorted()
-        load(files.flatMap { f -> am.open("english/$f").bufferedReader().readLines() })
+        if (items.isEmpty()) load(readAssetDir(ctx, dir))
     }
 
     /** 把空格画出来：需要提示的题显示首字母和字母数，例如 o _ _ */
@@ -172,6 +201,7 @@ object English {
             answerText = "\"${item.answers.first()}\"",
             explain = item.explain,
             words = item.answers,
+            level = level,
         )
     }
 
@@ -180,6 +210,185 @@ object English {
         if (items.isEmpty()) return null
         if (deck.isEmpty()) deck = ArrayDeque(items.shuffled(r))
         return toQuestion(deck.removeFirst())
+    }
+}
+
+/**
+ * 华文选择题库（P5 在 assets/chinese_p5，Sec 2 在 assets/chinese_sec2），一行一题：
+ *   题型代码|题干|正确答案|干扰项1/干扰项2/干扰项3|解释
+ * 电视遥控器没法输入汉字，所以华文题是四选一，选项每次随机打乱。
+ */
+class ChoiceBank(val level: String, val dir: String) {
+    private val topics = mapOf(
+        "Z" to "字词", "H" to "汉语拼音", "L" to "量词", "F" to "近义词·反义词", "C" to "选词填空",
+        "Y" to "成语", "G" to "关联词", "J" to "句子", "D" to "阅读理解", "W" to "文言与古诗文",
+    )
+
+    data class Item(val code: String, val stem: String, val answer: String, val wrong: List<String>, val explain: String)
+
+    @Volatile
+    var items: List<Item> = emptyList()
+        private set
+
+    private var deck = ArrayDeque<Item>()
+
+    /** 解析题库文本；格式不对的行会抛异常（单元测试会检查整个题库） */
+    fun parse(lines: List<String>): List<Item> = lines.map { it.trim().removePrefix("﻿") }
+        .filter { it.isNotEmpty() && !it.startsWith("#") }
+        .map { line ->
+            val p = line.split('|').map { it.trim() }
+            require(p.size == 5) { "需要 5 段：$line" }
+            val (code, stem, answer, wrongs, explain) = p
+            require(code in topics) { "未知题型 $code：$line" }
+            val wrong = wrongs.split('/').map { it.trim() }
+            require(wrong.size == 3) { "要有 3 个干扰项：$line" }
+            val all = wrong + answer
+            require(all.all { it.isNotEmpty() } && all.toSet().size == 4) { "选项不能为空或重复：$line" }
+            require(stem.isNotEmpty() && explain.isNotEmpty()) { "题干和解释不能为空：$line" }
+            Item(code, stem, answer, wrong, explain)
+        }
+
+    fun load(lines: List<String>) {
+        items = parse(lines)
+        deck = ArrayDeque()
+    }
+
+    fun loadAssets(ctx: android.content.Context) {
+        if (items.isEmpty()) load(readAssetDir(ctx, dir))
+    }
+
+    fun toQuestion(item: Item, r: Random): Question = Question(
+        topic = topics.getValue(item.code),
+        text = item.stem,
+        answerText = "「${item.answer}」",
+        explain = item.explain,
+        words = listOf(item.answer),
+        options = (item.wrong + item.answer).shuffled(r),
+        level = level,
+    )
+
+    fun next(r: Random): Question? {
+        if (items.isEmpty()) return null
+        if (deck.isEmpty()) deck = ArrayDeque(items.shuffled(r))
+        return toQuestion(deck.removeFirst(), r)
+    }
+}
+
+/**
+ * 真题题库：题目取自新加坡各校的考卷（一份卷子一个 txt 文件），一行一题，7 段：
+ *   作答方式|题型|题目|答案|干扰项|讲解|出处
+ *  - 作答方式：N = 填数字（答案是整数/小数/分数，可为负），W = 填一个英文单词（多个可接受答案用 / 分隔），
+ *              C = 四选一（干扰项 3 个，用 ~ 分隔）；N 和 W 的干扰项留空
+ *  - 题目和讲解里的 \n 表示换行
+ */
+class PaperBank(val level: String, val subject: Subject, val dir: String) {
+
+    data class Item(
+        val kind: Kind, val topic: String, val text: String, val answers: List<String>,
+        val wrong: List<String>, val explain: String, val source: String,
+    )
+
+    @Volatile
+    var items: List<Item> = emptyList()
+        private set
+
+    private var deck = ArrayDeque<Item>()
+
+    /** 解析题库文本；格式不对的行会抛异常（单元测试会检查整个题库） */
+    fun parse(lines: List<String>): List<Item> = lines.map { it.trim().removePrefix("﻿") }
+        .filter { it.isNotEmpty() && !it.startsWith("#") }
+        .map { line ->
+            val p = line.split('|').map { it.trim() }
+            require(p.size == 7) { "需要 7 段（现在 ${p.size} 段）：$line" }
+            val kind = when (p[0]) {
+                "N" -> Kind.NUMBER
+                "W" -> Kind.WORD
+                "C" -> Kind.CHOICE
+                else -> throw IllegalArgumentException("作答方式只能是 N/W/C：$line")
+            }
+            val text = p[2].replace("\\n", "\n")
+            val explain = p[5].replace("\\n", "\n")
+            require(p[1].isNotEmpty() && text.isNotEmpty() && explain.isNotEmpty() && p[6].isNotEmpty()) {
+                "题型、题目、讲解、出处都不能为空：$line"
+            }
+            val answers: List<String>
+            var wrong = emptyList<String>()
+            when (kind) {
+                Kind.NUMBER -> {
+                    require(Frac.parse(p[3]) != null) { "答案不是数字：$line" }
+                    require(p[4].isEmpty()) { "填数字题不要干扰项：$line" }
+                    answers = listOf(p[3])
+                }
+                Kind.WORD -> {
+                    answers = p[3].split('/').map { it.trim() }.filter { it.isNotEmpty() }
+                    require(answers.isNotEmpty() && answers.all { Regex("[A-Za-z']+").matches(it) }) {
+                        "填单词题的答案只能是一个英文单词：$line"
+                    }
+                    require(p[4].isEmpty()) { "填单词题不要干扰项：$line" }
+                }
+                Kind.CHOICE -> {
+                    answers = listOf(p[3])
+                    wrong = p[4].split('~').map { it.trim() }
+                    require(wrong.size == 3) { "要有 3 个干扰项（用 ~ 分隔）：$line" }
+                    val all = wrong + p[3]
+                    require(all.all { it.isNotEmpty() } && all.toSet().size == 4) { "选项不能为空或重复：$line" }
+                }
+            }
+            Item(kind, p[1], text, answers, wrong, explain, p[6])
+        }
+
+    fun load(lines: List<String>) {
+        items = parse(lines)
+        deck = ArrayDeque()
+    }
+
+    fun loadAssets(ctx: android.content.Context) {
+        if (items.isEmpty()) load(readAssetDir(ctx, dir))
+    }
+
+    fun toQuestion(item: Item, r: Random): Question = when (item.kind) {
+        Kind.NUMBER -> Question(
+            item.topic, item.text, item.answers.first(), item.explain,
+            answer = Frac.parse(item.answers.first()), level = level, subject = subject, source = item.source,
+        )
+        Kind.WORD -> Question(
+            item.topic, item.text, "\"${item.answers.first()}\"", item.explain,
+            words = item.answers, level = level, subject = subject, source = item.source,
+        )
+        Kind.CHOICE -> Question(
+            item.topic, item.text,
+            if (subject == Subject.CHINESE) "「${item.answers.first()}」" else "\"${item.answers.first()}\"",
+            item.explain, words = item.answers, options = (item.wrong + item.answers.first()).shuffled(r),
+            level = level, subject = subject, source = item.source,
+        )
+    }
+
+    /** 洗牌后依次出题，整个题库做完一轮才会重复 */
+    fun next(r: Random): Question? {
+        if (items.isEmpty()) return null
+        if (deck.isEmpty()) deck = ArrayDeque(items.shuffled(r))
+        return toQuestion(deck.removeFirst(), r)
+    }
+}
+
+/**
+ * 题库。现在出的题全部来自新加坡各校真题（assets/p5_* 和 assets/sec2_*）。
+ * 以前自编的题库（英文填空、华文选择）已搁置，文件移到了仓库的 old_banks/ 目录，不再打包进 APK；
+ * FillBank / ChoiceBank 和随机数学题生成器保留在代码里，以后需要可以再接回来。
+ */
+object Banks {
+    val englishP5 = PaperBank("Primary 5", Subject.ENGLISH, "p5_english")
+    val mathP5 = PaperBank("Primary 5", Subject.MATH, "p5_maths")
+    val chineseP5 = PaperBank("Primary 5", Subject.CHINESE, "p5_chinese")
+    val englishSec2 = PaperBank("Secondary 2", Subject.ENGLISH, "sec2_english")
+    val mathSec2 = PaperBank("Secondary 2", Subject.MATH, "sec2_maths")
+    val scienceSec2 = PaperBank("Secondary 2", Subject.SCIENCE, "sec2_science")
+
+    val all = listOf(englishP5, mathP5, chineseP5, englishSec2, mathSec2, scienceSec2)
+
+    /** 读取全部题库；某个读不到就跳过（出题时会换别的科目） */
+    fun loadAll(ctx: android.content.Context) {
+        for (b in all) runCatching { b.loadAssets(ctx) }
     }
 }
 
@@ -237,13 +446,31 @@ object Quiz {
 
     private var lastIndex = -1
 
-    /** 英文题和数学题的出题比例：6 道里 5 道英文、1 道数学 */
-    const val ENGLISH_SHARE = 5
-    const val MATH_SHARE = 1
+    /** 一个出题来源和它的权重 */
+    class Source(val name: String, val weight: Int, val next: () -> Question?)
 
-    /** 下一道题：英文填空和数学应用题按 5:1 混合（英文题库没加载时只出数学） */
+    /**
+     * 出题比例（权重合计 16），全部来自真题题库：
+     *  - P5 : Sec 2 = 3 : 1（12 : 4）
+     *  - P5 英文 : 数学 : 华文 = 2 : 1 : 1
+     *  - Sec 2 英文 : 数学 : 科学 = 2 : 1 : 1
+     */
+    val sources = listOf(
+        Source("P5 English", 6) { Banks.englishP5.next(r) },
+        Source("P5 Maths", 3) { Banks.mathP5.next(r) },
+        Source("P5 华文", 3) { Banks.chineseP5.next(r) },
+        Source("Sec 2 English", 2) { Banks.englishSec2.next(r) },
+        Source("Sec 2 Maths", 1) { Banks.mathSec2.next(r) },
+        Source("Sec 2 Science", 1) { Banks.scienceSec2.next(r) },
+    )
+
+    /** 按权重随机选一个来源出题；某个题库没加载（返回 null）就重新选，实在不行出 P5 数学 */
     fun next(): Question {
-        if (r.nextInt(ENGLISH_SHARE + MATH_SHARE) < ENGLISH_SHARE) English.next(r)?.let { return it }
+        repeat(10) {
+            var x = r.nextInt(sources.sumOf { it.weight })
+            val s = sources.first { x -= it.weight; x < 0 }
+            s.next()?.let { return it }
+        }
         return nextMath()
     }
 

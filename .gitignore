@@ -4,3 +4,6 @@ app/build/
 local.properties
 .idea/
 *.iml
+
+# 考卷 PDF 只放本机，不上传
+papers/

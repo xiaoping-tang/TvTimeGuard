@@ -1,0 +1,89 @@
+# Singapore Secondary 2 (Express) English fill-in: word forms (W), plurals (U), comparatives and superlatives (A)
+# Format: code|sentence (___ is the blank)|answers (separated by /)|explanation
+W|The ___ (discover) of penicillin saved millions of lives.|discovery|After "the" we need a noun: discover → discovery.
+W|Her ___ (persist) finally paid off when she won the scholarship.|persistence|After "her" we need a noun: persist → persistence.
+W|The museum guide spoke ___ (enthusiasm) about the dinosaur fossils.|enthusiastically|We need an adverb to describe how he spoke.
+W|The ___ (accurate) of the report was questioned by the editor.|accuracy|After "the" we need a noun: accurate → accuracy.
+W|The magician's tricks were so amazing that they seemed ___ (believe).|unbelievable|We need an adjective meaning "cannot be believed": un- + believe + -able.
+W|It was ___ (response) of you to leave your little brother alone at home.|irresponsible|We need a negative adjective: response → irresponsible.
+W|After hours of talks, the two sides finally reached an ___ (agree).|agreement|After "an" we need a noun: agree → agreement.
+W|He felt a deep sense of ___ (lonely) after moving abroad.|loneliness|After "sense of" we need a noun: lonely → loneliness.
+W|The government plans to ___ (modern) the old railway system.|modernise/modernize|After "to" we need a verb: modern → modernise.
+W|The council will ___ (wide) the road to reduce traffic jams.|widen|After "will" we need a verb: wide → widen.
+W|The flood made the road ___ (pass), so we had to turn back.|impassable|We need a negative adjective meaning "cannot be crossed": impassable.
+W|Her ___ (explain) was so clear that everyone understood.|explanation|After "her" we need a noun: explain → explanation.
+W|The ___ (fail) of the plan taught us an important lesson.|failure|After "the" we need a noun: fail → failure.
+W|The ___ (patience) customer kept tapping his foot at the counter.|impatient|We need a negative adjective to describe the customer: impatient.
+W|Plastic waste poses a serious ___ (threaten) to marine life.|threat|After "a serious" we need a noun: threaten → threat.
+W|The ___ (decide) to close the old library was unpopular.|decision|After "the" we need a noun: decide → decision.
+W|The team showed great ___ (determine) in the final match.|determination|After "great" we need a noun: determine → determination.
+W|Although she grew up in London, she speaks Mandarin ___ (fluent).|fluently|We need an adverb to describe how she speaks.
+W|Engineers tested the ___ (strong) of the new bridge.|strength|After "the" we need a noun: strong → strength.
+W|The ___ (long) of the Nile River is about 6,650 kilometres.|length|After "the" we need a noun: long → length.
+W|Please be ___ (consider) towards your neighbours and keep the noise down.|considerate|We need an adjective meaning "thoughtful": consider → considerate.
+W|His ___ (behave) in class has improved greatly this term.|behaviour/behavior|After "his" we need a noun: behave → behaviour.
+W|The ___ (arrive) of the new principal was announced at assembly.|arrival|After "the" we need a noun: arrive → arrival.
+W|The ___ (survive) of the trapped miners was a miracle.|survival|After "the" we need a noun: survive → survival.
+W|Her argument was ___ (logic), so the teacher did not accept it.|illogical|We need a negative adjective: logic → illogical.
+W|The cashier was dismissed for his ___ (honest).|dishonesty|We need a negative noun: honest → dishonesty.
+W|The medicine has some ___ (please) side effects, such as headaches.|unpleasant|We need a negative adjective: please → unpleasant.
+W|The ___ (populate) of Singapore is about six million.|population|After "the" we need a noun: populate → population.
+W|The note was so smudged that it was almost ___ (read).|unreadable|We need an adjective meaning "cannot be read": unreadable.
+W|Many people fought for the ___ (free) of their country.|freedom|After "the" we need a noun: free → freedom.
+W|The company's rapid ___ (grow) surprised the experts.|growth|After "rapid" we need a noun: grow → growth.
+W|Ken ___ (apology) to his friend for breaking her pen.|apologised/apologized|We need a past tense verb: apology → apologised.
+W|My father spent his ___ (child) in a small village in Malaysia.|childhood|After "his" we need a noun for the time of being a child.
+W|The coach tried to ___ (courage) the nervous players before the match.|encourage|After "to" we need a verb: en- + courage = encourage.
+W|The forest fire ___ (danger) the lives of many villagers.|endangered|We need a past tense verb: en- + danger = endanger.
+W|The ___ (pronounce) of this French word is tricky.|pronunciation|The noun of "pronounce" drops the "o": pronunciation.
+W|Her ___ (curious) led her to open the mysterious box.|curiosity|After "her" we need a noun: curious → curiosity.
+W|The old man's ___ (generous) touched everyone in the village.|generosity|We need a noun after the possessive: generous → generosity.
+W|The ___ (anxious) of the parents grew as night fell.|anxiety|After "the" we need a noun: anxious → anxiety.
+W|We ___ (simple) the instructions so that young children could follow them.|simplified|We need a past tense verb: simple → simplify → simplified.
+W|Divers measured the ___ (deep) of the underwater cave.|depth|After "the" we need a noun: deep → depth.
+W|The growing ___ (equal) between rich and poor worries many people.|inequality|We need a negative noun: equal → inequality.
+W|Regular ___ (maintain) of the lifts is carried out every month.|maintenance|We need a noun: maintain → maintenance (note the spelling).
+W|Her ___ (perform) in the school musical was outstanding.|performance|After "her" we need a noun: perform → performance.
+W|The judge listened ___ (attention) to both sides of the story.|attentively|We need an adverb to describe how the judge listened.
+W|The country's ___ (economy) growth slowed down this year.|economic|"Economic" means related to the economy.
+W|Buying in bulk is more ___ (economy) for a large family.|economical|"Economical" means saving money.
+W|The ___ (hero) of the firefighters saved many lives.|heroism|After "the" we need a noun for brave actions: heroism.
+W|The athlete was ___ (qualify) for using banned drugs.|disqualified|We need a negative verb form: dis- + qualified.
+W|The ___ (comfort) seats made the long bus journey miserable.|uncomfortable|We need a negative adjective: uncomfortable.
+W|The new app will ___ (able) users to edit videos easily.|enable|After "will" we need a verb: en- + able = enable.
+W|It is ___ (legal) to park on the double yellow lines.|illegal|We need a negative adjective: il- + legal.
+W|The ___ (mature) behaviour of the older boys disappointed the teacher.|immature|We need a negative adjective: im- + mature.
+W|The ___ (succeed) of the event was due to the hard-working volunteers.|success|After "the" we need a noun: succeed → success.
+W|The rescue team ___ (success) brought all the hikers down the mountain.|successfully|We need an adverb to describe the verb "brought".
+W|The children waited ___ (eager) for the exam results.|eagerly|We need an adverb to describe how they waited.
+W|Regular exercise ___ (strong) your muscles and bones.|strengthens|We need a verb: strong → strengthen; "exercise" takes -s.
+W|The ___ (introduce) of the new school rules caused some confusion.|introduction|After "the" we need a noun: introduce → introduction.
+W|The ___ (relate) between the two neighbouring countries has improved.|relationship/relation|After "the" we need a noun: relate → relationship.
+W|The scientist's ___ (observe) was recorded carefully in her notebook.|observation|We need a noun after the possessive: observe → observation.
+U|The country faced several ___ (crisis) that year.|crises|Nouns ending in -is change to -es: crisis → crises.
+U|The ___ (criterion) for selecting the team were announced yesterday.|criteria|The plural of "criterion" is "criteria".
+U|Scientists study natural ___ (phenomenon) such as rainbows and lightning.|phenomena|The plural of "phenomenon" is "phenomena".
+U|The ___ (thief) were caught by the police the next day.|thieves|Nouns ending in -f often change to -ves: thief → thieves.
+U|We spotted several ___ (deer) drinking at the stream.|deer|"Deer" stays the same in the plural.
+U|The two ___ (analysis) gave very different results.|analyses|Nouns ending in -is change to -es: analysis → analyses.
+U|The desert garden is full of ___ (cactus).|cacti/cactuses|The plural of "cactus" is "cacti" (or "cactuses").
+U|Both ___ (hypothesis) were proven wrong by the experiment.|hypotheses|Nouns ending in -is change to -es: hypothesis → hypotheses.
+U|The ___ (echo) in the cave frightened the young campers.|echoes|Some nouns ending in -o add -es: echo → echoes.
+U|Harmful ___ (bacterium) can multiply quickly in warm food.|bacteria|The plural of "bacterium" is "bacteria".
+U|The ___ (chief) of the two tribes met to sign a peace deal.|chiefs|"Chief" simply adds -s, unlike "thief".
+U|Cut each of the apples into two ___ (half).|halves|Nouns ending in -f often change to -ves: half → halves.
+A|This is the ___ (bad) storm we have had in years.|worst|The superlative of "bad" is "worst".
+A|The more you practise, the ___ (good) you will become.|better|"The more..., the better...": good → better.
+A|The ___ (early) you start, the sooner you will finish.|earlier|"The + comparative..., the + comparative...": early → earlier.
+A|Of the two sisters, Mei is the ___ (tall).|taller|When comparing only two, use the comparative: taller.
+A|My grandfather is the ___ (old) member of our family.|oldest/eldest|The superlative of "old" is "oldest" (or "eldest" for family).
+A|Please contact the office if you need any ___ (far) information.|further|"Further" means "more" or "additional".
+A|The station was ___ (far) away than I had thought.|farther/further|The comparative of "far" for distance is "farther" or "further".
+A|Ahmad has ___ (little) money than his brother.|less|The comparative of "little" is "less".
+A|Of all the candidates, she made the ___ (few) mistakes.|fewest|The superlative of "few" is "fewest".
+A|This is the ___ (simple) solution of all.|simplest|The superlative of "simple" is "simplest".
+A|The traffic is getting ___ (bad) and worse every day.|worse|"Worse and worse" shows something getting more and more bad.
+A|Have you read the ___ (late) issue of the magazine?|latest|"Latest" means the newest.
+A|This suitcase is ___ (heavy) than it looks.|heavier|Change y to i and add -er: heavy → heavier.
+A|My aunt is the ___ (happy) person I know.|happiest|Change y to i and add -est: happy → happiest.
+A|The ___ (little) you worry, the better you will sleep.|less|"The less..., the better...": little → less.

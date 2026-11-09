@@ -17,7 +17,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 
 /**
- * 「做题加时」全屏做题界面（新加坡 P5 英文应用题）。两种打开方式：
+ * 「做题加时」全屏做题界面（新加坡各校 P5 / Sec 2 真题）。两种打开方式：
  *  - 今天的时间用完了（包括开机时已经用完）：守护服务自动打开，代替关机倒计时
  *  - 家长在手机上按「做题加时」
  * 答对 1 题：加 10 分钟（每天有上限），界面关闭，去看电视；10 分钟用完会再回到这里。
@@ -43,6 +43,8 @@ class QuizActivity : Activity() {
     private lateinit var letterPad: View
     private lateinit var numFirst: Button
     private lateinit var letterFirst: Button
+    private lateinit var choicePad: LinearLayout
+    private val choiceBtns = mutableListOf<Button>()
     private val keys = mutableListOf<Button>()
 
     private var current: Question? = null
@@ -54,7 +56,7 @@ class QuizActivity : Activity() {
         super.onCreate(savedInstanceState)
         prefs = Prefs(this)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        runCatching { English.loadAssets(this) } // 读不到英文题库就只出数学题
+        Banks.loadAll(this) // 某个题库读不到就跳过，出题时换别的科目
         val dp = { v: Int -> Ui.dp(this, v) }
 
         // 电视横屏：左边题目（可滚动），右边数字键盘
@@ -106,7 +108,7 @@ class QuizActivity : Activity() {
             }
             setPadding(dp(12), dp(8), dp(12), dp(8))
         }
-        // 两套键盘：数学题用数字键盘，英文填空用字母键盘，按题目类型切换
+        // 三种输入：数学题用数字键盘，英文填空用字母键盘，华文选择题用四个选项按钮，按题目类型切换
         fun buildPad(rows: List<List<String>>, width: Int, size: Float, pad: Int, first: String): Pair<LinearLayout, Button> {
             val box = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
@@ -136,7 +138,7 @@ class QuizActivity : Activity() {
             listOf("7", "8", "9"),
             listOf("4", "5", "6"),
             listOf("1", "2", "3"),
-            listOf("0", ".", "/"),
+            listOf("0", ".", "/", "-"),
             listOf("⌫", "Clear"),
         ), 300, 20f, 8, "1")
         val (lp, lFirst) = buildPad(listOf(
@@ -146,8 +148,23 @@ class QuizActivity : Activity() {
             listOf("⌫", "Clear"),
         ), 400, 17f, 0, "a")
         numPad = np; numFirst = nFirst; letterPad = lp; letterFirst = lFirst
+        choicePad = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(dp(440), LinearLayout.LayoutParams.WRAP_CONTENT)
+        }
+        for (i in 0 until 4) {
+            val b = Ui.button(this, "") { choose(i) }.apply {
+                textSize = 20f
+                isAllCaps = false
+                gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            }
+            choiceBtns.add(b)
+            keys.add(b)
+            choicePad.addView(b)
+        }
         padCard.addView(numPad)
         padCard.addView(letterPad)
+        padCard.addView(choicePad)
         submitBtn = Ui.button(this, "✔ Submit") { submit() }.apply { textSize = 18f }
         padCard.addView(submitBtn)
         nextBtn = Ui.button(this, "Next question ▶") { nextQuestion() }.apply {
@@ -189,25 +206,66 @@ class QuizActivity : Activity() {
         current = q
         answered = false
         input.clear()
-        topicView.text = if (q.isEnglish) "Primary 5 English · ${q.topic} · Fill in the blank with ONE word"
-        else "Primary 5 Maths · ${q.topic}"
+        val subjectName = if (q.isChineseUi) "华文" else q.subject.label
+        topicView.text = buildString {
+            append("${q.level} $subjectName · ${q.topic}")
+            when (q.kind) {
+                Kind.WORD -> append(" · Fill in ONE word")
+                Kind.CHOICE -> append(if (q.isChineseUi) " · 选出正确答案" else " · Choose the best answer")
+                Kind.NUMBER -> {}
+            }
+            if (q.source.isNotEmpty()) append(if (q.isChineseUi) "\n出处：${q.source}" else "\nFrom: ${q.source}")
+        }
         questionView.text = q.text
-        feedbackView.text = if (q.isEnglish) "Type one word, then press Submit."
-        else "Type numbers only, no units. Use / for fractions, e.g. 3/4."
+        feedbackView.text = when (q.kind) {
+            Kind.WORD -> "Type one word, then press Submit."
+            Kind.NUMBER -> "Type numbers only, no units. Use / for fractions and - for negative numbers."
+            Kind.CHOICE -> if (q.isChineseUi) "用遥控器选一个答案，按确认键。" else "Use the arrow keys to pick an answer, then press OK."
+        }
         feedbackView.setTextColor(Color.parseColor("#B0BEC5"))
         refreshInput()
         refreshHeader()
         keys.forEach { it.isEnabled = true }
-        numPad.visibility = if (q.isEnglish) View.GONE else View.VISIBLE
-        letterPad.visibility = if (q.isEnglish) View.VISIBLE else View.GONE
-        submitBtn.visibility = View.VISIBLE
+        numPad.visibility = if (q.kind == Kind.NUMBER) View.VISIBLE else View.GONE
+        letterPad.visibility = if (q.kind == Kind.WORD) View.VISIBLE else View.GONE
+        choicePad.visibility = if (q.isChoice) View.VISIBLE else View.GONE
+        if (q.isChoice) {
+            // 选项长（例如科学题的句子）就把字调小一点，按钮会自动换行
+            val longest = q.options.maxOf { it.length }
+            val size = when {
+                q.isChineseUi -> if (longest > 16) 17f else 20f
+                longest > 45 -> 15f
+                longest > 25 -> 17f
+                else -> 20f
+            }
+            q.options.forEachIndexed { i, o ->
+                choiceBtns[i].text = "${'A' + i}.  $o"
+                choiceBtns[i].textSize = size
+            }
+        }
+        inputView.visibility = if (q.isChoice) View.GONE else View.VISIBLE
+        // 选择题点选项就直接作答，不需要「提交」按钮
+        submitBtn.visibility = if (q.isChoice) View.GONE else View.VISIBLE
         submitBtn.isEnabled = true
         nextBtn.visibility = View.GONE
-        (if (q.isEnglish) letterFirst else numFirst).requestFocus()
+        when (q.kind) {
+            Kind.WORD -> letterFirst
+            Kind.NUMBER -> numFirst
+            Kind.CHOICE -> choiceBtns[0]
+        }.requestFocus()
+    }
+
+    /** 华文选择题：点了第 i 个选项 */
+    private fun choose(i: Int) {
+        val q = current ?: return
+        if (answered || !q.isChoice) return
+        input.clear()
+        input.append(q.options[i])
+        submit()
     }
 
     private fun press(k: String) {
-        if (answered) return
+        if (answered || current?.isChoice == true) return
         when (k) {
             "⌫" -> if (input.isNotEmpty()) input.deleteCharAt(input.length - 1)
             "Clear" -> input.clear()
@@ -229,7 +287,7 @@ class QuizActivity : Activity() {
             feedbackView.text = "Please type your answer first."
             return
         }
-        if (!q.isEnglish && Frac.parse(input.toString()) == null) {
+        if (q.kind == Kind.NUMBER && Frac.parse(input.toString()) == null) {
             feedbackView.setTextColor(Color.parseColor("#FFAB91"))
             feedbackView.text = "That doesn't look like a number. Check it again (use / for fractions, e.g. 3/4)."
             return
@@ -240,8 +298,12 @@ class QuizActivity : Activity() {
         if (q.isCorrect(input.toString())) {
             val add = prefs.addQuizBonus()
             feedbackView.setTextColor(Color.parseColor("#A5D6A7"))
-            feedbackView.text = if (add > 0) "✅ Correct! Well done! Enjoy $add minutes of TV."
-            else "✅ Correct! Well done! (Today's quiz bonus limit is reached.)"
+            feedbackView.text = when {
+                q.isChineseUi && add > 0 -> "✅ 答对了！真棒！可以看 $add 分钟电视。"
+                q.isChineseUi -> "✅ 答对了！真棒！（今天做题加时已到上限）"
+                add > 0 -> "✅ Correct! Well done! Enjoy $add minutes of TV."
+                else -> "✅ Correct! Well done! (Today's quiz bonus limit is reached.)"
+            }
             refreshHeader()
             GuardService.poke()
             // 一次只给 10 分钟：答对就关掉做题界面，去看电视
@@ -250,15 +312,39 @@ class QuizActivity : Activity() {
         } else {
             wrong++
             feedbackView.setTextColor(Color.parseColor("#FFAB91"))
-            feedbackView.text = "❌ Not quite. The correct answer is ${q.answerText}.\n\n" +
-                (if (q.isEnglish) "Why: " else "Working:\n") + q.explain
+            feedbackView.text = when {
+                q.isChineseUi -> "❌ 答错了。你选的是「$input」，正确答案是${q.answerText}。\n\n解释：${q.explain}"
+                q.isChoice -> "❌ Not quite. You chose \"$input\". The correct answer is ${q.answerText}.\n\nWhy: ${q.explain}"
+                q.kind == Kind.WORD -> "❌ Not quite. The correct answer is ${q.answerText}.\n\nWhy: ${q.explain}"
+                else -> "❌ Not quite. The correct answer is ${q.answerText}.\n\nWorking:\n${q.explain}"
+            }
             refreshHeader()
             submitBtn.visibility = View.GONE
             nextBtn.visibility = View.VISIBLE
-            nextBtn.requestFocus()
-            // 看完解题步骤按「Next question」继续，60 秒后也会自动继续
+            if (q.isChoice) {
+                // 选择题容易蒙：答错后要先看 15 秒解释才能做下一题，乱猜不划算
+                waitThenEnableNext(CHOICE_WAIT_SEC)
+            } else {
+                nextBtn.isEnabled = true
+                nextBtn.text = "Next question ▶"
+                nextBtn.requestFocus()
+            }
+            // 看完解释按「下一题」继续，60 秒后也会自动继续
             handler.postDelayed({ nextQuestion() }, 60_000)
         }
+    }
+
+    /** 「下一题」按钮先倒数 sec 秒，倒数完才能按 */
+    private fun waitThenEnableNext(sec: Int) {
+        nextBtn.isEnabled = false
+        if (sec <= 0) {
+            nextBtn.isEnabled = true
+            nextBtn.text = if (current?.isChineseUi == true) "下一题 ▶" else "Next question ▶"
+            nextBtn.requestFocus()
+            return
+        }
+        nextBtn.text = if (current?.isChineseUi == true) "请先看解释（$sec）" else "Read the explanation ($sec)"
+        handler.postDelayed({ if (answered && nextBtn.visibility == View.VISIBLE) waitThenEnableNext(sec - 1) }, 1000)
     }
 
     /** 放弃做题：时间已用完时，守护服务会改走倒计时关机 */
@@ -282,9 +368,10 @@ class QuizActivity : Activity() {
             in KeyEvent.KEYCODE_NUMPAD_0..KeyEvent.KEYCODE_NUMPAD_9 -> (keyCode - KeyEvent.KEYCODE_NUMPAD_0).toString()
             KeyEvent.KEYCODE_PERIOD, KeyEvent.KEYCODE_NUMPAD_DOT -> "."
             KeyEvent.KEYCODE_SLASH, KeyEvent.KEYCODE_NUMPAD_DIVIDE -> "/"
+            KeyEvent.KEYCODE_MINUS, KeyEvent.KEYCODE_NUMPAD_SUBTRACT -> "-"
             KeyEvent.KEYCODE_DEL -> "⌫"
             else -> null
-        }
+        }.takeIf { current?.isChoice != true } // 选择题只用方向键 + 确认键
         if (k != null) {
             press(k)
             return true
@@ -329,5 +416,8 @@ class QuizActivity : Activity() {
         var lastResumeAt = 0L
 
         fun isActive() = visible || System.currentTimeMillis() < launchGraceUntil
+
+        /** 华文选择题答错后，要等几秒才能按「下一题」 */
+        private const val CHOICE_WAIT_SEC = 15
     }
 }

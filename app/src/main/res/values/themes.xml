@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主界面不用系统标题栏：页面里已经有「电视时间管家 · 家长端」标题，省出屏幕空间 -->
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#1B5E20</item>
+    </style>
+</resources>

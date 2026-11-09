@@ -1,0 +1,105 @@
+# Singapore Secondary 2 (Express) English fill-in: verb forms and tenses (T), subject-verb agreement (S)
+# Format: code|sentence (___ is the blank)|answers (separated by /)|explanation
+T|If Jia Hui had revised more carefully, she would have ___ (score) full marks.|scored|Third conditional: would have + past participle.
+T|If I ___ (be) you, I would apologise to her at once.|were|Second conditional uses "were" for all subjects: If I were you.
+T|If he ___ (know) the answer, he would tell us, but he doesn't.|knew|Second conditional: if + past simple for an unreal present situation.
+T|Had they ___ (leave) earlier, they would not have missed the ferry.|left|"Had they left" means "If they had left": had + past participle.
+T|If the weather had been better, we would have ___ (go) hiking yesterday.|gone|Third conditional: would have + past participle: go → gone.
+T|Mrs Lim has been ___ (wait) at the bus stop for over forty minutes.|waiting|Present perfect continuous: has been + -ing.
+T|By next June, my parents will have ___ (live) in this flat for twenty years.|lived|Future perfect: will have + past participle.
+T|The old bridge is ___ (be) repaired, so traffic has been diverted.|being|Passive continuous: is being + past participle.
+T|The suspect was being ___ (question) by the police when his lawyer arrived.|questioned|Past passive continuous: was being + past participle.
+T|She said that she ___ (be) too tired to continue the race.|was|Reported speech: "am" moves back to "was".
+T|He told me that he had ___ (finish) the report the day before.|finished|Reported speech: past simple moves back to past perfect (had finished).
+T|The teacher asked us whether we ___ (understand) the instructions.|understood|Reported question: "Do you understand?" moves back to "understood".
+T|"I will call you tonight," Ravi said. Ravi said that he ___ (will) call me that night.|would|Reported speech: "will" changes to "would".
+T|Mei said that she ___ (can) swim when she was only five.|could|Reported speech: "can" changes to "could".
+T|Having ___ (complete) his homework, Jun Wei went out to play.|completed|Participle clause: Having + past participle shows the first action.
+T|___ (have) finished her meal, Priya left the restaurant quietly.|Having/having|A participle clause starting with "Having" shows one action finished before another.
+T|You should have ___ (tell) me about the problem earlier.|told|Modal perfect: should have + past participle: tell → told.
+T|He must have ___ (forget) about the meeting because he did not turn up.|forgotten|Modal perfect: must have + past participle: forget → forgotten.
+T|They might have ___ (take) the wrong train, which is why they are late.|taken|Modal perfect: might have + past participle: take → taken.
+T|She could have ___ (win) the race if she had not tripped.|won|Modal perfect: could have + past participle: win → won.
+T|The thief is believed to have ___ (escape) through the back window.|escaped|"to have" + past participle refers to an earlier action.
+T|I have been ___ (learn) the violin since I was seven.|learning|Present perfect continuous: have been + -ing, with "since".
+T|How long have you been ___ (study) French?|studying|Present perfect continuous: have been + -ing.
+T|The workers had been ___ (dig) for hours before they found the pipe.|digging|Past perfect continuous: had been + -ing. Double the g.
+T|By the time the ambulance arrived, the victim had ___ (lose) a lot of blood.|lost|Past perfect: had + past participle: lose → lost.
+T|None of the essays was ___ (write) neatly enough for the competition.|written|Passive: was + past participle: write → written.
+T|The new sports hub will be ___ (open) by the minister next month.|opened|Future passive: will be + past participle.
+T|The secret documents have already been ___ (shred).|shredded|Present perfect passive: have been + past participle. Double the d.
+T|The patient's wound must be ___ (clean) twice a day.|cleaned|Modal passive: must be + past participle.
+T|I wish I ___ (have) more time to finish the project.|had|"I wish" about the present uses the past simple: have → had.
+T|I wish I had ___ (listen) to my mother's advice last year.|listened|"I wish" about the past uses had + past participle.
+T|If only he ___ (be) here now to see this!|were/was|"If only" about the present uses the past form: were (or was).
+T|It is high time we ___ (leave) for the airport.|left|"It is high time" is followed by the past simple.
+T|I would rather you ___ (stay) at home tonight.|stayed|"would rather you" is followed by the past simple.
+T|After years in Singapore, my aunt is used to ___ (eat) spicy food.|eating|"be used to" + -ing means "be accustomed to".
+T|My grandfather used to ___ (cycle) to work every day.|cycle|"used to" + base verb describes a past habit.
+T|I look forward to ___ (hear) from you soon.|hearing|"look forward to" is followed by -ing.
+T|The boy denied ___ (break) the classroom window.|breaking|"deny" is followed by -ing.
+T|The coach made us ___ (run) ten laps around the field.|run|"make someone" + base verb without "to".
+T|I heard someone ___ (call) my name, but nobody was there.|call/calling|"hear someone" + base verb or -ing.
+T|Unless you ___ (hurry), you will miss the last bus.|hurry|"Unless" + present simple for a future condition.
+T|Provided that it ___ (stop) raining, the match will go ahead.|stops|"Provided that" + present simple; "it" takes -s.
+T|As soon as the guests ___ (arrive), we will start the dinner.|arrive|After "as soon as", use the present simple for the future.
+T|When I reached home, my brother had already ___ (eat) all the cake.|eaten|Past perfect: had + past participle: eat → eaten.
+T|The phone rang while I was ___ (take) a shower.|taking|Past continuous: was + -ing for an action that was interrupted.
+T|This is the first time I have ever ___ (ride) a camel.|ridden|"The first time" uses the present perfect: ride → ridden.
+T|The sun had ___ (set) by the time we reached the summit.|set|Past perfect: had + past participle: set → set.
+T|If you heat ice, it ___ (melt).|melts|Zero conditional for facts: present simple in both parts.
+T|If it rains tomorrow, the sports day will be ___ (postpone).|postponed|Future passive: will be + past participle.
+T|___ (be) I in your position, I would accept the offer.|Were/were|"Were I" is a formal way to say "If I were".
+T|Should you ___ (need) any help, please call me.|need|"Should you" means "If you"; it is followed by the base verb.
+T|The house, ___ (build) in 1920, is now a museum.|built|A past participle phrase gives passive meaning: which was built.
+T|The girl ___ (sit) next to me is my cousin.|sitting|A present participle phrase describes the girl: who is sitting.
+T|Not ___ (know) what to do, the little boy burst into tears.|knowing|Negative participle clause: Not + -ing gives the reason.
+T|The man was accused of ___ (steal) a car.|stealing|After a preposition like "of", use the -ing form.
+T|My hair needs ___ (cut); it is getting too long.|cutting|"need" + -ing has a passive meaning: it needs to be cut.
+T|Dad had his car ___ (service) at the workshop last week.|serviced|"have something done": have + object + past participle.
+T|Aisha got her purse ___ (steal) on the crowded train.|stolen|"get something done": get + object + past participle.
+T|She ___ (lay) the sleeping baby gently in the cot last night.|laid|"lay" (put something down) in the past is "laid".
+T|The temperature has ___ (rise) sharply this week.|risen|Present perfect: has + past participle: rise → risen.
+T|The ship ___ (sink) within minutes after hitting the iceberg.|sank|Past simple: sink → sank.
+T|He has ___ (swear) never to tell a lie again.|sworn|Present perfect: has + past participle: swear → sworn.
+T|The tourists were ___ (forbid) to take photographs inside the temple.|forbidden|Passive: were + past participle: forbid → forbidden.
+T|The athlete had ___ (undergo) knee surgery before the competition.|undergone|Past perfect: had + past participle: undergo → undergone.
+T|By the end of this year, the author will have ___ (write) three novels.|written|Future perfect: will have + past participle.
+T|At this time tomorrow, we will be ___ (fly) to Tokyo.|flying|Future continuous: will be + -ing.
+T|The witness claimed to have ___ (see) the accident clearly.|seen|"to have" + past participle refers to an earlier action.
+T|Mr Tan, who has ___ (teach) here for thirty years, is retiring next week.|taught|Present perfect: has + past participle: teach → taught.
+T|The officer asked me where I ___ (live) at that time.|lived|Reported question: present simple moves back to past simple.
+T|She asked if I had ___ (see) her brother at the mall.|seen|Reported question with past perfect: had + past participle.
+T|Our teacher explained that the Earth ___ (go) round the Sun.|goes|A scientific fact keeps the present tense even in reported speech.
+T|If I had not ___ (oversleep), I would not have been late for school.|overslept|Third conditional: had + past participle: oversleep → overslept.
+T|The pickpocket was ___ (catch) red-handed by a security guard.|caught|Passive: was + past participle: catch → caught.
+T|The man was seen ___ (enter) the building at midnight.|entering|"was seen" + -ing describes an action in progress.
+T|The letter ought to have been ___ (send) yesterday.|sent|Modal perfect passive: ought to have been + past participle.
+T|Had I ___ (realise) how difficult it was, I would never have agreed.|realised/realized|"Had I realised" means "If I had realised".
+T|The prisoners were ___ (lead) away in handcuffs.|led|Passive: were + past participle: lead → led.
+T|She has ___ (bear) the pain bravely since the accident.|borne|Present perfect: has + past participle: bear → borne.
+T|The concert was being ___ (broadcast) live when the power failed.|broadcast|Past passive continuous; "broadcast" does not change in the past participle.
+T|Having been ___ (warn) about the storm, the fishermen stayed ashore.|warned|Passive participle clause: Having been + past participle.
+T|If the alarm had not rung, the fire would have ___ (spread) to the next block.|spread|Third conditional: would have + past participle: spread → spread.
+S|Neither the teacher nor the students ___ (be) aware of the change in schedule.|were|With "neither...nor", the verb agrees with the nearer subject: students → were.
+S|Either the manager or his assistants ___ (have) the keys to the store.|have|With "either...or", the verb agrees with the nearer subject: assistants → have.
+S|Each of the boys ___ (have) his own locker.|has|"Each of" takes a singular verb.
+S|The news about the floods ___ (be) shocking.|was/is|"News" is uncountable and takes a singular verb.
+S|Mathematics ___ (be) the subject that Ryan finds most challenging.|is|Subjects ending in -ics, like mathematics, take a singular verb.
+S|The committee ___ (meet) every Tuesday afternoon.|meets|A group acting as one unit takes a singular verb.
+S|The number of tourists visiting Sentosa ___ (have) increased this year.|has|"The number of" takes a singular verb.
+S|A number of students ___ (be) absent yesterday because of the flu.|were|"A number of" means "many" and takes a plural verb.
+S|Everyone in the two classes ___ (want) to join the trip.|wants|"Everyone" is singular.
+S|The captain, together with his players, ___ (be) celebrating the victory now.|is|The subject is "the captain"; "together with" does not change it.
+S|Ten kilometres ___ (be) a long way to walk in this heat.|is|A distance seen as one amount takes a singular verb.
+S|The scissors ___ (be) in the top drawer.|are|"Scissors" is a plural noun.
+S|One of my best friends ___ (live) in Bedok.|lives|The subject is "one", which is singular.
+S|Not only the students but also the principal ___ (be) excited about the news.|was/is|With "not only...but also", the verb agrees with the nearer subject.
+S|There ___ (be) a pen and two books on the table.|is|After "there", the verb agrees with the first noun: a pen → is.
+S|Bread and butter ___ (be) my usual breakfast.|is|"Bread and butter" is one dish, so it takes a singular verb.
+S|Physics ___ (require) a lot of practice to master.|requires|"Physics" takes a singular verb.
+S|The police ___ (be) investigating the robbery.|are|"Police" always takes a plural verb.
+S|Neither of the twins ___ (enjoy) spicy food.|enjoys|"Neither of" usually takes a singular verb.
+S|Five hundred dollars ___ (be) too much to pay for a pair of shoes.|is|A sum of money seen as one amount takes a singular verb.
+S|The cattle ___ (be) grazing peacefully in the field.|are|"Cattle" is a plural noun.
+S|Whoever broke the windows ___ (have) to pay for them.|has|A clause starting with "whoever" takes a singular verb.

@@ -401,10 +401,12 @@ class MainActivity : Activity() {
     private fun page(): LinearLayout {
         val ll = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(16), dp(16), dp(16), dp(32))
+            setPadding(dp(16), dp(12), dp(16), dp(32))
         }
         setContentView(ScrollView(this).apply {
             setBackgroundColor(Color.parseColor("#F5F7F5"))
+            // 内容避开状态栏/导航栏，不会被挡住
+            fitsSystemWindows = true
             addView(ll)
         })
         return ll
@@ -412,10 +414,10 @@ class MainActivity : Activity() {
 
     private fun title(s: String) = TextView(this).apply {
         text = s
-        textSize = 24f
+        textSize = 20f
         setTypeface(typeface, Typeface.BOLD)
         setTextColor(Color.parseColor("#1B5E20"))
-        setPadding(0, 0, 0, dp(12))
+        setPadding(0, 0, 0, dp(8))
     }
 
     private fun section(s: String) = TextView(this).apply {
