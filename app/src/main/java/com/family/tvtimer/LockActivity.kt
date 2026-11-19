@@ -19,16 +19,18 @@ class LockActivity : Activity() {
     private lateinit var prefs: Prefs
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var countdown: TextView
+    private lateinit var quizBtn: android.widget.Button
 
     private val ticker = object : Runnable {
         override fun run() {
             val deadline = prefs.lockDeadline
-            if (deadline == 0L) {
+            if (deadline == 0L && !prefs.hardLock) {
                 finish()
                 return
             }
             val left = ((deadline - System.currentTimeMillis()) / 1000).coerceAtLeast(0)
-            countdown.text = "$left 秒后电视将关闭"
+            countdown.text = if (prefs.hardLock) "请关掉电视休息一下" else "$left 秒后电视将关闭"
+            quizBtn.visibility = if (prefs.quizRewardMin() > 0 && prefs.isInAllowedWindow() && prefs.remainingSec <= 0) android.view.View.VISIBLE else android.view.View.GONE
             handler.postDelayed(this, 500)
         }
     }
@@ -63,6 +65,16 @@ class LockActivity : Activity() {
         countdown = label("", 28f, Color.parseColor("#FFD54F"))
         info.addView(countdown)
         info.addView(label("休息一下眼睛吧！\n家长输入密码可以多看 1 小时", 18f, Color.parseColor("#A5D6A7")))
+        // 小孩改主意了：回去做题（做题加时还没到上限时才显示）
+        quizBtn = Ui.button(this, "📝 去做题加时") {
+            QuizActivity.declined = false
+            prefs.hardLock = false
+            prefs.lockDeadline = 0L
+            startActivity(android.content.Intent(this, QuizActivity::class.java))
+            GuardService.poke()
+            finish()
+        }.apply { textSize = 18f }
+        info.addView(quizBtn)
 
         val padCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -76,6 +88,8 @@ class LockActivity : Activity() {
             if (ok) {
                 prefs.pauseUntil = System.currentTimeMillis() + 60 * 60_000
                 prefs.lockDeadline = 0L
+                prefs.hardLock = false
+                prefs.logEvent("家长在锁屏输入密码，暂停管控 1 小时")
                 finish()
             }
             ok

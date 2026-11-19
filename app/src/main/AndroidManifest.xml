@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!-- 「显示在其他应用上层」：有了它，守护服务不经过本机 ADB 也能直接打开做题/锁屏界面（由 ADB 授予） -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- 同一个 APK 也能装在 Google TV 上 -->
     <uses-feature android:name="android.software.leanback" android:required="false" />

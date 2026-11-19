@@ -1,5 +1,6 @@
 package com.family.tvtimer
 
+import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -13,6 +14,7 @@ import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+import android.provider.Settings
 import android.util.Log
 import org.json.JSONObject
 import java.time.LocalDate
@@ -39,7 +41,11 @@ class GuardService : Service() {
     private var publishBackoffUntil = 0L
     private var quizLaunchAt = 0L
     private var quizLaunchFails = 0
+    private var quizFailAt = 0L
     private var lockLaunchAt = 0L
+    private var overlayTryAt = 0L
+    private var hardOffTryAt = 0L
+    private var adbFailLoggedAt = 0L
 
     private val screenOnReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -75,6 +81,7 @@ class GuardService : Service() {
         )
         prefs.guardRunning = true
         if (executor == null) {
+            prefs.logEvent("守护启动")
             registerReceiver(screenOnReceiver, IntentFilter(Intent.ACTION_SCREEN_ON))
             lastTick = 0L
             executor = Executors.newSingleThreadScheduledExecutor().also {
@@ -114,6 +121,7 @@ class GuardService : Service() {
             lastTick = 0L
             // 倒计时中被关屏，下次开屏重新开始（短）倒计时，保证家长总有机会输 PIN
             prefs.lockDeadline = 0L
+            prefs.hardLock = false
             QuizActivity.declined = false // 下次开机时间还是用完的话，重新出题
             quizLaunchFails = 0
             quizLaunchAt = 0L
@@ -121,6 +129,8 @@ class GuardService : Service() {
             maybePublish(on = false)
             return
         }
+
+        ensureOverlay(now)
 
         // 手机要求做题：亮屏时打开做题界面（请求 10 分钟内有效）
         if (quizRequestAt > 0) {
@@ -158,6 +168,7 @@ class GuardService : Service() {
         if (reason == null) QuizActivity.declined = false
         if (reason == null || forceOff || prefs.isPaused() || !prefs.enforce || !prefs.paired) {
             prefs.lockDeadline = 0L // LockActivity 看到 0 会自己关闭
+            prefs.hardLock = false
         }
         when {
             reason == null -> {
@@ -176,6 +187,7 @@ class GuardService : Service() {
             // 时间用完：不弹关机倒计时，直接去做题（小孩主动放弃做题、或做题界面打不开时才走倒计时关机）
             timeUp && quizCanHelp && !QuizActivity.declined && quizUsable(now) -> {
                 prefs.lockDeadline = 0L
+                prefs.hardLock = false
                 showQuiz()
                 update("📝 时间用完，打开做题界面")
                 maybePublish(on = true)
@@ -192,6 +204,10 @@ class GuardService : Service() {
     /** 先全屏提示「时间到了」并倒计时，期间家长可输 PIN 解锁；倒计时结束才关机 */
     private fun countdownThenOff(reason: String) {
         val now = System.currentTimeMillis()
+        if (prefs.hardLock) {
+            holdLock(reason, now)
+            return
+        }
         if (prefs.lockDeadline == 0L) {
             // 10 分钟内刚倒计时过（小孩关了又开），只给短倒计时
             val sec = if (now - prefs.lastLockAt < 10 * 60_000) SHORT_LOCK_SEC else LOCK_SEC
@@ -217,12 +233,93 @@ class GuardService : Service() {
         executor?.schedule({ safeTick() }, minOf(left, 3L), TimeUnit.SECONDS)
     }
 
+    /**
+     * 关不掉电视（本机 ADB 连不上）时的后备：一直显示锁屏，小孩按主页键溜走马上拉回来。
+     * 锁屏上家长可以输密码，小孩也可以去做题。每分钟再试一次关电视，ADB 恢复了就照常关。
+     */
+    private fun holdLock(reason: String, now: Long) {
+        if (now - hardOffTryAt > 60_000) {
+            hardOffTryAt = now
+            try {
+                tv.turnOff()
+                prefs.hardLock = false
+                prefs.lockDeadline = 0L
+                lastTick = 0L
+                prefs.logEvent("本机 ADB 恢复，关电视：$reason")
+                update("已关闭电视：$reason")
+                forcePublish = true
+                maybePublish(on = false)
+                return
+            } catch (t: Throwable) {
+                adbFailed("关电视", t)
+            }
+        }
+        if (prefs.lockDeadline == 0L) prefs.lockDeadline = now // 非 0：锁屏界面不会自己关掉
+        prefs.lockReason = reason
+        val blocked = uiBlocked()
+        if (!LockActivity.visible && !blocked && now - lockLaunchAt > 3_000) {
+            lockLaunchAt = now
+            showLock()
+        }
+        update("🔒 $reason：电视关不掉（本机 ADB 连不上），已改为锁屏" + if (blocked) " · ⚠ $BLOCKED_MSG" else "")
+        maybePublish(on = true)
+        executor?.schedule({ safeTick() }, 3L, TimeUnit.SECONDS)
+    }
+
     private fun showLock() {
-        try {
-            // 后台服务不能直接弹界面，借本机 ADB 启动
-            tv.shell("am start -n $packageName/.LockActivity")
+        launch(LockActivity::class.java)
+    }
+
+    /**
+     * 打开本 App 的一个全屏界面。有「显示在其他应用上层」权限时直接打开（不依赖本机 ADB），
+     * 否则借本机 ADB 的 am start 打开（后台服务一般不能直接弹界面）。返回是否成功发出。
+     */
+    private fun launch(cls: Class<out Activity>): Boolean {
+        val intent = Intent(this, cls).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (Settings.canDrawOverlays(this)) {
+            try {
+                startActivity(intent)
+                // 系统也可能悄悄拦下不报错：4 秒后界面还没出现，就再用本机 ADB 打开一次
+                executor?.schedule({
+                    val shown = if (cls == QuizActivity::class.java) QuizActivity.visible else LockActivity.visible
+                    if (!shown) runCatching { tv.shell("am start -n $packageName/${cls.name}") }
+                        .onFailure { adbFailed("打开界面", it) }
+                }, 4, TimeUnit.SECONDS)
+                return true
+            } catch (t: Throwable) {
+                Log.w(TAG, "direct start failed", t)
+            }
+        }
+        return try {
+            tv.shell("am start -n $packageName/${cls.name}")
+            true
         } catch (t: Throwable) {
-            Log.w(TAG, "show lock failed", t)
+            adbFailed("打开${if (cls == QuizActivity::class.java) "做题" else "锁屏"}界面", t)
+            runCatching { startActivity(intent) } // 碰碰运气，系统可能会放行
+            false
+        }
+    }
+
+    /** 还没有「显示在其他应用上层」权限时，趁本机 ADB 能用授予一次（10 分钟最多试一次） */
+    private fun ensureOverlay(now: Long) {
+        if (Settings.canDrawOverlays(this) || now - overlayTryAt < 10 * 60_000) return
+        overlayTryAt = now
+        try {
+            tv.grantOverlay()
+            if (Settings.canDrawOverlays(this)) prefs.logEvent("已获得「显示在其他应用上层」权限，界面不再依赖本机 ADB")
+        } catch (t: Throwable) {
+            adbFailed("授予悬浮窗权限", t)
+        }
+    }
+
+    /** 记下本机 ADB 连不上（事件记录 10 分钟最多写一条，免得刷屏） */
+    private fun adbFailed(what: String, t: Throwable) {
+        Log.w(TAG, "adb failed: $what", t)
+        val now = System.currentTimeMillis()
+        prefs.lastAdbFailAt = now
+        if (now - adbFailLoggedAt > 10 * 60_000) {
+            adbFailLoggedAt = now
+            prefs.logEvent("⚠ 本机 ADB 连不上（$what）：${t.message ?: t.javaClass.simpleName}")
         }
     }
 
@@ -236,14 +333,19 @@ class GuardService : Service() {
 
     /**
      * 做题界面能不能用：App 被暂停就不能用；另外连续 2 次打开后它都没出现（被系统拦了），
-     * 也当作不能用，改走倒计时关机，不再一遍遍尝试。
+     * 也当作不能用，改走倒计时关机。10 分钟后再重新试做题（可能只是一时打不开）。
      */
     private fun quizUsable(now: Long): Boolean {
         if (uiBlocked()) return false
         if (quizLaunchAt > 0 && now - quizLaunchAt > 15_000) {
-            if (QuizActivity.lastResumeAt < quizLaunchAt) quizLaunchFails++ else quizLaunchFails = 0
+            if (QuizActivity.lastResumeAt < quizLaunchAt) {
+                quizLaunchFails++
+                quizFailAt = now
+                if (quizLaunchFails == 2) prefs.logEvent("⚠ 做题界面连续 2 次没打开，改为倒计时关机")
+            } else quizLaunchFails = 0
             quizLaunchAt = 0L
         }
+        if (quizLaunchFails >= 2 && now - quizFailAt > 10 * 60_000) quizLaunchFails = 0
         return quizLaunchFails < 2
     }
 
@@ -254,27 +356,27 @@ class GuardService : Service() {
         }
         // 不需要另外暂停视频：做题界面盖上来时，YouTube 等播放器退到后台会自己暂停；
         // 答对后做题界面关掉，系统回到原来的 App，播放器会自己接着播（已在电视上实测）
-        try {
-            quizLaunchAt = System.currentTimeMillis()
-            QuizActivity.launchGraceUntil = System.currentTimeMillis() + 15_000
-            // 和「时间到了」一样，后台服务借本机 ADB 打开界面
-            tv.shell("am start -n $packageName/.QuizActivity")
-        } catch (t: Throwable) {
-            QuizActivity.launchGraceUntil = 0L
-            Log.w(TAG, "show quiz failed", t)
-        }
+        quizLaunchAt = System.currentTimeMillis()
+        QuizActivity.launchGraceUntil = System.currentTimeMillis() + 15_000
+        if (!launch(QuizActivity::class.java)) QuizActivity.launchGraceUntil = 0L
     }
 
     private fun turnOff(reason: String) {
         try {
             tv.turnOff()
             lastTick = 0L
+            prefs.logEvent("关电视：$reason")
             update("已关闭电视：$reason")
+            forcePublish = true
+            maybePublish(on = false)
         } catch (t: Throwable) {
-            update("⚠ 想关电视但 ADB 失败（请在电视上重新授权）：$reason")
+            // 关不掉就一直锁屏，不能让小孩接着看
+            adbFailed("关电视", t)
+            prefs.hardLock = true
+            hardOffTryAt = System.currentTimeMillis()
+            prefs.logEvent("🔒 关不掉电视，改为锁屏：$reason")
+            holdLock(reason, System.currentTimeMillis())
         }
-        forcePublish = true
-        maybePublish(on = false)
     }
 
     /** 处理手机发来的指令，返回是否要求立即关机 */
@@ -339,6 +441,9 @@ class GuardService : Service() {
                     .put("bonus", prefs.bonusMin)
                     .put("quiz", prefs.quizBonusMin)
                     .put("pause", prefs.pauseUntil)
+                    .put("adbFail", prefs.lastAdbFailAt)
+                    .put("overlay", Settings.canDrawOverlays(this))
+                    .put("log", prefs.eventLog.lines().take(8).joinToString("\n"))
                     .put("msg", prefs.lastStatus.substringBefore('\n'))
                     .put("ts", now)
             )

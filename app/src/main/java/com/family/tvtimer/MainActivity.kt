@@ -171,6 +171,11 @@ class MainActivity : Activity() {
             else codeView.text = "配对码已隐藏"
         })
 
+        root.addView(section("最近记录（出问题时看这里）"))
+        val logView = text("")
+        logView.textSize = 14f
+        root.addView(logView)
+
         root.addView(section("其他"))
         root.addView(button("更换配对码（需密码，旧手机将失效）") {
             withPin {
@@ -204,7 +209,10 @@ class MainActivity : Activity() {
                     append("\n每日 ${prefs.dailyLimitMin} 分钟（今日奖励 +${prefs.bonusMin}，其中做题 +${prefs.quizBonusMin}）")
                     append("\n允许时段 ${prefs.windowText()}")
                     if (prefs.isPaused()) append("\n⏸ 管控暂停中")
+                    append(if (android.provider.Settings.canDrawOverlays(this@MainActivity))
+                        "\n✅ 已有「显示在其他应用上层」权限" else "\n⚠ 还没有「显示在其他应用上层」权限（点「授权 / 测试 ADB」获取）")
                 }
+                logView.text = prefs.eventLog.lines().take(15).joinToString("\n").ifBlank { "（暂无）" }
                 handler.postDelayed(this, 2000)
             }
         }.also { handler.post(it) }
@@ -217,7 +225,7 @@ class MainActivity : Activity() {
         root.addView(title("电视时间管家 · 家长端"))
 
         val status = text("正在获取电视状态…")
-        status.textSize = 18f
+        status.textSize = 12f // 原来 18，按家长要求缩小到 2/3
         root.addView(card(status))
         root.addView(button("🔄 刷新状态") { fetchStatus(status) })
 
@@ -386,11 +394,21 @@ class MainActivity : Activity() {
             if (!j.optBoolean("enforce")) append(" · 仅记录不关机")
             if (System.currentTimeMillis() < j.optLong("pause")) append("\n⏸ 管控暂停中")
             append("\n${j.optString("msg")}")
+            // 电视的本机 ADB 今天连不上过：电视可能关不掉、界面可能打不开
+            val adbFail = j.optLong("adbFail")
+            if (adbFail > 0 && System.currentTimeMillis() - adbFail < 24 * 3600_000L) {
+                val t = java.time.Instant.ofEpochMilli(adbFail).atZone(java.time.ZoneId.systemDefault()).toLocalTime()
+                append("\n⚠ 电视的本机 ADB 最近在 %02d:%02d 连不上：请到电视「开发者选项」确认「USB 调试」还开着，有「允许 USB 调试」弹窗要勾选「始终允许」".format(t.hour, t.minute))
+            }
+            if (j.has("overlay") && !j.optBoolean("overlay"))
+                append("\n⚠ 电视还没有「显示在其他应用上层」权限，做题/锁屏界面要靠本机 ADB 才能打开")
             append("\n（$ago 分钟前上报")
             if (ago > 70) append("，电视可能已待机或断网")
             append("）")
             if (ago > 70 && j.optBoolean("on"))
                 append("\n电视开着却很久没上报：可能是家里网络今天的免费消息额度（ntfy.sh 每天 250 条）用完了，第二天会恢复")
+            val log = j.optString("log")
+            if (log.isNotBlank()) append("\n\n最近记录：\n$log")
         }
     }
 

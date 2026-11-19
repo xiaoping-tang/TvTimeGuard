@@ -297,6 +297,7 @@ class QuizActivity : Activity() {
         submitBtn.isEnabled = false
         if (q.isCorrect(input.toString())) {
             val add = prefs.addQuizBonus()
+            prefs.logEvent("答对 1 题（+$add 分钟，之前答错 $wrong 题）")
             feedbackView.setTextColor(Color.parseColor("#A5D6A7"))
             feedbackView.text = when {
                 q.isChineseUi && add > 0 -> "✅ 答对了！真棒！可以看 $add 分钟电视。"
@@ -349,6 +350,7 @@ class QuizActivity : Activity() {
 
     /** 放弃做题：时间已用完时，守护服务会改走倒计时关机 */
     private fun giveUp() {
+        if (!declined && timeUp()) prefs.logEvent("小孩放弃做题（已答错 $wrong 题）")
         declined = true
         finish()
     }

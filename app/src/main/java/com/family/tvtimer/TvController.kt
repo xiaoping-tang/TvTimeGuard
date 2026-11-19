@@ -32,12 +32,18 @@ class TvController(private val context: Context) {
         withAdb { it.shell(cmd) }
     }
 
-    /** 测试 ADB 并顺便把本 App 加入省电白名单，避免被系统杀掉 */
+    /** 测试 ADB 并顺便把本 App 加入省电白名单（避免被系统杀掉），再授予「显示在其他应用上层」 */
     fun setup(): String = withAdb { adb ->
         val pkg = context.packageName
         adb.shell("dumpsys deviceidle whitelist +$pkg")
         adb.shell("cmd appops set $pkg RUN_ANY_IN_BACKGROUND allow")
         adb.shell("cmd appops set $pkg RUN_IN_BACKGROUND allow")
+        adb.shell("appops set $pkg SYSTEM_ALERT_WINDOW allow")
         adb.shell("getprop ro.product.model").output.trim()
+    }
+
+    /** 授予「显示在其他应用上层」：之后打开做题/锁屏界面就不再依赖本机 ADB */
+    fun grantOverlay() {
+        shell("appops set ${context.packageName} SYSTEM_ALERT_WINDOW allow")
     }
 }

@@ -102,6 +102,28 @@ class Prefs(context: Context) {
         get() = sp.getString("last_status", "守护未启动") ?: ""
         set(v) = sp.edit().putString("last_status", v).apply()
 
+    /** 电视端：时间到了却关不掉电视（本机 ADB 连不上），改为一直锁屏，直到家长输密码、做题或电视待机 */
+    var hardLock: Boolean
+        get() = sp.getBoolean("hard_lock", false)
+        set(v) = sp.edit().putBoolean("hard_lock", v).apply()
+
+    /** 电视端：最近一次本机 ADB 连不上的时间（毫秒），0 表示没有 */
+    var lastAdbFailAt: Long
+        get() = sp.getLong("last_adb_fail_at", 0L)
+        set(v) = sp.edit().putLong("last_adb_fail_at", v).apply()
+
+    /** 电视端：最近的事件记录（每行「月-日 时:分 事件」，最新的在最前面），出问题时用来查原因 */
+    val eventLog: String
+        get() = sp.getString("event_log", "") ?: ""
+
+    @Synchronized
+    fun logEvent(msg: String) {
+        val t = java.time.LocalDateTime.now()
+        val line = "%02d-%02d %02d:%02d %s".format(t.monthValue, t.dayOfMonth, t.hour, t.minute, msg)
+        val lines = listOf(line) + eventLog.lines().filter { it.isNotBlank() }.take(MAX_EVENTS - 1)
+        sp.edit().putString("event_log", lines.joinToString("\n")).apply()
+    }
+
     private fun rollDay() {
         val today = LocalDate.now().toString()
         if (sp.getString("usage_date", "") != today) {
@@ -171,6 +193,9 @@ class Prefs(context: Context) {
     companion object {
         /** 做对一道题加几分钟 */
         const val QUIZ_REWARD_MIN = 10
+
+        /** 事件记录最多保留几条 */
+        const val MAX_EVENTS = 60
 
         fun fmtHm(min: Int) = "%02d:%02d".format(min / 60, min % 60)
 
